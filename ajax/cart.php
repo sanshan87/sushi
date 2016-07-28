@@ -11,9 +11,7 @@
 		$currency = $simpla->money->get_currency($_SESSION['currency_id']);
 	else
 		$currency = reset($currencies);
-
 	$simpla->design->assign('currency',	$currency);
-	
 	$result = $simpla->design->fetch('cart_informer.tpl');
 	header("Content-type: application/json; charset=UTF-8");
 	header("Cache-Control: must-revalidate");
