@@ -496,11 +496,16 @@ class Products extends Simpla
 			if(is_array($rezised_images))
 			foreach (glob($this->config->root_dir.$this->config->resized_images_dir.$file.".*x*.".$ext) as $f)
 				@unlink($f);
+				
+			$rezised_images2 = glob($this->config->root_dir.$this->config->resized_images_dir.str_replace('_mini','_orig',$file).".*x*.".$ext);
+			if(is_array($rezised_images2))
+			foreach (glob($this->config->root_dir.$this->config->resized_images_dir.str_replace('_mini','_orig',$file).".*x*.".$ext) as $f)
+				@unlink($f);
 
-			@unlink($this->config->root_dir.$this->config->original_images_dir.$filename);		
-		}
+			@unlink($this->config->root_dir.$this->config->original_images_dir.$filename);	
+			@unlink($this->config->root_dir.$this->config->original_images_dir.str_replace('_mini','_orig',$filename));
 	}
-		
+	}
 	/*
 	*
 	* Следующий товар

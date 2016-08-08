@@ -178,57 +178,31 @@ class ProductAdmin extends Simpla
 							$i++;
 						}
 					}
-	
-					// Удаление изображений
-					$images = (array)$this->request->post('images');
-					$current_images = $this->products->get_images(array('product_id'=>$product->id));
-					foreach($current_images as $image)
-					{
-						if(!in_array($image->id, $images))
-	 						$this->products->delete_image($image->id);
-						}
-	
-					// Порядок изображений
-					if($images = $this->request->post('images'))
-					{
-	 					$i=0;
-						foreach($images as $id)
+					
+	   	    		// Загрузка изображений					
+					if($base64m = $this->request->post('imgData') and $base64o = $this->request->post('imgDataOrig')){
+						// Удаление изображений
+						if(!preg_match('/base64/i',$base64o))$base64o = $this->image->getDataURI($base64o);
+						$current_images = $this->products->get_images(array('product_id'=>$product->id));
+						foreach($current_images as $image)
 						{
-							$this->products->update_image($id, array('position'=>$i));
-							$i++;
+							$this->products->delete_image($image->id);
 						}
-					}
-	   	    		// Загрузка изображений
-		  		    if($images = $this->request->files('images'))
-		  		    {
-						for($i=0; $i<count($images['name']); $i++)
-						{
-				 			if ($image_name = $this->image->upload_image($images['tmp_name'][$i], $images['name'][$i]))
-				 			{
-			  	   				$this->products->add_image($product->id, $image_name);
-			  	   			}
-							else
-							{
-								$this->design->assign('error', 'error uploading image');
-							}
+						$nameImage = $this->image->saveBase64($base64m,$product->url,'mini');
+						if($nameImage){
+							$this->products->add_image($product->id, $nameImage);
+						}else{
+							$this->design->assign('error', 'error uploading image');
 						}
+						$nameImageOrig = $this->image->saveBase64($base64o,$product->url,'orig');
+						if(!$nameImageOrig){
+							$this->design->assign('error', 'error uploading image');
+						}					
 					}
+					
+					
+					
 	   	    		// Загрузка изображений из интернета и drag-n-drop файлов
-		  		    if($images = $this->request->post('images_urls'))
-		  		    {
-						foreach($images as $url)
-						{
-							// Если не пустой адрес и файл не локальный
-							if(!empty($url) && $url != 'http://' && strstr($url,'/')!==false)
-					 			$this->products->add_image($product->id, $url);
-					 		elseif($dropped_images = $this->request->files('dropped_images'))
-					  		{
-					 			$key = array_search($url, $dropped_images['name']);
-							 	if ($key!==false && $image_name = $this->image->upload_image($dropped_images['tmp_name'][$key], $dropped_images['name'][$key]))
-						  	   				$this->products->add_image($product->id, $image_name);
-							}
-						}
-					}
 					$images = $this->products->get_images(array('product_id'=>$product->id));
 	
 	   	    		// Характеристики товара
@@ -360,10 +334,9 @@ class ProductAdmin extends Simpla
 			
 
 		$this->design->assign('product', $product);
-
 		$this->design->assign('product_categories', $product_categories);
 		$this->design->assign('product_variants', $variants);
-		$this->design->assign('product_images', $images);
+		$this->design->assign('product_images', array_slice($images,0,1));
 		$this->design->assign('options', $options);
 		$this->design->assign('related_products', $related_products);		
 		

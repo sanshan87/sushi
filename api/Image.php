@@ -454,9 +454,26 @@ class Image extends Simpla
 
 	 	$res = str_replace($ru, $en, $filename);
 		$res = preg_replace("/[\s]+/ui", '-', $res);
-		$res = preg_replace("/[^a-zA-Z0-9\.\-\_]+/ui", '', $res);
+		$res = preg_replace("/[^a-zA-Z0-9\-\_]+/ui", '', $res);
 	 	$res = strtolower($res);
 	    return $res;  
 	}
+	
+	public function saveBase64($base64string,$name,$size){
+		list($type, $base64string) = explode(';', $base64string);
+        list(, $base64string)      = explode(',', $base64string);
+        $base64string = str_replace(' ', '+', $base64string);
+		$size = $size == 'mini' ? '_mini' : '_orig';
+		$new_name = $this->correct_filename($name).$size.'.jpeg';
+		$path = $this->config->root_dir.$this->config->original_images_dir.$new_name;
+        file_put_contents($path, base64_decode($base64string));
+		if(file_exists($path)){return $new_name;}else{return false;}
+	}
+	
+	public function getDataURI($imagePath) {
+    $finfo = new finfo(FILEINFO_MIME_TYPE);
+    @$type = $finfo->file($imagePath);
+    return 'data:'.$type.';base64,'.base64_encode(file_get_contents($imagePath));
+}
 	
 }

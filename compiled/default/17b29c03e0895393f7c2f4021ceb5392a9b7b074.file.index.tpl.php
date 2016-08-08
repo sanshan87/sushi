@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-02 19:05:59
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-08 15:46:57
          compiled from "E:\xampp\htdocs\sushi.local\design\default\html\index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:14945799cec9275f37-00617950%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '17b29c03e0895393f7c2f4021ceb5392a9b7b074' => 
     array (
       0 => 'E:\\xampp\\htdocs\\sushi.local\\design\\default\\html\\index.tpl',
-      1 => 1470157556,
+      1 => 1470664013,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
     'categories_tree' => 
+    array (
+      'parameter' => 
+      array (
+      ),
+      'compiled' => '',
+    ),
+    'categories_parent' => 
     array (
       'parameter' => 
       array (
@@ -32,9 +39,18 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'meta_keywords' => 0,
     'canonical' => 0,
     'settings' => 0,
+    'pages' => 0,
+    'p' => 0,
+    'page' => 0,
+    'keyword' => 0,
+    'cart' => 0,
+    'categories' => 0,
+    'c' => 0,
+    'category' => 0,
+    'subCat' => 0,
     'content' => 0,
   ),
-  'has_nocache_code' => false,
+  'has_nocache_code' => 0,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5799cec93c2008_36209308')) {function content_5799cec93c2008_36209308($_smarty_tpl) {?><!DOCTYPE html>
 
@@ -58,14 +74,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 "/><?php }?>
 	
 	
-	<!--<link href="design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
-	<link href="design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/images/favicon.ico" rel="icon"          type="image/x-icon"/>
-	<link href="design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>-->
 	<link rel="stylesheet" href="design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
 /bower_components/bootstrap/dist/css/bootstrap.min.css" />
 	<!-- endbower -->
@@ -85,8 +93,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 	
 	<script src="design/<?php echo $_smarty_tpl->tpl_vars['settings']->value->theme;?>
 /js/jquery-ui.min.js"></script>
-	<!--<script src="design/<?php echo $_smarty_tpl->tpl_vars['settings']->value->theme;?>
-/js/ajax_cart.js"></script>-->
+	<script src="design/<?php echo $_smarty_tpl->tpl_vars['settings']->value->theme;?>
+/js/ajax_cart.js"></script>
 	
 	
 	<script src="js/baloon/js/baloon.js" type="text/javascript"></script>
@@ -133,82 +141,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </head>
 <body>
 	<div class="basket-shadow hidden"></div>
-	<div class="side-basket">
-		<a href="#" class="sb-btn">
-			<div class="h-btn">
-				<span class="basket-count">2</span>
-			</div>
-		</a>
+	<div class="side-basket" id="cart_informer">
+		<?php echo $_smarty_tpl->getSubTemplate ('cart_informer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-		<div class="basket">
-			<div class="basket-header">
-				<span class="bh-name">Корзина</span>
-				<a href="#" class="basket-close">Свернуть</a>
-			</div>
-	
-			<div class="items-wrap">
-				<ul class="basket-items list-unstyled">
-					<li class="b-item">
-						<div class="b-price-img hidden-xs">
-							<img src="design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/images/b-price-1.jpg" alt="Товар" class="img-responsive">
-						</div>
-						<div class="b-price-info">
-							<a href="#" class="price-name">Гроза дракона</a>
-							<div class="form-inline">
-								<label class="price-count" for="b-item-1">Кол-во:</label>
-								<input type="text" class="form-control" id="b-item-1">
-							</div>
-						</div>
-						<div class="b-price-cost">230 руб.</div>
-						<div class="b-price-close">
-							<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						</div>
-					</li>
-					<li class="b-item">
-						<div class="b-price-img hidden-xs">
-							<img src="design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/images/b-price-1.jpg" alt="Товар" class="img-responsive">
-						</div>
-						<div class="b-price-info">
-							<a href="#" class="price-name">Гроза дракона</a>
-							<div class="form-inline">
-								<label class="price-count" for="b-item-1">Кол-во:</label>
-								<input type="text" class="form-control" id="b-item-1">
-							</div>
-						</div>
-						<div class="b-price-cost">230 руб.</div>
-						<div class="b-price-close">
-							<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						</div>
-					</li>
-					<li class="b-item">
-						<div class="b-price-img hidden-xs">
-							<img src="design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/images/b-price-1.jpg" alt="Товар" class="img-responsive">
-						</div>
-						<div class="b-price-info">
-							<a href="#" class="price-name">Гроза дракона</a>
-							<div class="form-inline">
-								<label class="price-count" for="b-item-1">Кол-во:</label>
-								<input type="text" class="form-control" id="b-item-1">
-							</div>
-						</div>
-						<div class="b-price-cost">230 руб.</div>
-						<div class="b-price-close">
-							<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						</div>
-					</li>
-				</ul>
-			</div>
-			
-
-			<div class="basket-buttons">
-				<div class="basket-total">Итого к оплате: <b>1800 руб.</b></div>
-				<div><a href="#" class="link">Продолжить покупки</a></div>
-				<div><a href="#" class="btn">Оформить заказ</a></div>
-			</div>
-		</div>
 	</div>
 
 	<nav class="navbar navbar-default">
@@ -224,12 +159,22 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				</div>
 
 				<div class="collapse navbar-collapse" id="main-navbar">
-					<ul class="nav navbar-nav">
-						<li><a href="#">Главная</a></li>
-						<li><a href="#">Акции</a></li>
-						<li><a href="#">Скидки</a></li>
-						<li><a href="#">Доставка и оплата</a></li>
-						<li><a href="#">Контакты</a></li>
+					<ul class="nav navbar-nav" id="menu">
+					<?php  $_smarty_tpl->tpl_vars['p'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['p']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['pages']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['p']->key => $_smarty_tpl->tpl_vars['p']->value) {
+$_smarty_tpl->tpl_vars['p']->_loop = true;
+?>
+						
+						<?php if ($_smarty_tpl->tpl_vars['p']->value->menu_id==1) {?>
+						<li <?php if ($_smarty_tpl->tpl_vars['page']->value&&$_smarty_tpl->tpl_vars['page']->value->id==$_smarty_tpl->tpl_vars['p']->value->id) {?>class="selected"<?php }?>>
+							<a data-page="<?php echo $_smarty_tpl->tpl_vars['p']->value->id;?>
+" href="<?php echo $_smarty_tpl->tpl_vars['p']->value->url;?>
+"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value->name, ENT_QUOTES, 'UTF-8', true);?>
+</a>
+						</li>
+						<?php }?>
+					<?php } ?>
 					</ul>
 						
 					<ul class="nav navbar-nav navbar-right nav-social hidden-sm">
@@ -237,9 +182,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 /images/top-social-vk.png" alt=""></a></li>
 					</ul>
 
-					<form class="navbar-form navbar-right" role="search" id="navbar-form">
+					<form class="navbar-form navbar-right" role="search" id="navbar-form" action="/products">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Поиск">
+							<input type="text" class="form-control input_search" placeholder="Поиск" name="keyword" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['keyword']->value, ENT_QUOTES, 'UTF-8', true);?>
+">
 						</div>
 						<button type="submit" class="btn btn-search"><span class="glyphicon glyphicon-search"></span></button>
 					</form>
@@ -262,12 +208,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-2 col-xs-12">
-					<a href="#" class="h-basket">
+					<a href="/cart" class="h-basket">
 						<div class="b-icon">
-							<div class="b-icon-count">2</div>
+							<div class="b-icon-count" id="cnt_in_cart"><?php echo $_smarty_tpl->tpl_vars['cart']->value->total_products;?>
+</div>
 						</div>
 						<div class="b-text hidden-sm">
-							<b>Корзина</b>В корзине 2 товара
+							<b>Корзина</b><span id="txt_cnt">В корзине <?php echo $_smarty_tpl->tpl_vars['cart']->value->total_products;?>
+ <?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['plural'][0][0]->plural_modifier($_smarty_tpl->tpl_vars['cart']->value->total_products,'товар','товаров','товара');?>
+</span>
 						</div>
 					</a>
 				</div>
@@ -301,24 +250,53 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				</div>
 				<div class="col-sm-3">
 					<ul class="main-menu">
-						<li class="menu-header">Меню</li>
-						<li><a href="#">Суши <span>(4)</span></a></li>
-						<li>
-							<div class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Роллы <span>(4)</span></a>
-								<ul class="dropdown-menu"> 
-									<li><a href="#">Ассорти</a></li> 
-									<li><a href="#">Жареные</a></li> 
-									<li><a href="#">Запеченые</a></li> 
-								</ul>
-							</div>
-						</li>
-						<li><a href="#">Лапша <span>(4)</span></a></li>
-						<li><a href="#">Соусы <span>(4)</span></a></li>
-						<li><a href="#">Салаты <span>(4)</span></a></li>
-						<li><a href="#">Напитки <span>(4)</span></a></li>
-						<li><a href="#">Другие блюда <span>(4)</span></a></li>
-						<li><a href="#">Закуски <span>(4)</span></a></li>
+						<li class="menu-header">Меню</li>										
+						
+						<?php if (!function_exists('smarty_template_function_categories_tree')) {
+    function smarty_template_function_categories_tree($_smarty_tpl,$params) {
+    $saved_tpl_vars = $_smarty_tpl->tpl_vars;
+    foreach ($_smarty_tpl->smarty->template_functions['categories_tree']['parameter'] as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);};
+    foreach ($params as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);}?>
+						<?php if ($_smarty_tpl->tpl_vars['categories']->value) {?>
+						<?php  $_smarty_tpl->tpl_vars['c'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['c']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['categories']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['c']->key => $_smarty_tpl->tpl_vars['c']->value) {
+$_smarty_tpl->tpl_vars['c']->_loop = true;
+?>
+							
+							<?php if ($_smarty_tpl->tpl_vars['c']->value->visible) {?>
+								<li>
+								<?php if (count($_smarty_tpl->tpl_vars['c']->value->subcategories)>0) {?>
+									<div class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['c']->value->name, ENT_QUOTES, 'UTF-8', true);?>
+ <span>(4)</span></a>
+											<ul class="dropdown-menu"> 
+												<?php  $_smarty_tpl->tpl_vars['subCat'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['subCat']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['c']->value->subcategories; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['subCat']->key => $_smarty_tpl->tpl_vars['subCat']->value) {
+$_smarty_tpl->tpl_vars['subCat']->_loop = true;
+?>
+												<li><a <?php if ($_smarty_tpl->tpl_vars['category']->value->id==$_smarty_tpl->tpl_vars['subCat']->value->id) {?>class="selected"<?php }?> href="catalog/<?php echo $_smarty_tpl->tpl_vars['subCat']->value->url;?>
+"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['subCat']->value->name, ENT_QUOTES, 'UTF-8', true);?>
+</a></li>
+												<?php } ?>
+											</ul>
+									</div>
+								<?php } else { ?>
+									<a <?php if ($_smarty_tpl->tpl_vars['category']->value->id==$_smarty_tpl->tpl_vars['c']->value->id) {?>class="selected"<?php }?> href="catalog/<?php echo $_smarty_tpl->tpl_vars['c']->value->url;?>
+" data-category="<?php echo $_smarty_tpl->tpl_vars['c']->value->id;?>
+"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['c']->value->name, ENT_QUOTES, 'UTF-8', true);?>
+ <span>(4)</span></a>
+								<?php }?>
+								</li>
+							<?php }?>
+						<?php } ?>
+						<?php }?>
+						<?php $_smarty_tpl->tpl_vars = $saved_tpl_vars;
+foreach (Smarty::$global_tpl_vars as $key => $value) if(!isset($_smarty_tpl->tpl_vars[$key])) $_smarty_tpl->tpl_vars[$key] = $value;}}?>
+
+						<?php smarty_template_function_categories_tree($_smarty_tpl,array('categories'=>$_smarty_tpl->tpl_vars['categories']->value));?>
+
 					</ul>
 				</div>
 			</div>
@@ -343,19 +321,39 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 					</ul>
 					<ul class="footer-nav list-unstyled border-right">
 						<li class="menu-header">Меню</li>
-						<li><a href="#">Лапша</a></li>
-						<li><a href="#">Соусы</a></li>
-						<li><a href="#">Салаты</a></li>
-						<li><a href="#">Напитки</a></li>
-						<li><a href="#">Другие блюда</a></li>
-						<li><a href="#">Закуски</a></li>
+						<?php if ($_smarty_tpl->tpl_vars['categories']->value) {?>
+						<?php  $_smarty_tpl->tpl_vars['c'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['c']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['categories']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['c']->key => $_smarty_tpl->tpl_vars['c']->value) {
+$_smarty_tpl->tpl_vars['c']->_loop = true;
+?>
+							
+							<?php if ($_smarty_tpl->tpl_vars['c']->value->visible) {?>
+								<li>
+									<a <?php if ($_smarty_tpl->tpl_vars['category']->value->id==$_smarty_tpl->tpl_vars['c']->value->id) {?>class="selected"<?php }?> href="catalog/<?php echo $_smarty_tpl->tpl_vars['c']->value->url;?>
+" data-category="<?php echo $_smarty_tpl->tpl_vars['c']->value->id;?>
+"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['c']->value->name, ENT_QUOTES, 'UTF-8', true);?>
+</a>
+								</li>
+							<?php }?>
+						<?php } ?>
+						<?php }?>
 					</ul>
 					<ul class="footer-nav list-unstyled">
-						<li><a href="#">Главная</a></li>
-						<li><a href="#">Акции</a></li>
-						<li><a href="#">Скидки</a></li>
-						<li><a href="#">Доставка и оплата</a></li>
-						<li><a href="#">Контакты</a></li>
+					<?php  $_smarty_tpl->tpl_vars['p'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['p']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['pages']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['p']->key => $_smarty_tpl->tpl_vars['p']->value) {
+$_smarty_tpl->tpl_vars['p']->_loop = true;
+?>
+					
+						<?php if ($_smarty_tpl->tpl_vars['p']->value->menu_id==1) {?>
+						<li <?php if ($_smarty_tpl->tpl_vars['page']->value&&$_smarty_tpl->tpl_vars['page']->value->id==$_smarty_tpl->tpl_vars['p']->value->id) {?>class="selected"<?php }?>>
+							<a href="<?php echo $_smarty_tpl->tpl_vars['p']->value->url;?>
+"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['p']->value->name, ENT_QUOTES, 'UTF-8', true);?>
+</a>
+						</li>
+						<?php }?>
+					<?php } ?>
 					</ul>
 				</div>
 				<div class="col-md-6 col-xs-12">

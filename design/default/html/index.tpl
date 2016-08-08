@@ -17,9 +17,6 @@
 	{if isset($canonical)}<link rel="canonical" href="{$config->root_url}{$canonical}"/>{/if}
 	
 	{* Стили *}
-	<!--<link href="design/{$settings->theme|escape}/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
-	<link href="design/{$settings->theme|escape}/design/{$settings->theme|escape}/images/favicon.ico" rel="icon"          type="image/x-icon"/>
-	<link href="design/{$settings->theme|escape}/design/{$settings->theme|escape}/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>-->
 	<link rel="stylesheet" href="design/{$settings->theme|escape}/bower_components/bootstrap/dist/css/bootstrap.min.css" />
 	<!-- endbower -->
 	<link rel="stylesheet" href="design/{$settings->theme|escape}/css/main.css">
@@ -34,7 +31,7 @@
 	{/if}
 	{* Аяксовая корзина *}
 	<script src="design/{$settings->theme}/js/jquery-ui.min.js"></script>
-	<!--<script src="design/{$settings->theme}/js/ajax_cart.js"></script>-->
+	<script src="design/{$settings->theme}/js/ajax_cart.js"></script>
 	
 	{* js-проверка форм *}
 	<script src="js/baloon/js/baloon.js" type="text/javascript"></script>
@@ -81,79 +78,8 @@
 </head>
 <body>
 	<div class="basket-shadow hidden"></div>
-	<div class="side-basket">
-		<a href="#" class="sb-btn">
-			<div class="h-btn">
-				<span class="basket-count">2</span>
-			</div>
-		</a>
-
-		<div class="basket">
-			<div class="basket-header">
-				<span class="bh-name">Корзина</span>
-				<a href="#" class="basket-close">Свернуть</a>
-			</div>
-	
-			<div class="items-wrap">
-				<ul class="basket-items list-unstyled">
-					<li class="b-item">
-						<div class="b-price-img hidden-xs">
-							<img src="design/{$settings->theme|escape}/images/b-price-1.jpg" alt="Товар" class="img-responsive">
-						</div>
-						<div class="b-price-info">
-							<a href="#" class="price-name">Гроза дракона</a>
-							<div class="form-inline">
-								<label class="price-count" for="b-item-1">Кол-во:</label>
-								<input type="text" class="form-control" id="b-item-1">
-							</div>
-						</div>
-						<div class="b-price-cost">230 руб.</div>
-						<div class="b-price-close">
-							<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						</div>
-					</li>
-					<li class="b-item">
-						<div class="b-price-img hidden-xs">
-							<img src="design/{$settings->theme|escape}/images/b-price-1.jpg" alt="Товар" class="img-responsive">
-						</div>
-						<div class="b-price-info">
-							<a href="#" class="price-name">Гроза дракона</a>
-							<div class="form-inline">
-								<label class="price-count" for="b-item-1">Кол-во:</label>
-								<input type="text" class="form-control" id="b-item-1">
-							</div>
-						</div>
-						<div class="b-price-cost">230 руб.</div>
-						<div class="b-price-close">
-							<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						</div>
-					</li>
-					<li class="b-item">
-						<div class="b-price-img hidden-xs">
-							<img src="design/{$settings->theme|escape}/images/b-price-1.jpg" alt="Товар" class="img-responsive">
-						</div>
-						<div class="b-price-info">
-							<a href="#" class="price-name">Гроза дракона</a>
-							<div class="form-inline">
-								<label class="price-count" for="b-item-1">Кол-во:</label>
-								<input type="text" class="form-control" id="b-item-1">
-							</div>
-						</div>
-						<div class="b-price-cost">230 руб.</div>
-						<div class="b-price-close">
-							<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						</div>
-					</li>
-				</ul>
-			</div>
-			
-
-			<div class="basket-buttons">
-				<div class="basket-total">Итого к оплате: <b>1800 руб.</b></div>
-				<div><a href="#" class="link">Продолжить покупки</a></div>
-				<div><a href="#" class="btn">Оформить заказ</a></div>
-			</div>
-		</div>
+	<div class="side-basket" id="cart_informer">
+		{include file='cart_informer.tpl'}
 	</div>
 
 	<nav class="navbar navbar-default">
@@ -169,21 +95,24 @@
 				</div>
 
 				<div class="collapse navbar-collapse" id="main-navbar">
-					<ul class="nav navbar-nav">
-						<li><a href="#">Главная</a></li>
-						<li><a href="#">Акции</a></li>
-						<li><a href="#">Скидки</a></li>
-						<li><a href="#">Доставка и оплата</a></li>
-						<li><a href="#">Контакты</a></li>
+					<ul class="nav navbar-nav" id="menu">
+					{foreach $pages as $p}
+						{* Выводим только страницы из первого меню *}
+						{if $p->menu_id == 1}
+						<li {if $page && $page->id == $p->id}class="selected"{/if}>
+							<a data-page="{$p->id}" href="{$p->url}">{$p->name|escape}</a>
+						</li>
+						{/if}
+					{/foreach}
 					</ul>
 						
 					<ul class="nav navbar-nav navbar-right nav-social hidden-sm">
 						<li><a href="http://vk.com/">Мы вконтакте <img src="design/{$settings->theme|escape}/images/top-social-vk.png" alt=""></a></li>
 					</ul>
 
-					<form class="navbar-form navbar-right" role="search" id="navbar-form">
+					<form class="navbar-form navbar-right" role="search" id="navbar-form" action="/products">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Поиск">
+							<input type="text" class="form-control input_search" placeholder="Поиск" name="keyword" value="{$keyword|escape}">
 						</div>
 						<button type="submit" class="btn btn-search"><span class="glyphicon glyphicon-search"></span></button>
 					</form>
@@ -205,12 +134,12 @@
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-2 col-xs-12">
-					<a href="#" class="h-basket">
+					<a href="/cart" class="h-basket">
 						<div class="b-icon">
-							<div class="b-icon-count">2</div>
+							<div class="b-icon-count" id="cnt_in_cart">{$cart->total_products}</div>
 						</div>
 						<div class="b-text hidden-sm">
-							<b>Корзина</b>В корзине 2 товара
+							<b>Корзина</b><span id="txt_cnt">В корзине {$cart->total_products} {$cart->total_products|plural:'товар':'товаров':'товара'}</span>
 						</div>
 					</a>
 				</div>
@@ -240,24 +169,32 @@
 				</div>
 				<div class="col-sm-3">
 					<ul class="main-menu">
-						<li class="menu-header">Меню</li>
-						<li><a href="#">Суши <span>(4)</span></a></li>
-						<li>
-							<div class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Роллы <span>(4)</span></a>
-								<ul class="dropdown-menu"> 
-									<li><a href="#">Ассорти</a></li> 
-									<li><a href="#">Жареные</a></li> 
-									<li><a href="#">Запеченые</a></li> 
-								</ul>
-							</div>
-						</li>
-						<li><a href="#">Лапша <span>(4)</span></a></li>
-						<li><a href="#">Соусы <span>(4)</span></a></li>
-						<li><a href="#">Салаты <span>(4)</span></a></li>
-						<li><a href="#">Напитки <span>(4)</span></a></li>
-						<li><a href="#">Другие блюда <span>(4)</span></a></li>
-						<li><a href="#">Закуски <span>(4)</span></a></li>
+						<li class="menu-header">Меню</li>										
+						{* функция вывода дерева категорий *}
+						{function name=categories_tree}
+						{if $categories}
+						{foreach $categories as $c}
+							{* Показываем только видимые категории *}
+							{if $c->visible}
+								<li>
+								{if $c->subcategories|@count>0}
+									<div class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">{$c->name|escape} <span>(4)</span></a>
+											<ul class="dropdown-menu"> 
+												{foreach $c->subcategories as $subCat}
+												<li><a {if $category->id == $subCat->id}class="selected"{/if} href="catalog/{$subCat->url}">{$subCat->name|escape}</a></li>
+												{/foreach}
+											</ul>
+									</div>
+								{else}
+									<a {if $category->id == $c->id}class="selected"{/if} href="catalog/{$c->url}" data-category="{$c->id}">{$c->name|escape} <span>(4)</span></a>
+								{/if}
+								</li>
+							{/if}
+						{/foreach}
+						{/if}
+						{/function}
+						{categories_tree categories=$categories}
 					</ul>
 				</div>
 			</div>
@@ -281,19 +218,26 @@
 					</ul>
 					<ul class="footer-nav list-unstyled border-right">
 						<li class="menu-header">Меню</li>
-						<li><a href="#">Лапша</a></li>
-						<li><a href="#">Соусы</a></li>
-						<li><a href="#">Салаты</a></li>
-						<li><a href="#">Напитки</a></li>
-						<li><a href="#">Другие блюда</a></li>
-						<li><a href="#">Закуски</a></li>
+						{if $categories}
+						{foreach $categories as $c}
+							{* Показываем только видимые категории *}
+							{if $c->visible}
+								<li>
+									<a {if $category->id == $c->id}class="selected"{/if} href="catalog/{$c->url}" data-category="{$c->id}">{$c->name|escape}</a>
+								</li>
+							{/if}
+						{/foreach}
+						{/if}
 					</ul>
 					<ul class="footer-nav list-unstyled">
-						<li><a href="#">Главная</a></li>
-						<li><a href="#">Акции</a></li>
-						<li><a href="#">Скидки</a></li>
-						<li><a href="#">Доставка и оплата</a></li>
-						<li><a href="#">Контакты</a></li>
+					{foreach $pages as $p}
+					{* Выводим только страницы из первого меню *}
+						{if $p->menu_id == 1}
+						<li {if $page && $page->id == $p->id}class="selected"{/if}>
+							<a href="{$p->url}">{$p->name|escape}</a>
+						</li>
+						{/if}
+					{/foreach}
 					</ul>
 				</div>
 				<div class="col-md-6 col-xs-12">

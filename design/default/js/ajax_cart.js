@@ -1,6 +1,8 @@
 // Аяксовая корзина
-$('form.variants').live('submit', function(e) {
+$(document).ready(function() {
+$('form.variants').on('submit', function(e) {
 	e.preventDefault();
+	var forma = $(this);
 	button = $(this).find('input[type="submit"]');
 	if($(this).find('input[name=variant]:checked').size()>0)
 		variant = $(this).find('input[name=variant]:checked').val();
@@ -11,55 +13,20 @@ $('form.variants').live('submit', function(e) {
 		data: {variant: variant},
 		dataType: 'json',
 		success: function(data){
-			$('#cart_informer').html(data);
-			if(button.attr('data-result-text'))
-				button.val(button.attr('data-result-text'));
-		}
-	});
-	var o1 = $(this).offset();
-	var o2 = $('#cart_informer').offset();
-	var dx = o1.left - o2.left;
-	var dy = o1.top - o2.top;
-	var distance = Math.sqrt(dx * dx + dy * dy);
-	$(this).closest('.product').find('.image img').effect("transfer", { to: $("#cart_informer"), className: "transfer_class" }, distance);	
-	$('.transfer_class').html($(this).closest('.product').find('.image').html());
-	$('.transfer_class').find('img').css('height', '100%');
-	return false;
-});
-
-
-/*
-// Аяксовая корзина
-$('a[href*="cart?variant"]').live('click', function(e) {
-	e.preventDefault();
-	//variant_id = $(this).attr('id');
-	
-	href = $(this).attr('href');
-	pattern = /\/?cart\?variant=(\d+)$/;
-	variant_id = pattern.exec(href)[1];
-	
-	link = $(this);
-	$.ajax({
-		url: "ajax/cart.php",
-		data: {variant: variant_id},
-		dataType: 'json',
-		success: function(data){
-			$('#cart_informer').html(data);
-			//if(link.attr('added_text'))
-			//	link.html(link.attr('added_text'));
-			//link.attr('href', '/cart');
+			$('#cart_informer').html(data.cart);
+			$('#cnt_in_cart').text(data.count);
+			$('#txt_cnt').html(data.text);
+			var o1 = forma.offset();
+			var o2 = $('.h-btn').offset();
+			var dx = o1.left - o2.left;
+			var dy = o1.top - o2.top;
+			var distance = Math.sqrt(dx * dx + dy * dy);
+			forma.closest('.price-item').find('.price-img img').effect("transfer", { to: $(".h-btn"), className: "transfer_class" }, distance);	
+			$('.transfer_class').html(forma.closest('.price-item').find('.price-img').html());
+			$('.transfer_class').find('img').css('height', '100%');
 		}
 	});
 
-	var o1 = $(this).offset();
-	var o2 = $('#cart_informer').offset();
-	var dx = o1.left - o2.left;
-	var dy = o1.top - o2.top;
-	var distance = Math.sqrt(dx * dx + dy * dy);
-
-	$(this).closest('.product').find('.image img').effect("transfer", { to: $("#cart_informer"), className: "transfer_class" }, distance);	
-	$('.transfer_class').html($(this).closest('.product').find('.image').html());
-	$('.transfer_class').find('img').css('height', '100%');
 	return false;
 });
-*/
+});

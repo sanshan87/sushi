@@ -12,7 +12,6 @@
 
 {* Тело страницы *}
 {*$page->body*}
-
 	<div class="stock-slider">
 		<div class="container">
 			<div class="block-name"><span>Акции</span></div>
@@ -52,7 +51,10 @@
 			</div>
 		</div>
 	</div>
-
+{* Популярные товары *}
+{get_featured_products var=featured_products}
+{if $featured_products}
+<!-- Список товаров-->
 	<div class="slider-price popular-price-slider">
 		<div class="container">
 			<div class="block-header">
@@ -61,122 +63,49 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="owl-carousel">
-				<div>
-					<div class="price-item">
-						<div class="price-header clearfix">
-							<div class="info-flag flag-discount">-20%</div>
-							<div class="menu-number">21</div>
-						</div>
-						<a href="#" class="price-link">
-							<div class="price-img"><img src="design/{$settings->theme|escape}/images/price-1.jpg" alt="Товар" class="img-responsive"></div>
-							<div class="price-info">
-								<p class="price-name">Радуга</p>
-								<p class="price-components">Рис, сыр, креветка, окунь, тунец,лосось, угорь, лосось х/к</p>
-								<p class="price-weight">270 гр.</p>
-							</div>
-						</a>
-						
-						<div class="price-footer clearfix">
-							<div class="price-cost">
-								<span class="old-cost">190 р.</span>
-								<span class="current-cost">160 р.</span>
-							</div>
-							<div class="price-form">
-								<form action="">
-									<button class="btn addToBasket">В корзину</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
 
-				<div>
-					<div class="price-item">
-						<div class="price-header clearfix">
-							<div class="info-flag flag-new">new</div>
-							<div class="menu-number">20</div>
-						</div>
-						<a href="#" class="price-link">
-							<div class="price-img"><img src="design/{$settings->theme|escape}/images/price-2.jpg" alt="Товар" class="img-responsive"></div>
-							<div class="price-info">
-								<p class="price-name">Глаз дракона</p>
-								<p class="price-components">Рис, лосось х/к, томаго, огурец, икра лососевая</p>
-								<p class="price-weight">220 гр.</p>
-							</div>
-						</a>
-						
-						<div class="price-footer clearfix">
-							<div class="price-cost">
-								<span class="current-cost">170 р.</span>
-							</div>
-							<div class="price-form">
-								<form action="">
-									<button class="btn addToBasket">В корзину</button>
-								</form>
-							</div>
-						</div>
+	{foreach $featured_products as $product}
+		<div>
+			<div class="price-item">
+				<!--<div class="price-header clearfix">
+					<div class="info-flag flag-discount">-20%</div>
+					<div class="menu-number">21</div>
+				</div>-->
+				<a href="products/{$product->url}" class="price-link">
+				{if $product->image}
+					<div class="price-img"><img src="{$product->image->filename|resize:225:120}" alt="{$product->name|escape}" class="img-responsive"></div>
+				{/if}	
+					<div class="price-info">
+						<p class="price-name">{$product->name|escape}</p>
+						<p class="price-components">{$product->annotation|strip_tags:true}</p>
+						<p class="price-weight">270 гр.</p>
+					</div>
+				</a>
+				{if $product->variants|count > 0}
+				<form class="variants" action="/cart">
+				{foreach $product->variants as $v}
+				<input id="featured_{$v->id}" name="variant" value="{$v->id}" type="radio" class="variant_radiobutton" {if $v@first}checked{/if} {if $product->variants|count<2}style="display:none;"{/if}/>
+				<div class="price-footer clearfix">
+					<div class="price-cost">
+						<span class="old-cost">{$v->price|convert} {$currency->sign|escape}</span>
+						<span class="current-cost">160 р.</span>
+					</div>
+					<div class="price-form">
+						<button class="btn addToBasket" type="submit">В корзину</button>
 					</div>
 				</div>
-
-				<div>
-					<div class="price-item">
-						<div class="price-header clearfix">
-							<div class="menu-number">24</div>
-						</div>
-						<a href="#" class="price-link">
-							<div class="price-img"><img src="design/{$settings->theme|escape}/images/price-3.jpg" alt="Товар" class="img-responsive"></div>
-							<div class="price-info">
-								<p class="price-name">Эдо</p>
-								<p class="price-components">Рис, сыр, угорь, тобикко оранжевая</p>
-								<p class="price-weight">260 гр.</p>
-							</div>
-						</a>
-						
-						<div class="price-footer clearfix">
-							<div class="price-cost">
-								<span class="current-cost">190 р.</span>
-							</div>
-							<div class="price-form">
-								<form action="">
-									<button class="btn addToBasket">В корзину</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div>
-					<div class="price-item">
-						<div class="price-header clearfix">
-							<div class="info-flag flag-discount">-30%</div>
-							<div class="menu-number">25</div>
-						</div>
-						<a href="#" class="price-link">
-							<div class="price-img"><img src="design/{$settings->theme|escape}/images/price-4.jpg" alt="Товар" class="img-responsive"></div>
-							<div class="price-info">
-								<p class="price-name">Калифорния с имитацией краба</p>
-								<p class="price-components">Рис, майонез, имитация краба, авокадо, огурец</p>
-								<p class="price-weight">270 гр.</p>
-							</div>
-						</a>
-						
-						<div class="price-footer clearfix">
-							<div class="price-cost">
-								<span class="old-cost">190 р.</span>
-								<span class="current-cost">160 р.</span>
-							</div>
-							<div class="price-form">
-								<form action="">
-									<button class="btn addToBasket">В корзину</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+				{/foreach}
+				</form>
+				{/if}
 			</div>
 		</div>
-	</div>
 
+
+	{/foreach}
+			</div>
+		</div>
+	</div>			
+{/if}
 	<div class="slider-price new-price-slider">
 		<div class="container">
 			<div class="block-header">

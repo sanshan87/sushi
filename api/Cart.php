@@ -167,6 +167,61 @@ class Cart extends Simpla
 		unset($_SESSION['shopping_cart'][$variant_id]); 
 	}
 	
+	
+	public function getCountInCart(){
+		$cart = new stdClass();
+		$cart->purchases = array();
+		$cart->total_price = 0;
+		$cart->total_products = 0;
+		$cart->coupon = null;
+		$cart->discount = 0;
+		$cart->coupon_discount = 0;
+
+		// Берем из сессии список variant_id=>amount
+		if(!empty($_SESSION['shopping_cart']))
+		{
+			$session_items = $_SESSION['shopping_cart'];
+			
+			$variants = $this->variants->get_variants(array('id'=>array_keys($session_items)));
+			if(!empty($variants))
+			{
+				foreach($variants as $variant)
+				{
+					$items[$variant->id] = new stdClass();
+					$items[$variant->id]->variant = $variant;
+					$items[$variant->id]->amount = $session_items[$variant->id];
+					$products_ids[] = $variant->product_id;
+				}
+	
+				$products = array();
+				foreach($this->products->get_products(array('id'=>$products_ids, 'limit' => count($products_ids))) as $p)
+					$products[$p->id]=$p;
+			
+				
+				foreach($items as $variant_id=>$item)
+				{	
+					$purchase = null;
+					if(!empty($products[$item->variant->product_id]))
+					{
+						$purchase = new stdClass();
+						$purchase->product = $products[$item->variant->product_id];						
+						$purchase->variant = $item->variant;
+						$purchase->amount = $item->amount;
+
+						$cart->purchases[] = $purchase;
+						$cart->total_price += $item->variant->price*$item->amount;
+						$cart->total_products += $item->amount;
+					}
+				}
+				return $cart->total_products;
+			}
+		}else{
+			return 0;
+		}
+	
+	
+	}
+	
 	/*
 	*
 	* Очистка корзины

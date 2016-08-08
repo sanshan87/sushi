@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-02 19:03:47
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-08 16:02:36
          compiled from "E:\xampp\htdocs\sushi.local\design\default\html\main.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:260975799cec90b0cc8-82024307%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6a2035cf555f619d709c17415cabd0d081a38348' => 
     array (
       0 => 'E:\\xampp\\htdocs\\sushi.local\\design\\default\\html\\main.tpl',
-      1 => 1470157395,
+      1 => 1470664884,
       2 => 'file',
     ),
   ),
@@ -20,6 +20,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'settings' => 0,
+    'featured_products' => 0,
+    'product' => 0,
+    'v' => 0,
+    'currency' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -33,7 +37,6 @@ if ($_smarty_tpl->parent != null) $_smarty_tpl->parent->tpl_vars['wrapper'] = cl
 
 <?php $_smarty_tpl->tpl_vars['canonical'] = new Smarty_variable('', null, 1);
 if ($_smarty_tpl->parent != null) $_smarty_tpl->parent->tpl_vars['canonical'] = clone $_smarty_tpl->tpl_vars['canonical'];?>
-
 
 
 
@@ -82,6 +85,10 @@ if ($_smarty_tpl->parent != null) $_smarty_tpl->parent->tpl_vars['canonical'] = 
 		</div>
 	</div>
 
+<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['get_featured_products'][0][0]->get_featured_products_plugin(array('var'=>'featured_products'),$_smarty_tpl);?>
+
+<?php if ($_smarty_tpl->tpl_vars['featured_products']->value) {?>
+<!-- Список товаров-->
 	<div class="slider-price popular-price-slider">
 		<div class="container">
 			<div class="block-header">
@@ -90,126 +97,69 @@ if ($_smarty_tpl->parent != null) $_smarty_tpl->parent->tpl_vars['canonical'] = 
 				<div class="clearfix"></div>
 			</div>
 			<div class="owl-carousel">
-				<div>
-					<div class="price-item">
-						<div class="price-header clearfix">
-							<div class="info-flag flag-discount">-20%</div>
-							<div class="menu-number">21</div>
-						</div>
-						<a href="#" class="price-link">
-							<div class="price-img"><img src="design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/images/price-1.jpg" alt="Товар" class="img-responsive"></div>
-							<div class="price-info">
-								<p class="price-name">Радуга</p>
-								<p class="price-components">Рис, сыр, креветка, окунь, тунец,лосось, угорь, лосось х/к</p>
-								<p class="price-weight">270 гр.</p>
-							</div>
-						</a>
-						
-						<div class="price-footer clearfix">
-							<div class="price-cost">
-								<span class="old-cost">190 р.</span>
-								<span class="current-cost">160 р.</span>
-							</div>
-							<div class="price-form">
-								<form action="">
-									<button class="btn addToBasket">В корзину</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
 
-				<div>
-					<div class="price-item">
-						<div class="price-header clearfix">
-							<div class="info-flag flag-new">new</div>
-							<div class="menu-number">20</div>
-						</div>
-						<a href="#" class="price-link">
-							<div class="price-img"><img src="design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/images/price-2.jpg" alt="Товар" class="img-responsive"></div>
-							<div class="price-info">
-								<p class="price-name">Глаз дракона</p>
-								<p class="price-components">Рис, лосось х/к, томаго, огурец, икра лососевая</p>
-								<p class="price-weight">220 гр.</p>
-							</div>
-						</a>
-						
-						<div class="price-footer clearfix">
-							<div class="price-cost">
-								<span class="current-cost">170 р.</span>
-							</div>
-							<div class="price-form">
-								<form action="">
-									<button class="btn addToBasket">В корзину</button>
-								</form>
-							</div>
-						</div>
+	<?php  $_smarty_tpl->tpl_vars['product'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['product']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['featured_products']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['product']->key => $_smarty_tpl->tpl_vars['product']->value) {
+$_smarty_tpl->tpl_vars['product']->_loop = true;
+?>
+		<div>
+			<div class="price-item">
+				<!--<div class="price-header clearfix">
+					<div class="info-flag flag-discount">-20%</div>
+					<div class="menu-number">21</div>
+				</div>-->
+				<a href="products/<?php echo $_smarty_tpl->tpl_vars['product']->value->url;?>
+" class="price-link">
+				<?php if ($_smarty_tpl->tpl_vars['product']->value->image) {?>
+					<div class="price-img"><img src="<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['resize'][0][0]->resize_modifier($_smarty_tpl->tpl_vars['product']->value->image->filename,225,120);?>
+" alt="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['product']->value->name, ENT_QUOTES, 'UTF-8', true);?>
+" class="img-responsive"></div>
+				<?php }?>	
+					<div class="price-info">
+						<p class="price-name"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['product']->value->name, ENT_QUOTES, 'UTF-8', true);?>
+</p>
+						<p class="price-components"><?php echo preg_replace('!<[^>]*?>!', ' ', $_smarty_tpl->tpl_vars['product']->value->annotation);?>
+</p>
+						<p class="price-weight">270 гр.</p>
+					</div>
+				</a>
+				<?php if (count($_smarty_tpl->tpl_vars['product']->value->variants)>0) {?>
+				<form class="variants" action="/cart">
+				<?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['product']->value->variants; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+ $_smarty_tpl->tpl_vars['v']->index=-1;
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+ $_smarty_tpl->tpl_vars['v']->index++;
+ $_smarty_tpl->tpl_vars['v']->first = $_smarty_tpl->tpl_vars['v']->index === 0;
+?>
+				<input id="featured_<?php echo $_smarty_tpl->tpl_vars['v']->value->id;?>
+" name="variant" value="<?php echo $_smarty_tpl->tpl_vars['v']->value->id;?>
+" type="radio" class="variant_radiobutton" <?php if ($_smarty_tpl->tpl_vars['v']->first) {?>checked<?php }?> <?php if (count($_smarty_tpl->tpl_vars['product']->value->variants)<2) {?>style="display:none;"<?php }?>/>
+				<div class="price-footer clearfix">
+					<div class="price-cost">
+						<span class="old-cost"><?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['convert'][0][0]->convert($_smarty_tpl->tpl_vars['v']->value->price);?>
+ <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['currency']->value->sign, ENT_QUOTES, 'UTF-8', true);?>
+</span>
+						<span class="current-cost">160 р.</span>
+					</div>
+					<div class="price-form">
+						<button class="btn addToBasket" type="submit">В корзину</button>
 					</div>
 				</div>
-
-				<div>
-					<div class="price-item">
-						<div class="price-header clearfix">
-							<div class="menu-number">24</div>
-						</div>
-						<a href="#" class="price-link">
-							<div class="price-img"><img src="design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/images/price-3.jpg" alt="Товар" class="img-responsive"></div>
-							<div class="price-info">
-								<p class="price-name">Эдо</p>
-								<p class="price-components">Рис, сыр, угорь, тобикко оранжевая</p>
-								<p class="price-weight">260 гр.</p>
-							</div>
-						</a>
-						
-						<div class="price-footer clearfix">
-							<div class="price-cost">
-								<span class="current-cost">190 р.</span>
-							</div>
-							<div class="price-form">
-								<form action="">
-									<button class="btn addToBasket">В корзину</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div>
-					<div class="price-item">
-						<div class="price-header clearfix">
-							<div class="info-flag flag-discount">-30%</div>
-							<div class="menu-number">25</div>
-						</div>
-						<a href="#" class="price-link">
-							<div class="price-img"><img src="design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/images/price-4.jpg" alt="Товар" class="img-responsive"></div>
-							<div class="price-info">
-								<p class="price-name">Калифорния с имитацией краба</p>
-								<p class="price-components">Рис, майонез, имитация краба, авокадо, огурец</p>
-								<p class="price-weight">270 гр.</p>
-							</div>
-						</a>
-						
-						<div class="price-footer clearfix">
-							<div class="price-cost">
-								<span class="old-cost">190 р.</span>
-								<span class="current-cost">160 р.</span>
-							</div>
-							<div class="price-form">
-								<form action="">
-									<button class="btn addToBasket">В корзину</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+				<?php } ?>
+				</form>
+				<?php }?>
 			</div>
 		</div>
-	</div>
 
+
+	<?php } ?>
+			</div>
+		</div>
+	</div>			
+<?php }?>
 	<div class="slider-price new-price-slider">
 		<div class="container">
 			<div class="block-header">

@@ -1,7 +1,4 @@
 ;<? exit(); ?>
-
-license = "fbiacahici fgjgjhnrnj osrtuxyxsa 6db79faafa ffjkhmklih olornqkspu xyw4w54b7c bc9hcfhb9i jfgjlphqor jlpvrttsqt x44dae3a8d cfbaebdd hlmpojoqnm rtmqv9ubu7 7db74d598d bljldokngq gkppprjvnn u3v8u7ua4f 499iahgkhi ekfqmnmllk posvrto2q2 p5va378h7d 8kfddm9lii iqlnhpioqv p8r3s8q7r9 4c9e6eca7j affi "
-
 [database]
 
 ;Сервер базы данных

@@ -1,3 +1,6 @@
+<script src="/js/cropit/dist/jquery.cropit.js"></script>
+<link href="/js/modalPopLite/modalPopLite.css" rel="stylesheet" type="text/css" /> 
+<script  src="/js/modalPopLite/modalPopLite.min.js"></script>
 {capture name=tabs}
 	<li class="active"><a href="{url module=ProductsAdmin category_id=$product->category_id return=null brand_id=null id=null}">Товары</a></li>
 	{if in_array('categories', $manager->permissions)}<li><a href="index.php?module=CategoriesAdmin">Категории</a></li>{/if}
@@ -373,14 +376,13 @@ $(function() {
 	url_touched = true;
 	
 	if($('input[name="meta_title"]').val() == generate_meta_title() || $('input[name="meta_title"]').val() == '')
-		meta_title_touched = false;
+		meta_title_touched = false;	
 	if($('input[name="meta_keywords"]').val() == generate_meta_keywords() || $('input[name="meta_keywords"]').val() == '')
 		meta_keywords_touched = false;
 	if($('textarea[name="meta_description"]').val() == generate_meta_description() || $('textarea[name="meta_description"]').val() == '')
 		meta_description_touched = false;
 	if($('input[name="url"]').val() == generate_url() || $('input[name="url"]').val() == '')
 		url_touched = false;
-		
 	$('input[name="meta_title"]').change(function() { meta_title_touched = true; });
 	$('input[name="meta_keywords"]').change(function() { meta_keywords_touched = true; });
 	$('textarea[name="meta_description"]').change(function() { meta_description_touched = true; });
@@ -389,6 +391,31 @@ $(function() {
 	$('input[name="name"]').keyup(function() { set_meta(); });
 	$('select[name="brand_id"]').change(function() { set_meta(); });
 	$('select[name="categories[]"]').change(function() { set_meta(); });
+	
+    $('#popup-wrapper').modalPopLite({ openButton: '#clicker', closeButton: '#close-btn' }); 
+	
+	   $('#image-cropper').cropit({ imageBackground: true , 
+   width:225,
+   height:120,
+   initialZoom:'image'{/literal}{if $product_images|@count>0}{literal},
+   imageState: {
+            src: '{/literal}{$product_images[0]->filename|replace:"_mini":"_orig"|resize:1000:800}{literal}',
+          }
+          {/literal}{/if}{literal}
+          }); 
+		  
+	   $('.export').click(function() {
+          var imageData = $('#image-cropper').cropit('export');
+          var imageOrig = $('img.cropit-image-background').attr('src');
+              if(imageData && imageOrig){
+				$('#preview_result').html('');
+				$('#imgMini').val(imageData);
+				$('#imgOrig').val(imageOrig);
+                $("<img src='"+ imageData + "'>").appendTo('#preview_result');
+                $("#close-btn").trigger('click');
+              }
+        });  
+
 	
 });
 
@@ -523,7 +550,7 @@ overflow-y: auto;
 			<input name=visible value='1' type="checkbox" id="active_checkbox" {if $product->visible}checked{/if}/> <label for="active_checkbox">Активен</label>
 		</div>
 		<div class="checkbox">
-			<input name=featured value="1" type="checkbox" id="featured_checkbox" {if $product->featured}checked{/if}/> <label for="featured_checkbox">Рекомендуемый</label>
+			<input name=featured value="1" type="checkbox" id="featured_checkbox" {if $product->featured}checked{/if}/> <label for="featured_checkbox">Популярный</label>
 		</div>
 	</div> 
 	
@@ -581,7 +608,7 @@ overflow-y: auto;
 			<li class="variant_price">     <input name="variants[price][]"         type="text"   value="{$variant->price|escape}" /></li>
 			<li class="variant_discount">  <input name="variants[compare_price][]" type="text"   value="{$variant->compare_price|escape}" /></li>
 			<li class="variant_amount">    <input name="variants[stock][]"         type="text"   value="{if $variant->infinity || $variant->stock == ''}∞{else}{$variant->stock|escape}{/if}" />{$settings->units}</li>
-			<li class="variant_download">
+			<!--<li class="variant_download">
 			
 				{if $variant->attachment}
 					<span class=attachment_name>{$variant->attachment|truncate:25:'...':false:true}</span>
@@ -595,7 +622,7 @@ overflow-y: auto;
 					<input type=hidden name=delete_attachment[]>
 				</div>
 			
-			</li>
+			</li>-->
 		</ul>
 		{/foreach}		
 		</div>
@@ -616,7 +643,7 @@ overflow-y: auto;
 		</ul>
 
 		<input class="button_green button_save" type="submit" name="" value="Сохранить" />
-		<span class="add" id="add_variant"><i class="dash_link">Добавить вариант</i></span>
+		<!--<span class="add" id="add_variant"><i class="dash_link">Добавить вариант</i></span>-->
  	</div>
 	<!-- Варианты товара (The End)--> 
 	
@@ -673,25 +700,35 @@ overflow-y: auto;
 	
 	<!-- Правая колонка свойств товара -->	
 	<div id="column_right">
-		
-		<!-- Изображения товара -->	
-		<div class="block layer images">
-			<h2>Изображения товара
-			<a href="#" id=images_wizard><img src="design/images/wand.png" alt="Подобрать автоматически" title="Подобрать автоматически"/></a>
-			</h2>
-			<ul>{foreach $product_images as $image}<li>
-					<a href='#' class="delete"><img src='design/images/cross-circle-frame.png'></a>
-					<img src="{$image->filename|resize:100:100}" alt="" />
-					<input type=hidden name='images[]' value='{$image->id}'>
-				</li>{/foreach}</ul>
-			<div id=dropZone>
-				<div id=dropMessage>Перетащите файлы сюда</div>
-				<input type="file" name="dropped_images[]" multiple class="dropInput">
-			</div>
-			<div id="add_image"></div>
-			<span class=upload_image><i class="dash_link" id="upload_image">Добавить изображение</i></span> или <span class=add_image_url><i class="dash_link" id="add_image_url">загрузить из интернета</i></span>
+	
+		<div class="block layer images" style="height:200px; overflow: hidden;">
+		         <div id="clicker" style="text-align:center;text-decoration:underline;">Добавление превью</div>
+				 <div id="preview_result" style="height:120px;width:225px;">
+				{foreach $product_images as $image}
+					<img src="{$image->filename|resize:225:120}" alt="" />
+					<!--<input type=hidden name='images[]' value='{$image->id}'>-->
+				{/foreach}
+				 </div>
+                    <div id="popup-wrapper" style="background-color: #fff;width:100%;height:100%;">
+                        <div id="image-cropper" style="margin: 0 auto;width: 225px;position: absolute;top: 50%;transform: translate(-50%, -50%);left: 50%;">
+                            <div class="cropit-image-preview-container">
+                                <div class="cropit-image-preview"></div>
+                            </div>
+                            <input type="range" class="cropit-image-zoom-input" />
+                            <br>
+                            <input type="file" class="cropit-image-input" />
+  <br>
+    <input type="button" class="export" value="Получить превью">
+    </div>
+<input type="button" id="close-btn" value="&times; Close" style="position:absolute; right: 8px; top: 8px; cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: red;">
+</div>
+<input type="hidden" id="imgMini" value="" name="imgData">
+<input type="hidden" id="imgOrig" value="" name="imgDataOrig">
 		</div>
-
 		<div class="block layer">
 			<h2>Связанные товары</h2>
 			<div id=list class="sortable related_products">
@@ -752,7 +789,6 @@ overflow-y: auto;
 	</div>
 	<!-- Описание товара (The End)-->
 	<input class="button_green button_save" type="submit" name="" value="Сохранить" />
-	
 </form>
 <!-- Основная форма (The End) -->
 

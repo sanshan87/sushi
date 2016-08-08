@@ -2,6 +2,7 @@
 	session_start();
 	require_once('../api/Simpla.php');
 	$simpla = new Simpla();
+	$result = array();
 	$simpla->cart->add_item($simpla->request->get('variant', 'integer'), $simpla->request->get('amount', 'integer'));
 	$cart = $simpla->cart->get_cart();
 	$simpla->design->assign('cart', $cart);
@@ -12,7 +13,9 @@
 	else
 		$currency = reset($currencies);
 	$simpla->design->assign('currency',	$currency);
-	$result = $simpla->design->fetch('cart_informer.tpl');
+	$result['cart'] = $simpla->design->fetch('cart_informer.tpl');
+	$result['count'] = $simpla->cart->getCountInCart();
+	$result['text'] = "В корзине {$result['count']} ".$simpla->design->plural_modifier($result['count'],'товар','товаров','товара');
 	header("Content-type: application/json; charset=UTF-8");
 	header("Cache-Control: must-revalidate");
 	header("Pragma: no-cache");
