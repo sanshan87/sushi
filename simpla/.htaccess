@@ -1,5 +1,0 @@
-AddType application/octet-stream csv
-AuthName "Simpla CMS"
-AuthType Basic
-AuthUserFile C:\openserver\OpenServer\domains\sushitore\sushi\simpla\.passwd
-require valid-user
