@@ -102,6 +102,8 @@
 				<li><label class=property>Вертикальное положение водяного знака</label><input name="watermark_offset_y" class="simpla_inp" type="text" value="{$settings->watermark_offset_y|escape}" /> %</li>
 				<li><label class=property>Прозрачность знака (больше &mdash; прозрачней)</label><input name="watermark_transparency" class="simpla_inp" type="text" value="{$settings->watermark_transparency|escape}" /> %</li>
 				<li><label class=property>Резкость изображений (рекомендуется 20%)</label><input name="images_sharpen" class="simpla_inp" type="text" value="{$settings->images_sharpen|escape}" /> %</li>
+				<li><label class=property>Ширина превью товара</label><input name="preview_x" class="simpla_inp" type="text" value="{$settings->preview_x|escape}" /> px</li>
+				<li><label class=property>Ширина превью товара</label><input name="preview_y" class="simpla_inp" type="text" value="{$settings->preview_y|escape}" /> px</li>
 			</ul>
 		</div>
 		<!-- Параметры (The End)-->

@@ -193,7 +193,6 @@ class Features extends Simpla
 	{
 		$query = $this->db->placehold("SELECT f.id as feature_id, f.name, po.value, po.product_id FROM __options po LEFT JOIN __features f ON f.id=po.feature_id
 										WHERE po.product_id in(?@) ORDER BY f.position", (array)$product_id);
-
 		$this->db->query($query);
 		$res = $this->db->results();
 

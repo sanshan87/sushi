@@ -37,7 +37,9 @@ class SettingsAdmin extends Simpla
 			$this->settings->pz_server = $this->request->post('pz_server');
 			$this->settings->pz_password = $this->request->post('pz_password');
 			$this->settings->pz_phones = $this->request->post('pz_phones');
-			
+			//Размеры превью
+			$this->settings->preview_x = $this->request->post('preview_x');
+			$this->settings->preview_y = $this->request->post('preview_y');
 			
 			// Водяной знак
 			$clear_image_cache = false;

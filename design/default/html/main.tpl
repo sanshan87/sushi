@@ -67,10 +67,12 @@
 	{foreach $featured_products as $product}
 		<div>
 			<div class="price-item">
-				<!--<div class="price-header clearfix">
-					<div class="info-flag flag-discount">-20%</div>
-					<div class="menu-number">21</div>
-				</div>-->
+				<div class="price-header clearfix">
+				{if $product->variant->skidka > 0}
+					<div class="info-flag flag-discount">-{$product->variant->skidka}%</div>
+				{/if}
+					<div class="menu-number">{$product->variant->sku}</div>
+				</div>
 				<a href="products/{$product->url}" class="price-link">
 				{if $product->image}
 					<div class="price-img"><img src="{$product->image->filename|resize:225:120}" alt="{$product->name|escape}" class="img-responsive"></div>
@@ -78,7 +80,11 @@
 					<div class="price-info">
 						<p class="price-name">{$product->name|escape}</p>
 						<p class="price-components">{$product->annotation|strip_tags:true}</p>
-						<p class="price-weight">270 гр.</p>
+						{if $product->features}
+						{foreach $product->features as $opt}
+						<p class="price-weight">{$opt->value}</p>
+						{/foreach}
+						{/if}
 					</div>
 				</a>
 				{if $product->variants|count > 0}
@@ -87,8 +93,12 @@
 				<input id="featured_{$v->id}" name="variant" value="{$v->id}" type="radio" class="variant_radiobutton" {if $v@first}checked{/if} {if $product->variants|count<2}style="display:none;"{/if}/>
 				<div class="price-footer clearfix">
 					<div class="price-cost">
+					{if $v->skidka > 0}
 						<span class="old-cost">{$v->price|convert} {$currency->sign|escape}</span>
-						<span class="current-cost">160 р.</span>
+						<span class="current-cost">{($v->price|convert - $v->price|convert*$v->skidka/100)|string_format:"%.2f"}</span>
+					{else}
+						<span class="current-cost">{$v->price|convert} {$currency->sign|escape}</span>
+					{/if}
 					</div>
 					<div class="price-form">
 						<button class="btn addToBasket" type="submit">В корзину</button>
@@ -106,6 +116,10 @@
 		</div>
 	</div>			
 {/if}
+	
+{* Новинки *}
+{get_new_products var=new_products limit=5}
+{if $new_products}
 	<div class="slider-price new-price-slider">
 		<div class="container">
 			<div class="block-header">
@@ -114,119 +128,56 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="owl-carousel">
-				<div>
-					<div class="price-item">
-						<div class="price-header clearfix">
-							<div class="info-flag flag-hit">хит</div>
-							<div class="menu-number">31</div>
-						</div>
-						<a href="#" class="price-link">
-							<div class="price-img"><img src="design/{$settings->theme|escape}/images/price-5.jpg" alt="Товар" class="img-responsive"></div>
-							<div class="price-info">
-								<p class="price-name">Аляска</p>
-								<p class="price-components">Рис, сыр филадельфия, лосось х/к, огурец, укроп сверху, помидорчерри</p>
-								<p class="price-weight">310 гр.</p>
-							</div>
-						</a>
-						
-						<div class="price-footer clearfix">
-							<div class="price-cost">
-								<span class="current-cost">180 р.</span>
-							</div>
-							<div class="price-form">
-								<form action="">
-									<button class="btn addToBasket">В корзину</button>
-								</form>
-							</div>
-						</div>
+			{foreach $new_products as $product}
+			<div>
+			<div class="price-item">
+				<div class="price-header clearfix">
+				{if $product->variant->skidka > 0}
+					<div class="info-flag flag-discount">-{$product->variant->skidka}%</div>
+				{/if}
+					<div class="menu-number">{$product->variant->sku}</div>
+				</div>
+				<a href="products/{$product->url}" class="price-link">
+				{if $product->image}
+					<div class="price-img"><img src="{$product->image->filename|resize:225:120}" alt="{$product->name|escape}" class="img-responsive"></div>
+				{/if}	
+					<div class="price-info">
+						<p class="price-name">{$product->name|escape}</p>
+						<p class="price-components">{$product->annotation|strip_tags:true}</p>
+												{if $product->features}
+						{foreach $product->features as $opt}
+						<p class="price-weight">{$opt->value}</p>
+						{/foreach}
+						{/if}
+					</div>
+				</a>
+				{if $product->variants|count > 0}
+				<form class="variants" action="/cart">
+				{foreach $product->variants as $v}
+				<input id="featured_{$v->id}" name="variant" value="{$v->id}" type="radio" class="variant_radiobutton" {if $v@first}checked{/if} {if $product->variants|count<2}style="display:none;"{/if}/>
+				<div class="price-footer clearfix">
+					<div class="price-cost">
+					{if $v->skidka > 0}
+						<span class="old-cost">{$v->price|convert} {$currency->sign|escape}</span>
+						<span class="current-cost">{($v->price|convert - $v->price|convert*$v->skidka/100)|string_format:"%.2f"}</span>
+					{else}
+						<span class="current-cost">{$v->price|convert} {$currency->sign|escape}</span>
+					{/if}
+					</div>
+					<div class="price-form">
+						<button class="btn addToBasket" type="submit">В корзину</button>
 					</div>
 				</div>
-
-				<div>
-					<div class="price-item">
-						<div class="price-header clearfix">
-							<div class="menu-number">12</div>
-						</div>
-						<a href="#" class="price-link">
-							<div class="price-img"><img src="design/{$settings->theme|escape}/images/price-6.jpg" alt="Товар" class="img-responsive"></div>
-							<div class="price-info">
-								<p class="price-name">Филадельфия с авокадо</p>
-								<p class="price-components">Рис, сыр филадельфия, авокадо, лосось</p>
-								<p class="price-weight">290 гр.</p>
-							</div>
-						</a>
-						
-						<div class="price-footer clearfix">
-							<div class="price-cost">
-								<span class="current-cost">180 р.</span>
-							</div>
-							<div class="price-form">
-								<form action="">
-									<button class="btn addToBasket">В корзину</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div>
-					<div class="price-item">
-						<div class="price-header clearfix">
-							<div class="info-flag flag-discount">-20%</div>
-						</div>
-						<a href="#" class="price-link">
-							<div class="price-img"><img src="design/{$settings->theme|escape}/images/price-7.jpg" alt="Товар" class="img-responsive"></div>
-							<div class="price-info">
-								<p class="price-name">Тортилья с курицей</p>
-								<p class="price-components">Лепешка тортилья, куриная грудка, огурец, помидор, соус цезарь, лист салата</p>
-								<p class="price-weight">1 шт.</p>
-							</div>
-						</a>
-						
-						<div class="price-footer clearfix">
-							<div class="price-cost">
-								<span class="old-cost">150 р.</span>
-								<span class="current-cost">120 р.</span>
-							</div>
-							<div class="price-form">
-								<form action="">
-									<button class="btn addToBasket">В корзину</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div>
-					<div class="price-item">
-						<div class="price-header clearfix">
-							<div class="menu-number">2</div>
-						</div>
-						<a href="#" class="price-link">
-							<div class="price-img"><img src="design/{$settings->theme|escape}/images/price-8.jpg" alt="Товар" class="img-responsive"></div>
-							<div class="price-info">
-								<p class="price-name">Спайс с мидиями</p>
-								<p class="price-components">Рис, мидии, спайси</p>
-								<p class="price-weight">110 гр.</p>
-							</div>
-						</a>
-						
-						<div class="price-footer clearfix">
-							<div class="price-cost">
-								<span class="current-cost">70 р.</span>
-							</div>
-							<div class="price-form">
-								<form action="">
-									<button class="btn addToBasket">В корзину</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+				{/foreach}
+				</form>
+				{/if}
+			</div>
+		</div>
+			{/foreach}
 			</div>
 		</div>
 	</div>
-
+{/if}
 	<div class="text-content">
 		<div class="container">
 			<h1 class="text-center">Суши и роллы в Орле</h1>

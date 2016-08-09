@@ -31,7 +31,7 @@
 
 	{* Цена за единицу *}
 	<td class="price">
-		{($purchase->variant->price)|convert} {$currency->sign}
+		{($purchase->variant->price)|string_format:"%.2f"} {$currency->sign}
 	</td>
 
 	{* Количество *}
@@ -45,7 +45,7 @@
 
 	{* Цена *}
 	<td class="price">
-		{($purchase->variant->price*$purchase->amount)|convert}&nbsp;{$currency->sign}
+		{($purchase->variant->price*$purchase->amount)|string_format:"%.2f"}&nbsp;{$currency->sign}
 	</td>
 	
 	{* Удалить из корзины *}
@@ -89,7 +89,7 @@
 	</th>
 	<th class="price">
 		{if $cart->coupon_discount>0}
-		&minus;{$cart->coupon_discount|convert}&nbsp;{$currency->sign}
+		&minus;{$cart->coupon_discount|string_format:"%.2f"}&nbsp;{$currency->sign}
 		{/if}
 	</th>
 	<th class="remove"></th>
@@ -114,7 +114,7 @@ $("input[name='coupon_code']").keypress(function(event){
 	<th class="name"></th>
 	<th class="price" colspan="4">
 		Итого
-		{$cart->total_price|convert}&nbsp;{$currency->sign}
+		{$cart->total_price|string_format:"%.2f"}&nbsp;{$currency->sign}
 	</th>
 </tr>
 </table>

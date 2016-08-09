@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-02 19:15:46
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-09 12:36:57
          compiled from "simpla\design\html\settings.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2190157a0d542694e66-31437928%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '418c522abdcc45242a9a35d7207d38fc61cfc733' => 
     array (
       0 => 'simpla\\design\\html\\settings.tpl',
-      1 => 1411839018,
+      1 => 1470739014,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_57a0d54280fd38_88034763',
   'variables' => 
   array (
     'manager' => 0,
@@ -26,8 +28,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'managers' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_57a0d54280fd38_88034763',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_57a0d54280fd38_88034763')) {function content_57a0d54280fd38_88034763($_smarty_tpl) {?><?php if (!is_callable('smarty_function_math')) include 'E:\\xampp\\htdocs\\sushi.local\\Smarty\\libs\\plugins\\function.math.php';
 ?><?php $_smarty_tpl->_capture_stack[0][] = array('tabs', null, null); ob_start(); ?>
@@ -166,6 +166,10 @@ if ($_smarty_tpl->parent != null) $_smarty_tpl->parent->tpl_vars['meta_title'] =
 " /> %</li>
 				<li><label class=property>Резкость изображений (рекомендуется 20%)</label><input name="images_sharpen" class="simpla_inp" type="text" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->images_sharpen, ENT_QUOTES, 'UTF-8', true);?>
 " /> %</li>
+				<li><label class=property>Ширина превью товара</label><input name="preview_x" class="simpla_inp" type="text" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->preview_x, ENT_QUOTES, 'UTF-8', true);?>
+" /> px</li>
+				<li><label class=property>Ширина превью товара</label><input name="preview_y" class="simpla_inp" type="text" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->preview_y, ENT_QUOTES, 'UTF-8', true);?>
+" /> px</li>
 			</ul>
 		</div>
 		<!-- Параметры (The End)-->

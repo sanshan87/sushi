@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-07 20:50:52
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-09 13:01:29
          compiled from "simpla\design\html\product.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2096257a0d4fe4acee2-93099070%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '3f18dfe5f48ef059e152ab919b3f13338168bbfc' => 
     array (
       0 => 'simpla\\design\\html\\product.tpl',
-      1 => 1470595778,
+      1 => 1470740483,
       2 => 'file',
     ),
   ),
@@ -29,6 +29,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   array (
     'product' => 0,
     'manager' => 0,
+    'settings' => 0,
     'product_images' => 0,
     'message_success' => 0,
     'config' => 0,
@@ -45,7 +46,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'first_variant' => 0,
     'currency' => 0,
     'variant' => 0,
-    'settings' => 0,
     'features' => 0,
     'feature' => 0,
     'feature_id' => 0,
@@ -464,11 +464,13 @@ $(function() {
     $('#popup-wrapper').modalPopLite({ openButton: '#clicker', closeButton: '#close-btn' }); 
 	
 	   $('#image-cropper').cropit({ imageBackground: true , 
-   width:225,
-   height:120,
+   width:<?php echo $_smarty_tpl->tpl_vars['settings']->value->preview_x;?>
+,
+   height:<?php echo $_smarty_tpl->tpl_vars['settings']->value->preview_y;?>
+,
    initialZoom:'image'<?php if (count($_smarty_tpl->tpl_vars['product_images']->value)>0) {?>,
    imageState: {
-            src: '<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['resize'][0][0]->resize_modifier(smarty_modifier_replace($_smarty_tpl->tpl_vars['product_images']->value[0]->filename,"_mini","_orig"),1000,800);?>
+            src: '<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['resize'][0][0]->resize_modifier(smarty_modifier_replace($_smarty_tpl->tpl_vars['product_images']->value[0]->filename,"_mini","_orig"),600,600);?>
 ',
           }
           <?php }?>
@@ -742,8 +744,9 @@ foreach (Smarty::$global_tpl_vars as $key => $value) if(!isset($_smarty_tpl->tpl
 			<li class="variant_sku">Артикул</li>	
 			<li class="variant_price">Цена, <?php echo $_smarty_tpl->tpl_vars['currency']->value->sign;?>
 </li>	
-			<li class="variant_discount">Старая, <?php echo $_smarty_tpl->tpl_vars['currency']->value->sign;?>
-</li>	
+			<!--<li class="variant_discount">Старая, <?php echo $_smarty_tpl->tpl_vars['currency']->value->sign;?>
+</li>-->
+			<li class="variant_amount">Скидка, %</li>
 			<li class="variant_amount">Кол-во</li>
 		</ul>
 		<div id="variants">
@@ -761,7 +764,9 @@ $_smarty_tpl->tpl_vars['variant']->_loop = true;
 " /></li>
 			<li class="variant_price">     <input name="variants[price][]"         type="text"   value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['variant']->value->price, ENT_QUOTES, 'UTF-8', true);?>
 " /></li>
-			<li class="variant_discount">  <input name="variants[compare_price][]" type="text"   value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['variant']->value->compare_price, ENT_QUOTES, 'UTF-8', true);?>
+			<!--<li class="variant_discount">  <input name="variants[compare_price][]" type="text"   value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['variant']->value->compare_price, ENT_QUOTES, 'UTF-8', true);?>
+" /></li>-->
+			<li class="variant_amount">    <input name="variants[skidka][]"         type="text"   value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['variant']->value->skidka, ENT_QUOTES, 'UTF-8', true);?>
 " /></li>
 			<li class="variant_amount">    <input name="variants[stock][]"         type="text"   value="<?php if ($_smarty_tpl->tpl_vars['variant']->value->infinity||$_smarty_tpl->tpl_vars['variant']->value->stock=='') {?>∞<?php } else { ?><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['variant']->value->stock, ENT_QUOTES, 'UTF-8', true);?>
 <?php }?>" /><?php echo $_smarty_tpl->tpl_vars['settings']->value->units;?>
@@ -845,12 +850,11 @@ $_smarty_tpl->tpl_vars['feature']->_loop = true;
 " /></li>
 				<?php } ?>
 			</ul>
-			<!-- Новые свойства -->
 			<ul class=new_features>
 				<li id=new_feature><label class=property><input type=text name=new_features_names[]></label><input class="simpla_inp" type="text" name=new_features_values[] /></li>
 			</ul>
 			<span class="add"><i class="dash_link" id="add_new_feature">Добавить новое свойство</i></span>
-			<input class="button_green button_save" type="submit" name="" value="Сохранить" />			
+			<input class="button_green button_save" type="submit" name="" value="Сохранить" />	
 		</div>
 		
 		<!-- Свойства товара (The End)-->
@@ -956,7 +960,7 @@ $_smarty_tpl->tpl_vars['related_product']->_loop = true;
 
 	<!-- Описагние товара -->
 	<div class="block layer">
-		<h2>Краткое описание</h2>
+		<h2>Ингридиенты</h2>
 		<textarea name="annotation" class="editor_small"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['product']->value->annotation, ENT_QUOTES, 'UTF-8', true);?>
 </textarea>
 	</div>
