@@ -88,7 +88,7 @@ $(document).ready(function() {
 		$('.basket-shadow').toggleClass('hidden');
 	});
 
-	$('.sb-btn, .basket-shadow, .basket-close').on('click',function(e) {
+	$('body').on('click', '.sb-btn, .basket-shadow, .basket-close',function(e) {
 		e.preventDefault();
 		$('.side-basket').trigger('open.basket');
 	});

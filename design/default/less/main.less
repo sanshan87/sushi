@@ -36,6 +36,10 @@ h1 {
 	text-transform: uppercase;
 }
 
+.transfer_class {
+	z-index: 2;
+}
+
 .flex-row {
 	display: flex;
 }
@@ -49,8 +53,6 @@ h1 {
 	border: none;
 	border-radius: 0;
 	background: url('../images/nav-top-bg.jpg') repeat-x left top;
-}
-.navbar-collapse {
 }
 
 .navbar-default {
@@ -953,9 +955,8 @@ h1 {
 					display: inline-block;
 					margin-bottom: 10px;
 					color: #cf232d;
-					border-bottom: 1px solid #cf232d;
 					line-height: 1;
-					text-decoration: none;
+					text-decoration: underline;
 				}
 				.form-inline {
 					label {
@@ -1148,6 +1149,16 @@ h1 {
 
 	.main-menu {
 		padding-bottom: 35px;
+		li {
+			.dropdown {
+				.dropdown-menu {
+					top: 100%;
+					right: auto;
+					left: 50%;
+					transform: translateX(-50%);
+				}
+			}
+		}
 	}
 
 	.flex-row {
@@ -1199,7 +1210,7 @@ h1 {
 	.side-basket {
 		max-width: 320px;
 		right: -320px;
-		padding-bottom: 155px;
+		padding-bottom: 195px;
 		.sb-btn {
 			height: 49px;
 		}

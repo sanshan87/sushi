@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-02 21:09:16
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-09 15:24:58
          compiled from "simpla\design\html\category.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:766457a0efdcdac1c8-89837278%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd5b5c676acbd0d0337e4b95b95b107848faa83b5' => 
     array (
       0 => 'simpla\\design\\html\\category.tpl',
-      1 => 1426719906,
+      1 => 1470676790,
       2 => 'file',
     ),
   ),
@@ -23,6 +23,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       'compiled' => '',
     ),
   ),
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_57a0efdcf17697_89480400',
   'variables' => 
   array (
     'manager' => 0,
@@ -36,10 +38,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'categories' => 0,
   ),
   'has_nocache_code' => 0,
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_57a0efdcf17697_89480400',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_57a0efdcf17697_89480400')) {function content_57a0efdcf17697_89480400($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_replace')) include 'E:\\xampp\\htdocs\\sushi.local\\Smarty\\libs\\plugins\\modifier.replace.php';
+<?php if ($_valid && !is_callable('content_57a0efdcf17697_89480400')) {function content_57a0efdcf17697_89480400($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_replace')) include 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\Smarty\\libs\\plugins\\modifier.replace.php';
 ?>
 <?php $_smarty_tpl->_capture_stack[0][] = array('tabs', null, null); ob_start(); ?>
 	<?php if (in_array('products',$_smarty_tpl->tpl_vars['manager']->value->permissions)) {?><li><a href="index.php?module=ProductsAdmin">Товары</a></li><?php }?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-07 20:50:52
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-09 15:24:46
          compiled from "simpla\design\html\product.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2096257a0d4fe4acee2-93099070%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '3f18dfe5f48ef059e152ab919b3f13338168bbfc' => 
     array (
       0 => 'simpla\\design\\html\\product.tpl',
-      1 => 1470595778,
+      1 => 1470676790,
       2 => 'file',
     ),
   ),
@@ -56,8 +56,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => 0,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_57a0d4fe768308_95896520')) {function content_57a0d4fe768308_95896520($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_replace')) include 'E:\\xampp\\htdocs\\sushi.local\\Smarty\\libs\\plugins\\modifier.replace.php';
-if (!is_callable('smarty_modifier_truncate')) include 'E:\\xampp\\htdocs\\sushi.local\\Smarty\\libs\\plugins\\modifier.truncate.php';
+<?php if ($_valid && !is_callable('content_57a0d4fe768308_95896520')) {function content_57a0d4fe768308_95896520($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_replace')) include 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\Smarty\\libs\\plugins\\modifier.replace.php';
+if (!is_callable('smarty_modifier_truncate')) include 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\Smarty\\libs\\plugins\\modifier.truncate.php';
 ?><script src="/js/cropit/dist/jquery.cropit.js"></script>
 <link href="/js/modalPopLite/modalPopLite.css" rel="stylesheet" type="text/css" /> 
 <script  src="/js/modalPopLite/modalPopLite.min.js"></script>
