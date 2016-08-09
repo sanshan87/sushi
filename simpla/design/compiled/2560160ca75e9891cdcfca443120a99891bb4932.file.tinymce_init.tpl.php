@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-02 19:14:38
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-09 15:24:47
          compiled from "simpla\design\html\tinymce_init.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2699557a0d4fe77bb84-33809040%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2560160ca75e9891cdcfca443120a99891bb4932' => 
     array (
       0 => 'simpla\\design\\html\\tinymce_init.tpl',
-      1 => 1350431946,
+      1 => 1470676790,
       2 => 'file',
     ),
   ),
@@ -15,14 +15,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_57a0d4fe793298_22228470',
   'variables' => 
   array (
     'settings' => 0,
     'config' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_57a0d4fe793298_22228470',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_57a0d4fe793298_22228470')) {function content_57a0d4fe793298_22228470($_smarty_tpl) {?><script language="javascript" type="text/javascript" src="design/js/tiny_mce/plugins/smimage/smplugins.js"></script>
 <script language="javascript" type="text/javascript" src="design/js/tiny_mce/tiny_mce.js"></script>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-02 19:15:35
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-09 15:24:56
          compiled from "simpla\design\html\categories.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:252657a0d537be77c8-03962785%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd90a52f424e766404ee01d4941546f5d3f919be0' => 
     array (
       0 => 'simpla\\design\\html\\categories.tpl',
-      1 => 1363848412,
+      1 => 1470676790,
       2 => 'file',
     ),
   ),
@@ -23,6 +23,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       'compiled' => '',
     ),
   ),
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_57a0d537dc02b3_10909493',
   'variables' => 
   array (
     'manager' => 0,
@@ -31,8 +33,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'level' => 0,
   ),
   'has_nocache_code' => 0,
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_57a0d537dc02b3_10909493',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_57a0d537dc02b3_10909493')) {function content_57a0d537dc02b3_10909493($_smarty_tpl) {?>
 <?php $_smarty_tpl->_capture_stack[0][] = array('tabs', null, null); ob_start(); ?>

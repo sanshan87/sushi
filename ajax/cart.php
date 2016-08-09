@@ -3,7 +3,21 @@
 	require_once('../api/Simpla.php');
 	$simpla = new Simpla();
 	$result = array();
-	$simpla->cart->add_item($simpla->request->get('variant', 'integer'), $simpla->request->get('amount', 'integer'));
+
+	switch ($simpla->request->get('action', 'string')) {
+		case 'removeFromCart':
+			$simpla->cart->delete_item($simpla->request->get('variant_id', 'integer'));
+		break;
+
+		case 'updateAmount':
+			$simpla->cart->update_item($simpla->request->get('variant_id', 'integer'), $simpla->request->get('amount', 'integer'));
+		break;
+
+		default: 
+			$simpla->cart->add_item($simpla->request->get('variant', 'integer'), $simpla->request->get('amount', 'integer'));
+		break;
+	}
+	
 	$cart = $simpla->cart->get_cart();
 	$simpla->design->assign('cart', $cart);
 	

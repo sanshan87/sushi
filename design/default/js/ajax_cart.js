@@ -29,4 +29,55 @@ $('form.variants').on('submit', function(e) {
 
 	return false;
 });
+
+	$('body').on('submit', 'form.removeFromCart', function(e) {
+		e.preventDefault();
+		var form = $(this),
+			button = $(this).find('input[type="submit"]');
+		if($(this).find('input[name="variant_id"]').size()) 
+			var variant_id = $(this).find('input[name="variant_id"]').val();
+
+		$.ajax({
+			url: "ajax/cart.php",
+			data: {
+				action: "removeFromCart",
+				variant_id: variant_id
+			},
+			dataType: 'json',
+			success: function(data){
+				$('#cart_informer').html(data.cart);
+				$('#cnt_in_cart').text(data.count);
+				$('#txt_cnt').html(data.text);
+			}
+		});
+	});
+
+	$('body').on('change', 'input[name="item_amount"]', function() {
+		var max = 99,
+			min = 1,
+			inp = $(this),
+			amount = parseInt(inp.val()),
+			form = $(this).closest('.b-item').find('form');
+
+		if(form.find('input[name="variant_id"]').size()) 
+			var variant_id = form.find('input[name="variant_id"]').val();
+
+		if(amount < min) amount = min;
+		if(amount > max) amount = max;
+
+		$.ajax({
+			url: "ajax/cart.php",
+			data: {
+				action: "updateAmount",
+				variant_id: variant_id,
+				amount: amount
+			},
+			dataType: 'json',
+			success: function(data){
+				$('#cart_informer').html(data.cart);
+				$('#cnt_in_cart').text(data.count);
+				$('#txt_cnt').html(data.text);
+			}
+		});
+	});
 });
