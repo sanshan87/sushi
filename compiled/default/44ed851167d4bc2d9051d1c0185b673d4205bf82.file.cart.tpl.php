@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-07-28 11:23:26
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-09 11:18:28
          compiled from "E:\xampp\htdocs\sushi.local\design\default\html\cart.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:286055799cf0e9fee56-05467909%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '44ed851167d4bc2d9051d1c0185b673d4205bf82' => 
     array (
       0 => 'E:\\xampp\\htdocs\\sushi.local\\design\\default\\html\\cart.tpl',
-      1 => 1429232858,
+      1 => 1470734303,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_5799cf0eb6a325_07812605',
   'variables' => 
   array (
     'cart' => 0,
@@ -37,8 +39,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'comment' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_5799cf0eb6a325_07812605',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5799cf0eb6a325_07812605')) {function content_5799cf0eb6a325_07812605($_smarty_tpl) {?><?php if (!is_callable('smarty_function_math')) include 'E:\\xampp\\htdocs\\sushi.local\\Smarty\\libs\\plugins\\function.math.php';
 ?>
@@ -87,7 +87,7 @@ $_smarty_tpl->tpl_vars['purchase']->_loop = true;
 
 	
 	<td class="price">
-		<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['convert'][0][0]->convert(($_smarty_tpl->tpl_vars['purchase']->value->variant->price));?>
+		<?php echo sprintf("%.2f",($_smarty_tpl->tpl_vars['purchase']->value->variant->price));?>
  <?php echo $_smarty_tpl->tpl_vars['currency']->value->sign;?>
 
 	</td>
@@ -134,7 +134,7 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['amounts']['last']       = ($
 
 	
 	<td class="price">
-		<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['convert'][0][0]->convert(($_smarty_tpl->tpl_vars['purchase']->value->variant->price*$_smarty_tpl->tpl_vars['purchase']->value->amount));?>
+		<?php echo sprintf("%.2f",($_smarty_tpl->tpl_vars['purchase']->value->variant->price*$_smarty_tpl->tpl_vars['purchase']->value->amount));?>
 &nbsp;<?php echo $_smarty_tpl->tpl_vars['currency']->value->sign;?>
 
 	</td>
@@ -187,7 +187,7 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['amounts']['last']       = ($
 	</th>
 	<th class="price">
 		<?php if ($_smarty_tpl->tpl_vars['cart']->value->coupon_discount>0) {?>
-		&minus;<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['convert'][0][0]->convert($_smarty_tpl->tpl_vars['cart']->value->coupon_discount);?>
+		&minus;<?php echo sprintf("%.2f",$_smarty_tpl->tpl_vars['cart']->value->coupon_discount);?>
 &nbsp;<?php echo $_smarty_tpl->tpl_vars['currency']->value->sign;?>
 
 		<?php }?>
@@ -214,7 +214,7 @@ $("input[name='coupon_code']").keypress(function(event){
 	<th class="name"></th>
 	<th class="price" colspan="4">
 		Итого
-		<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['convert'][0][0]->convert($_smarty_tpl->tpl_vars['cart']->value->total_price);?>
+		<?php echo sprintf("%.2f",$_smarty_tpl->tpl_vars['cart']->value->total_price);?>
 &nbsp;<?php echo $_smarty_tpl->tpl_vars['currency']->value->sign;?>
 
 	</th>

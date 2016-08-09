@@ -166,6 +166,10 @@ if ($_smarty_tpl->parent != null) $_smarty_tpl->parent->tpl_vars['meta_title'] =
 " /> %</li>
 				<li><label class=property>Резкость изображений (рекомендуется 20%)</label><input name="images_sharpen" class="simpla_inp" type="text" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->images_sharpen, ENT_QUOTES, 'UTF-8', true);?>
 " /> %</li>
+				<li><label class=property>Ширина превью товара</label><input name="preview_x" class="simpla_inp" type="text" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->preview_x, ENT_QUOTES, 'UTF-8', true);?>
+" /> px</li>
+				<li><label class=property>Ширина превью товара</label><input name="preview_y" class="simpla_inp" type="text" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->preview_y, ENT_QUOTES, 'UTF-8', true);?>
+" /> px</li>
 			</ul>
 		</div>
 		<!-- Параметры (The End)-->

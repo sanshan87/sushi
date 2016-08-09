@@ -38,9 +38,10 @@ class Cart extends Simpla
 			if(!empty($variants))
 			{
  
-				foreach($variants as $variant)
+				foreach($variants as &$variant)
 				{
 					$items[$variant->id] = new stdClass();
+					$variant->price = $variant->skidka!=0 ? (string)number_format($variant->price - $variant->price*$variant->skidka/100,2,'.','') : $variant->price;
 					$items[$variant->id]->variant = $variant;
 					$items[$variant->id]->amount = $session_items[$variant->id];
 					$products_ids[] = $variant->product_id;

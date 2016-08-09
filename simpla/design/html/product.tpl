@@ -395,11 +395,11 @@ $(function() {
     $('#popup-wrapper').modalPopLite({ openButton: '#clicker', closeButton: '#close-btn' }); 
 	
 	   $('#image-cropper').cropit({ imageBackground: true , 
-   width:225,
-   height:120,
+   width:{/literal}{$settings->preview_x}{literal},
+   height:{/literal}{$settings->preview_y}{literal},
    initialZoom:'image'{/literal}{if $product_images|@count>0}{literal},
    imageState: {
-            src: '{/literal}{$product_images[0]->filename|replace:"_mini":"_orig"|resize:1000:800}{literal}',
+            src: '{/literal}{$product_images[0]->filename|replace:"_mini":"_orig"|resize:600:600}{literal}',
           }
           {/literal}{/if}{literal}
           }); 
@@ -596,7 +596,8 @@ overflow-y: auto;
 			<li class="variant_name">Название варианта</li>	
 			<li class="variant_sku">Артикул</li>	
 			<li class="variant_price">Цена, {$currency->sign}</li>	
-			<li class="variant_discount">Старая, {$currency->sign}</li>	
+			<!--<li class="variant_discount">Старая, {$currency->sign}</li>-->
+			<li class="variant_amount">Скидка, %</li>
 			<li class="variant_amount">Кол-во</li>
 		</ul>
 		<div id="variants">
@@ -606,7 +607,8 @@ overflow-y: auto;
 			<li class="variant_name">      <input name="variants[id][]"            type="hidden" value="{$variant->id|escape}" /><input name="variants[name][]" type="" value="{$variant->name|escape}" /> <a class="del_variant" href=""><img src="design/images/cross-circle-frame.png" alt="" /></a></li>
 			<li class="variant_sku">       <input name="variants[sku][]"           type="text"   value="{$variant->sku|escape}" /></li>
 			<li class="variant_price">     <input name="variants[price][]"         type="text"   value="{$variant->price|escape}" /></li>
-			<li class="variant_discount">  <input name="variants[compare_price][]" type="text"   value="{$variant->compare_price|escape}" /></li>
+			<!--<li class="variant_discount">  <input name="variants[compare_price][]" type="text"   value="{$variant->compare_price|escape}" /></li>-->
+			<li class="variant_amount">    <input name="variants[skidka][]"         type="text"   value="{$variant->skidka|escape}" /></li>
 			<li class="variant_amount">    <input name="variants[stock][]"         type="text"   value="{if $variant->infinity || $variant->stock == ''}∞{else}{$variant->stock|escape}{/if}" />{$settings->units}</li>
 			<!--<li class="variant_download">
 			
@@ -673,12 +675,11 @@ overflow-y: auto;
 					<li feature_id={$feature_id}><label class=property>{$feature->name}</label><input class="simpla_inp" type="text" name=options[{$feature_id}] value="{$options.$feature_id->value|escape}" /></li>
 				{/foreach}
 			</ul>
-			<!-- Новые свойства -->
 			<ul class=new_features>
 				<li id=new_feature><label class=property><input type=text name=new_features_names[]></label><input class="simpla_inp" type="text" name=new_features_values[] /></li>
 			</ul>
 			<span class="add"><i class="dash_link" id="add_new_feature">Добавить новое свойство</i></span>
-			<input class="button_green button_save" type="submit" name="" value="Сохранить" />			
+			<input class="button_green button_save" type="submit" name="" value="Сохранить" />	
 		</div>
 		
 		<!-- Свойства товара (The End)-->
@@ -779,7 +780,7 @@ overflow-y: auto;
 
 	<!-- Описагние товара -->
 	<div class="block layer">
-		<h2>Краткое описание</h2>
+		<h2>Ингридиенты</h2>
 		<textarea name="annotation" class="editor_small">{$product->annotation|escape}</textarea>
 	</div>
 		

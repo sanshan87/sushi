@@ -180,7 +180,6 @@ class View extends Simpla
 		
 				// Выбираем варианты товаров
 				$variants = $this->variants->get_variants(array('product_id'=>$products_ids, 'in_stock'=>true));
-				
 				// Для каждого варианта
 				foreach($variants as &$variant)
 				{
@@ -199,6 +198,8 @@ class View extends Simpla
 						$product->variant = $product->variants[0];
 					if(isset($product->images[0]))
 						$product->image = $product->images[0];
+					$features = $this->features->get_product_options(array('product_id'=>$product->id));
+					$product->features = $features;
 				}				
 			}
 
@@ -245,6 +246,8 @@ class View extends Simpla
 						$product->variant = $product->variants[0];
 					if(isset($product->images[0]))
 						$product->image = $product->images[0];
+					$features = $this->features->get_product_options(array('product_id'=>$product->id));
+					$product->features = $features;
 				}				
 			}
 

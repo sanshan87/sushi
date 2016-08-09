@@ -112,4 +112,44 @@ $(document).ready(function() {
 			deltaTouch = 0;
 		}
 	});
+
+
+	var counter = {
+		max: 99,
+		min: 0,
+		inc: function(num) {
+			if(num < this.max) {
+				return ++num;
+			}
+			return num;
+		},
+		dec: function(num) {
+			if(num > this.min) {
+				return --num;
+			}
+			return num;
+		},
+		checkVal: function(num) {
+			num = parseInt(num);
+			if(num > this.max) {
+				num = this.max;
+			}
+			if(num < this.min || isNaN(num)) {
+				num = this.min;
+			}
+			return num;
+		}
+	};
+	$('.count-form .btn-minus').click(function(){
+		var inp = $(this).siblings('.number');
+		inp.val(counter.dec(inp.val()));
+	});
+	$('.count-form .btn-plus').click(function(){
+		var inp = $(this).siblings('.number');
+		inp.val(counter.inc(inp.val()));
+	});
+	$('.count-form .number').change(function(){
+		var inp = $(this);
+		inp.val(counter.checkVal(inp.val()));
+	});
 });

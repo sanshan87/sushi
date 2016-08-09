@@ -31,13 +31,13 @@
 						{/foreach}
 						</div>
 						<div class="b-price-info">
-							<a href="#" class="price-name">{$product->product->name}</a>
+							<a href="products/{$product->product->url}" class="price-name">{$product->product->name}</a>
 							<div class="form-inline">
 								<label class="price-count" for="b-item-1">Кол-во:</label>
 								<input type="text" class="form-control" id="b-item-1" name="item_amount" value="{$product->amount}">
 							</div>
 						</div>
-						<div class="b-price-cost">{$product->variant->price|convert} {$currency->sign|escape}</div>
+						<div class="b-price-cost">{$product->variant->price|string_format:"%.2f"} {$currency->sign|escape}</div>
 						<div class="b-price-close">
 							<form action="/cart" class="removeFromCart">
 								<input type="hidden" name="variant_id" value="{$product->variant->id}">
@@ -51,7 +51,7 @@
 			
 
 			<div class="basket-buttons">
-				<div class="basket-total">Итого к оплате: <b>{$cart->total_price|convert} {$currency->sign|escape}</b></div>
+				<div class="basket-total">Итого к оплате: <b>{$cart->total_price|string_format:"%.2f"} {$currency->sign|escape}</b></div>
 				<div><a href="#" class="link">Продолжить покупки</a></div>
 				<div><a href="#" class="btn">Оформить заказ</a></div>
 			</div>
