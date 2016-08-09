@@ -1,6 +1,6 @@
 .cache/*
 .config/*
 .local/*
-simpla/.htaccess
-simpla/design/compiled/*
-compiled/*
+/compiled/**
+/simpla/design/compiled/**
+/simpla/.htaccess
