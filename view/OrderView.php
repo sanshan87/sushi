@@ -43,7 +43,7 @@ class OrderView extends View
 	{
 		$cart = $this->cart->get_cart();
 		
-		if($_SERVER['REQUEST_METHOD'] == 'POST' and $_POST['checkout'] and count($cart->purchases)){
+		if($_SERVER['REQUEST_METHOD'] == 'POST' and count($cart->purchases)){
 
 			$order = new stdClass;
 			$order->delivery_id = $this->request->post('delivery_id', 'integer');
