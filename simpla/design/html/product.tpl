@@ -4,7 +4,7 @@
 {capture name=tabs}
 	<li class="active"><a href="{url module=ProductsAdmin category_id=$product->category_id return=null brand_id=null id=null}">Товары</a></li>
 	{if in_array('categories', $manager->permissions)}<li><a href="index.php?module=CategoriesAdmin">Категории</a></li>{/if}
-	{if in_array('brands', $manager->permissions)}<li><a href="index.php?module=BrandsAdmin">Бренды</a></li>{/if}
+	{*{if in_array('brands', $manager->permissions)}<li><a href="index.php?module=BrandsAdmin">Бренды</a></li>{/if}*}
 	{if in_array('features', $manager->permissions)}<li><a href="index.php?module=FeaturesAdmin">Свойства</a></li>{/if}
 {/capture}
 
@@ -514,14 +514,14 @@ overflow-y: auto;
 	<a class="button" href="{$smarty.get.return}">Вернуться</a>
 	{/if}
 	
-	<span class="share">		
+	<!--<span class="share">		
 		<a href="#" onClick='window.open("http://vkontakte.ru/share.php?url={$config->root_url|urlencode}/products/{$product->url|urlencode}&title={$product->name|urlencode}&description={$product->annotation|urlencode}&image={$product_images.0->filename|resize:1000:1000|urlencode}&noparse=true","displayWindow","width=700,height=400,left=250,top=170,status=no,toolbar=no,menubar=no");return false;'>
   		<img src="{$config->root_url}/simpla/design/images/vk_icon.png" /></a>
 		<a href="#" onClick='window.open("http://www.facebook.com/sharer.php?u={$config->root_url|urlencode}/products/{$product->url|urlencode}","displayWindow","width=700,height=400,left=250,top=170,status=no,toolbar=no,menubar=no");return false;'>
   		<img src="{$config->root_url}/simpla/design/images/facebook_icon.png" /></a>
 		<a href="#" onClick='window.open("http://twitter.com/share?text={$product->name|urlencode}&url={$config->root_url|urlencode}/products/{$product->url|urlencode}&hashtags={$product->meta_keywords|replace:' ':''|urlencode}","displayWindow","width=700,height=400,left=250,top=170,status=no,toolbar=no,menubar=no");return false;'>
   		<img src="{$config->root_url}/simpla/design/images/twitter_icon.png" /></a>
-	</span>
+	</span>-->
 	
 </div>
 <!-- Системное сообщение (The End)-->
@@ -544,7 +544,7 @@ overflow-y: auto;
 <input type=hidden name="session_id" value="{$smarty.session.id}">
 
  	<div id="name">
-		<input class="name" name=name type="text" value="{$product->name|escape}"/> 
+		<label>Название</label><input class="name" name=name type="text" style="width: 89%;margin-left: 14px;" value="{$product->name|escape}"/> 
 		<input name=id type="hidden" value="{$product->id|escape}"/> 
 		<div class="checkbox">
 			<input name=visible value='1' type="checkbox" id="active_checkbox" {if $product->visible}checked{/if}/> <label for="active_checkbox">Активен</label>
@@ -703,8 +703,9 @@ overflow-y: auto;
 	<div id="column_right">
 	
 		<div class="block layer images" style="height:200px; overflow: hidden;">
-		         <div id="clicker" style="text-align:center;text-decoration:underline;">Добавление превью</div>
-				 <div id="preview_result" style="height:120px;width:225px;">
+		         <div id="clicker" style="text-align:center;text-decoration:underline;cursor:pointer;"><h2>{if $smarty.get.id>0}Редактирование{else}Добавление{/if} превью</h2></div>
+				 <div id="preview_result" style="height:140px;width:430px;text-align:center;
+				 padding-top:20px;">
 				{foreach $product_images as $image}
 					<img src="{$image->filename|resize:225:120}" alt="" />
 					<!--<input type=hidden name='images[]' value='{$image->id}'>-->
@@ -731,7 +732,7 @@ overflow-y: auto;
 <input type="hidden" id="imgOrig" value="" name="imgDataOrig">
 		</div>
 		<div class="block layer">
-			<h2>Связанные товары</h2>
+			<h2>С этим продуктом часто заказывают</h2>
 			<div id=list class="sortable related_products">
 				{foreach $related_products as $related_product}
 				<div class="row">

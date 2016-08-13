@@ -44,21 +44,21 @@
 		<li><a href="index.php?module=OrdersLabelsAdmin"><img src="design/images/menu/orders.png"><b>Заказы</b></a></li>
 	{/if}
 		
-	{if in_array('users', $manager->permissions)}
+	{*{if in_array('users', $manager->permissions)}
 		<li><a href="index.php?module=UsersAdmin"><img src="design/images/menu/users.png"><b>Покупатели</b></a></li>
 	{elseif in_array('groups', $manager->permissions)}
 		<li><a href="index.php?module=GroupsAdmin"><img src="design/images/menu/users.png"><b>Покупатели</b></a></li>
 	{elseif in_array('coupons', $manager->permissions)}
 		<li><a href="index.php?module=CouponsAdmin"><img src="design/images/menu/users.png"><b>Покупатели</b></a></li>
-	{/if}
+	{/if}*}
 		
 	{if in_array('pages', $manager->permissions)}
 		<li><a href="index.php?module=PagesAdmin"><img src="design/images/menu/pages.png"><b>Страницы</b></a></li>
 	{/if}
 		
-	{if in_array('blog', $manager->permissions)}
+	{*{if in_array('blog', $manager->permissions)}
 		<li><a href="index.php?module=BlogAdmin"><img src="design/images/menu/blog.png"><b>Блог</b></a></li>
-	{/if}
+	{/if}*}
 		
 	{if in_array('comments', $manager->permissions)}
 		<li><a href="index.php?module=CommentsAdmin"><img src="design/images/menu/comments.png"><b>Комментарии</b></a>
@@ -67,17 +67,17 @@
 		<li><a href="index.php?module=FeedbacksAdmin"><img src="design/images/menu/comments.png"><b>Комментарии</b></a>
 	{/if}
 		
-	{if in_array('import', $manager->permissions)}
+	{*{if in_array('import', $manager->permissions)}
 		<li><a href="index.php?module=ImportAdmin"><img src="design/images/menu/wizards.png"><b>Автоматизация</b></a></li>
 	{elseif in_array('export', $manager->permissions)}
 		<li><a href="index.php?module=ExportAdmin"><img src="design/images/menu/wizards.png"><b>Автоматизация</b></a></li>
 	{elseif in_array('backup', $manager->permissions)}
 		<li><a href="index.php?module=BackupAdmin"><img src="design/images/menu/wizards.png"><b>Автоматизация</b></a></li>
-	{/if}	
+	{/if}*}	
 		
-	{if in_array('stats', $manager->permissions)}
+	{*{if in_array('stats', $manager->permissions)}
 		<li><a href="index.php?module=StatsAdmin"><img src="design/images/menu/statistics.png"><b>Статистика</b></a></li>
-	{/if}
+	{/if}*}
 	
 	{if in_array('design', $manager->permissions)}
 		<li><a href="index.php?module=ThemeAdmin"><img src="design/images/menu/design.png"><b>Дизайн</b></a></li>

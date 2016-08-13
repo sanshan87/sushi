@@ -9,9 +9,9 @@
 	<li class="active"><a href="{url module=OrdersAdmin keyword=$keyword id=null label=null}">Поиск</a></li>
 	{/if}
 	{/if}
-	{if in_array('labels', $manager->permissions)}
+	{*{if in_array('labels', $manager->permissions)}
 	<li><a href="{url module=OrdersLabelsAdmin keyword=null id=null page=null label=null}">Метки</a></li>
-	{/if}
+	{/if}*}
 {/capture}
 
 {* Title *}
@@ -113,12 +113,12 @@
 			{if $status!==0}<option value="set_status_0">В новые</option>{/if}
 			{if $status!==1}<option value="set_status_1">В принятые</option>{/if}
 			{if $status!==2}<option value="set_status_2">В выполненные</option>{/if}
-			{foreach $labels as $l}
+			{*{foreach $labels as $l}
 			<option value="set_label_{$l->id}">Отметить &laquo;{$l->name}&raquo;</option>
 			{/foreach}
 			{foreach $labels as $l}
 			<option value="unset_label_{$l->id}">Снять &laquo;{$l->name}&raquo;</option>
-			{/foreach}
+			{/foreach}*}
 			<option value="delete">Удалить выбранные заказы</option>
 		</select>
 		</span>
@@ -142,11 +142,11 @@
 	<!-- Метки -->
 	<ul id="labels">
 		<li {if !$label}class="selected"{/if}><span class="label"></span> <a href="{url label=null}">Все заказы</a></li>
-		{foreach $labels as $l}
+		{*{foreach $labels as $l}
 		<li data-label-id="{$l->id}" {if $label->id==$l->id}class="selected"{/if}>
 		<span style="background-color:#{$l->color};" class="order_label"></span>
 		<a href="{url label=$l->id}">{$l->name}</a></li>
-		{/foreach}
+		{/foreach}*}
 	</ul>
 	<!-- Метки -->
 	{/if}

@@ -52,8 +52,8 @@
 
 			<div class="basket-buttons">
 				<div class="basket-total">Итого к оплате: <b>{$cart->total_price|string_format:"%.2f"} {$currency->sign|escape}</b></div>
-				<div><a href="#" class="link">Продолжить покупки</a></div>
-				<div><a href="#" class="btn">Оформить заказ</a></div>
+				<div><a href="/" class="link">Продолжить покупки</a></div>
+				<div><a href="/cart" class="btn">Оформить заказ</a></div>
 			</div>
 			{else}
 			<div class="items-wrap">

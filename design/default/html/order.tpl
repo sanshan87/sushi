@@ -139,6 +139,29 @@
 					{/if}
 				</div>
 			</div>
+			<div class="col-md-3 col-sm-4 col-xs-12">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="main-menu-block">
+							<div class="block-frame">
+								<div class="bf-corner bf-corner--topLeft"></div>
+								<div class="bf-corner bf-corner--topRight"></div>
+								<div class="bf-corner bf-corner--bottomLeft"></div>
+								<div class="bf-corner bf-corner--bottomRight"></div>
+							</div>
+							{include file="main_menu.tpl"}
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="working-info">
+							<div class="border"></div>
+							<div class="wi-text">
+							{include file='working_info.tpl'}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

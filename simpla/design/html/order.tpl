@@ -9,9 +9,9 @@
 	<li class="active"><a href="{url module=OrdersAdmin keyword=$keyword id=null label=null}">Поиск</a></li>
 	{/if}
 	{/if}
-	{if in_array('labels', $manager->permissions)}
+	{*{if in_array('labels', $manager->permissions)}
 	<li><a href="{url module=OrdersLabelsAdmin keyword=null id=null page=null label=null}">Метки</a></li>
-	{/if}
+	{/if}*}
 {/capture}
 
 
@@ -134,9 +134,8 @@
 
 	
 	{if $labels}
-	<div class='layer'>
+	<!--<div class='layer'>
 	<h2>Метка</h2>
-	<!-- Метки -->
 	<ul>
 		{foreach $labels as $l}
 		<li>
@@ -148,12 +147,11 @@
 		</li>
 		{/foreach}
 	</ul>
-	<!-- Метки -->
-	</div>
+	</div>-->
 	{/if}
 
 	
-	<div class='layer'>
+	<!--<div class='layer'>
 	<h2>Покупатель <a href='#' class="edit_user"><img src='design/images/pencil.png' alt='Редактировать' title='Редактировать'></a> {if $user}<a href="#" class='delete_user'><img src='design/images/delete.png' alt='Удалить' title='Удалить'></a>{/if}</h2>
 		<div class='view_user'>
 		{if !$user}
@@ -166,7 +164,7 @@
 		<input type=hidden name=user_id value='{$user->id}'>
 		<input type=text id='user' class="input_autocomplete" placeholder="Выберите пользователя">
 		</div>
-	</div>
+	</div>-->
 	
 
 	
@@ -305,23 +303,23 @@
 	</div>
 	{/if}
 
-	<div class="block discount layer">
+	<!--<div class="block discount layer">
 		<h2>Скидка</h2>
 		<input type=text name=discount value='{$order->discount}'> <span class=currency>%</span>		
 	</div>
 
 	<div class="subtotal layer">
 	С учетом скидки<b> {($subtotal-$subtotal*$order->discount/100)|round:2} {$currency->sign}</b>
-	</div> 
+	</div> -->
 	
-	<div class="block discount layer">
+	<!--<div class="block discount layer">
 		<h2>Купон{if $order->coupon_code} ({$order->coupon_code}){/if}</h2>
 		<input type=text name=coupon_discount value='{$order->coupon_discount}'> <span class=currency>{$currency->sign}</span>		
 	</div>
 
 	<div class="subtotal layer">
 	С учетом купона<b> {($subtotal-$subtotal*$order->discount/100-$order->coupon_discount)|round:2} {$currency->sign}</b>
-	</div> 
+	</div> -->
 	
 	<div class="block delivery">
 		<h2>Доставка</h2>
@@ -333,16 +331,16 @@
 				</select>	
 				<input type=text name=delivery_price value='{$order->delivery_price}'> <span class=currency>{$currency->sign}</span>
 				<div class="separate_delivery">
-					<input type=checkbox id="separate_delivery" name=separate_delivery value='1' {if $order->separate_delivery}checked{/if}> <label  for="separate_delivery">оплачивается отдельно</label>
+					<input type=checkbox id="separate_delivery" style="display:none;" name=separate_delivery value='1' {if $order->separate_delivery}checked{/if}> <!--<label  for="separate_delivery">оплачивается отдельно</label>-->
 				</div>
 	</div>
 
-	<div class="total layer">
+	<!--<div class="total layer">
 	Итого<b> {$order->total_price} {$currency->sign}</b>
-	</div>
+	</div>-->
 		
 		
-	<div class="block payment">
+	<!--<div class="block payment">
 		<h2>Оплата</h2>
 				<select name="payment_method_id">
 				<option value="0">Не выбрана</option>
@@ -352,7 +350,7 @@
 				</select>
 		
 		<input type=checkbox name="paid" id="paid" value="1" {if $order->paid}checked{/if}> <label for="paid" {if $order->paid}class="green"{/if}>Заказ оплачен</label>		
-	</div>
+	</div>-->
 
  
 	{if $payment_method}

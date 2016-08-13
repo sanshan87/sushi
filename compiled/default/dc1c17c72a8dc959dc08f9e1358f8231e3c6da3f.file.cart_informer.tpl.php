@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-09 18:11:10
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-14 00:07:30
          compiled from "C:\openserver\OpenServer\domains\sushitore\sushi\design\default\html\cart_informer.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:807657a8c076652ae4-76844674%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'dc1c17c72a8dc959dc08f9e1358f8231e3c6da3f' => 
     array (
       0 => 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\design\\default\\html\\cart_informer.tpl',
-      1 => 1470752018,
+      1 => 1471122418,
       2 => 'file',
     ),
   ),
@@ -93,8 +93,8 @@ $_smarty_tpl->tpl_vars['image']->_loop = true;
 				<div class="basket-total">Итого к оплате: <b><?php echo sprintf("%.2f",$_smarty_tpl->tpl_vars['cart']->value->total_price);?>
  <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['currency']->value->sign, ENT_QUOTES, 'UTF-8', true);?>
 </b></div>
-				<div><a href="#" class="link">Продолжить покупки</a></div>
-				<div><a href="#" class="btn">Оформить заказ</a></div>
+				<div><a href="/" class="link">Продолжить покупки</a></div>
+				<div><a href="/cart" class="btn">Оформить заказ</a></div>
 			</div>
 			<?php } else { ?>
 			<div class="items-wrap">
