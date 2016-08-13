@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-09 15:09:59
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-09 18:11:10
          compiled from "C:\openserver\OpenServer\domains\sushitore\sushi\design\default\html\cart_informer.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:807657a8c076652ae4-76844674%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'dc1c17c72a8dc959dc08f9e1358f8231e3c6da3f' => 
     array (
       0 => 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\design\\default\\html\\cart_informer.tpl',
-      1 => 1470744310,
+      1 => 1470752018,
       2 => 'file',
     ),
   ),
@@ -64,7 +64,8 @@ $_smarty_tpl->tpl_vars['image']->_loop = true;
 						<?php } ?>
 						</div>
 						<div class="b-price-info">
-							<a href="#" class="price-name"><?php echo $_smarty_tpl->tpl_vars['product']->value->product->name;?>
+							<a href="products/<?php echo $_smarty_tpl->tpl_vars['product']->value->product->url;?>
+" class="price-name"><?php echo $_smarty_tpl->tpl_vars['product']->value->product->name;?>
 </a>
 							<div class="form-inline">
 								<label class="price-count" for="b-item-1">Кол-во:</label>
@@ -72,7 +73,7 @@ $_smarty_tpl->tpl_vars['image']->_loop = true;
 ">
 							</div>
 						</div>
-						<div class="b-price-cost"><?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['convert'][0][0]->convert($_smarty_tpl->tpl_vars['product']->value->variant->price);?>
+						<div class="b-price-cost"><?php echo sprintf("%.2f",$_smarty_tpl->tpl_vars['product']->value->variant->price);?>
  <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['currency']->value->sign, ENT_QUOTES, 'UTF-8', true);?>
 </div>
 						<div class="b-price-close">
@@ -89,7 +90,7 @@ $_smarty_tpl->tpl_vars['image']->_loop = true;
 			
 
 			<div class="basket-buttons">
-				<div class="basket-total">Итого к оплате: <b><?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['convert'][0][0]->convert($_smarty_tpl->tpl_vars['cart']->value->total_price);?>
+				<div class="basket-total">Итого к оплате: <b><?php echo sprintf("%.2f",$_smarty_tpl->tpl_vars['cart']->value->total_price);?>
  <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['currency']->value->sign, ENT_QUOTES, 'UTF-8', true);?>
 </b></div>
 				<div><a href="#" class="link">Продолжить покупки</a></div>

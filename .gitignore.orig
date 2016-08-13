@@ -1,0 +1,10 @@
+.cache/*
+.config/*
+.local/*
+<<<<<<< HEAD
+simpla/.htaccess
+simpla/design/compiled/*
+compiled/*
+=======
+simpla/.htaccess
+>>>>>>> origin/skidki
