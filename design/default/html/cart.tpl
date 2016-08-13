@@ -26,7 +26,6 @@
 					</div>
 					{foreach $cart->purchases as $product}
 					<div class="basket-row">
-				
 						<div class="basket-col info-col">
 							<div class="price-img">
 							{if $product->variant->sku}
@@ -83,83 +82,99 @@
 							</div>-->
 						</div>
 					</div>
-					<div class="row">
+					
 					{* Доставка *}
-{if $deliveries}
-				<div class="page-header-block">
-					<h1>Выберите способ доставки:</h1>
-				</div>
-	<form method="post" action="/order">
-	{foreach $payment_methods as $payment_method}	
-	<input type="hidden" name="payment_method_id" value="{$payment_method->id}">
-	{/foreach}
-	{foreach $deliveries as $delivery}
-	<div class="col-md-6 col-sm-12 col-xs-12">
-		<div class="checkbox">
-			<input type="radio" name="delivery_id" value="{$delivery->id}" {if $delivery_id==$delivery->id}checked{elseif $delivery@first}checked{/if} id="deliveries_{$delivery->id}">
-		</div>
-		
-			<h3 style="margin-top: 0;
-    margin-bottom: 16px;
-    font-family: 'Roboto Slab',serif;
-    font-size: 18px;">
-			<label for="deliveries_{$delivery->id}">
-			{$delivery->name}
-			<span{if $delivery->id == 1} id="free"{/if}>{if $cart->total_price < $delivery->free_from && $delivery->price>0}
-				({$delivery->price|convert}&nbsp;{$currency->sign})
-			{elseif $cart->total_price >= $delivery->free_from}
-				(бесплатно)
-			{/if}
-			</span>
-			</label>
-			</h3>
-	</div>
-	{/foreach}  
-<div class="clearfix"></div> 
-{foreach $deliveries as $delivery}
-   <div class="col-md-12 col-sm-12 col-xs-12 description" id="desc_{$delivery->id}" {if $delivery->id != 1}style="display:none"{/if}>
-   {$delivery->description|strip_tags:true}
-   </div>
- {/foreach}
-	{if $error}
-	<div class="message_error" class="col-md-12 col-sm-12 col-xs-12">
-		{if $error == 'empty_name'}Введите имя{/if}
-		{if $error == 'empty_email'}Введите email{/if}
-		{if $error == 'captcha'}Капча введена неверно{/if}
-	</div>
-	{/if}
-	<div class="col-md-12 col-sm-12 col-xs-12">
-	<label>Имя, фамилия</label>
-	<input name="name" type="text" value="{$name|escape}" data-format=".+" data-notice="Введите имя"/>
-	</div>
-	<div  class="col-md-12 col-sm-12 col-xs-12">
-	<label>Телефон</label>
-	<input name="phone" type="text" value="{$phone|escape}" />
-	</div>
-	<div  class="col-md-12 col-sm-12 col-xs-12">
-	<label>Адрес доставки</label>
-	<input name="address" type="text" value="{$address|escape}"/>	
-	</div>
-	<div class="captcha" ><img style="width:120px" src="captcha/image.php?{math equation='rand(10,10000)'}" alt='captcha'/></div> 
-	<input class="input_captcha" id="comment_captcha" type="text" name="captcha_code" value="" data-format="\d\d\d\d" data-notice="Введите капчу"/>
-	<div class="result-row basket-controls">
-		<!--<div class="result-col"><a href="#" class="link">Продолжить покупки</a></div>-->
-		<div class="result-col"><input type="submit" name="checkout" class="button" value="Оформить заказ"><!--<a href="#" class="btn">Оформить заказ</a>--></div>
-	</div>
-	</form>
-	<script>
-	$(document).ready(function(){
-		$('input[name=delivery_id]').click(function(){
-		var id = $(this).val();
-		$('.description').hide();
-		$('#desc_' + id).show();
-		
-		
-		});
-	});
-	</script>
-{/if}
-</div>
+					{if $deliveries}
+					<div class="page-header-block">
+						<h2>Выберите способ доставки:</h2>
+					</div>
+					<form method="post" action="/order" class="form-horizontal">
+						{foreach $payment_methods as $payment_method}	
+							<input type="hidden" name="payment_method_id" value="{$payment_method->id}">
+						{/foreach}
+						<div class="form-group">
+							<div class="btn-group col-xs-12" data-toggle="buttons">
+								{foreach $deliveries as $delivery}
+								<label class="btn btn-default col-sm-6 col-xs-12 {if $delivery_id==$delivery->id}active{elseif $delivery@first}active{/if}">
+									<input type="radio" name="delivery_id" id="deliveries_{$delivery->id}" value="{$delivery->id}" {if $delivery_id==$delivery->id}checked{elseif $delivery@first}checked{/if} id="deliveries_{$delivery->id}"> {$delivery->name} 
+									<span {if $delivery->id == 1}id="free"{/if}>
+										{if $cart->total_price < $delivery->free_from && $delivery->price>0}
+											({$delivery->price|convert}&nbsp;{$currency->sign})
+										{elseif $cart->total_price >= $delivery->free_from}
+											(бесплатно)
+										{/if}
+									</span>
+								</label>
+								{/foreach}
+							</div>
+						</div> 
+						{foreach $deliveries as $delivery}
+							<div class="form-group">
+								<div class="col-md-12 col-sm-12 col-xs-12 description" id="desc_{$delivery->id}" {if $delivery->id != 1}style="display: none;"{/if}>{$delivery->description|strip_tags:true}</div>
+							</div>
+						{/foreach}
+						{if $error}
+							<div class="from-group">
+								<div class="message_error" class="col-md-12 col-sm-12 col-xs-12">
+									{if $error == 'empty_name'}Введите имя{/if}
+									{if $error == 'empty_email'}Введите email{/if}
+									{if $error == 'captcha'}Капча введена неверно{/if}
+								</div>
+							</div>
+						{/if}
+						<div class="form-group">
+							<label class="control-label col-md-2">Имя, фамилия</label>
+							<div class="col-md-4">
+								<input name="name" type="text" value="{$name|escape}" data-format=".+" data-notice="Введите имя" class="form-control"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-2">Телефон</label>
+							<div class="col-md-4">
+								<input name="phone" type="text" value="{$phone|escape}" class="form-control" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-2">Адрес доставки</label>
+							<div class="col-md-4">
+								<input name="address" type="text" value="{$address|escape}" class="form-control" />
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-2">
+								<div class="captcha" >
+									<img style="width:120px" src="captcha/image.php?{math equation='rand(10,10000)'}" alt='captcha'/>
+								</div> 
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-xs-8">
+										<input class="input_captcha form-control" id="comment_captcha" type="text" name="captcha_code" value="" data-format="\d\d\d\d" data-notice="Введите капчу"/>
+									</div>
+									<div class="col-xs-4 text-right">
+										<button type="button" class="btn btn-default glyphicon glyphicon-refresh"></button>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="result-col col-md-4 col-md-offset-2">
+								<button type="submit" class="btn btn-default">Оформить заказ</button>
+							</div>
+						</div>
+					</form>
+					<script>
+						$(document).ready(function(){
+							$('input[name=delivery_id]').change(function(){
+								var id = $(this).val();
+								$('.description').hide();
+								$('#desc_' + id).show();
+							});
+						});
+					</script>
+					{/if}
 				</div>
 				{/if}
 			</div>
