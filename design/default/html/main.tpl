@@ -71,7 +71,9 @@
 				{if $product->variant->skidka > 0}
 					<div class="info-flag flag-discount">-{$product->variant->skidka}%</div>
 				{/if}
+				{if $product->variant->sku}
 					<div class="menu-number">{$product->variant->sku}</div>
+				{/if}
 				</div>
 				<a href="products/{$product->url}" class="price-link">
 				{if $product->image}
@@ -135,7 +137,9 @@
 				{if $product->variant->skidka > 0}
 					<div class="info-flag flag-discount">-{$product->variant->skidka}%</div>
 				{/if}
+				{if $product->variant->sku}
 					<div class="menu-number">{$product->variant->sku}</div>
+				{/if}
 				</div>
 				<a href="products/{$product->url}" class="price-link">
 				{if $product->image}

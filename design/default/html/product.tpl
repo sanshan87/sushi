@@ -61,6 +61,7 @@
 									{/if}
 									{if $product->variants|count > 0}
 									{foreach $product->variants as $v}
+										<div class="old-price">{$v->price|string_format:"%.2f"} {$currency->sign|escape}</div>
 										<div class="price-buttons">
 											<input id="featured_{$v->id}" name="variant" value="{$v->id}" type="radio" class="variant_radiobutton" {if $v@first}checked{/if} {if $product->variants|count<2}style="display:none;"{/if}/>
 											<div class="price-cost">{($v->price|convert - $v->price|convert*$v->skidka/100)|string_format:"%.2f"} {$currency->sign|escape}</div>

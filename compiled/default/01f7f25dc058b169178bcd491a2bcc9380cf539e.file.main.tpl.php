@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-09 18:11:10
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-13 20:24:16
          compiled from "C:\openserver\OpenServer\domains\sushitore\sushi\design\default\html\main.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2121457a8c07605f281-49720559%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '01f7f25dc058b169178bcd491a2bcc9380cf539e' => 
     array (
       0 => 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\design\\default\\html\\main.tpl',
-      1 => 1470752018,
+      1 => 1471109055,
       2 => 'file',
     ),
   ),
@@ -112,8 +112,10 @@ $_smarty_tpl->tpl_vars['product']->_loop = true;
 					<div class="info-flag flag-discount">-<?php echo $_smarty_tpl->tpl_vars['product']->value->variant->skidka;?>
 %</div>
 				<?php }?>
+				<?php if ($_smarty_tpl->tpl_vars['product']->value->variant->sku) {?>
 					<div class="menu-number"><?php echo $_smarty_tpl->tpl_vars['product']->value->variant->sku;?>
 </div>
+				<?php }?>
 				</div>
 				<a href="products/<?php echo $_smarty_tpl->tpl_vars['product']->value->url;?>
 " class="price-link">
@@ -207,8 +209,10 @@ $_smarty_tpl->tpl_vars['product']->_loop = true;
 					<div class="info-flag flag-discount">-<?php echo $_smarty_tpl->tpl_vars['product']->value->variant->skidka;?>
 %</div>
 				<?php }?>
+				<?php if ($_smarty_tpl->tpl_vars['product']->value->variant->sku) {?>
 					<div class="menu-number"><?php echo $_smarty_tpl->tpl_vars['product']->value->variant->sku;?>
 </div>
+				<?php }?>
 				</div>
 				<a href="products/<?php echo $_smarty_tpl->tpl_vars['product']->value->url;?>
 " class="price-link">
