@@ -51,10 +51,10 @@
 			<div class="col-md-3 col-sm-2 col-xs-12">
 				<a href="/cart" class="h-basket">
 					<div class="b-icon">
-						<div class="b-icon-count" id="cnt_in_cart">{$cart->total_products}</div>
+						<div class="b-icon-count" id="cnt_in_cart">{if $cart->total_products}{$cart->total_products}{else}0{/if}</div>
 					</div>
 					<div class="b-text hidden-sm">
-						<b>Корзина</b><span id="txt_cnt">В корзине {$cart->total_products} {$cart->total_products|plural:'товар':'товаров':'товара'}</span>
+						<b>Корзина</b><span id="txt_cnt">В корзине {if $cart->total_products}{$cart->total_products} {$cart->total_products|plural:'товар':'товаров':'товара'}{else}0 товаров{/if}</span>
 					</div>
 				</a>
 			</div>
