@@ -1,14 +1,6 @@
-<<<<<<< HEAD
-/.cache/* 
-/.config/* 
-/.local/* 
-/compiled/** 
-/simpla/design/compiled/** 
-=======
 /.cache/*
 /.config/*
 /.local/*
 /compiled/**
 /simpla/design/compiled/**
->>>>>>> order
 /simpla/.htaccess
