@@ -21,8 +21,13 @@ $('form.variants').on('submit', function(e) {
 			var dx = o1.left - o2.left;
 			var dy = o1.top - o2.top;
 			var distance = Math.sqrt(dx * dx + dy * dy);
-			forma.closest('.price-item').find('.price-img img').effect("transfer", { to: $(".h-btn"), className: "transfer_class" }, distance);	
-			$('.transfer_class').html(forma.closest('.price-item').find('.price-img').html());
+			if(!forma.data('page')){
+				forma.closest('.price-item').find('.price-img img').effect("transfer", { to: $(".h-btn"), className: "transfer_class" }, distance);	
+				$('.transfer_class').html(forma.closest('.price-item').find('.price-img').html());
+			}else{
+				forma.closest('.price-info').find('.price-item img').effect("transfer", { to: $(".h-btn"), className: "transfer_class" }, distance);	
+				$('.transfer_class').html(forma.closest('.price-info').find('.price-item img').prop('outerHTML'));	
+			}
 			$('.transfer_class').find('img').css('height', '100%');
 		}
 	});
@@ -31,9 +36,11 @@ $('form.variants').on('submit', function(e) {
 });
 
 	$('body').on('submit', 'form.removeFromCart', function(e) {
+		console.log($(e.target));
 		e.preventDefault();
 		var form = $(this),
 			button = $(this).find('input[type="submit"]');
+			buttonMainCart = $(this).find('button[type="submit"]');
 		if($(this).find('input[name="variant_id"]').size()) 
 			var variant_id = $(this).find('input[name="variant_id"]').val();
 
@@ -48,6 +55,22 @@ $('form.variants').on('submit', function(e) {
 				$('#cart_informer').html(data.cart);
 				$('#cnt_in_cart').text(data.count);
 				$('#txt_cnt').html(data.text);
+				if(document.location.pathname.indexOf('/cart')>-1){
+				if(buttonMainCart)
+					buttonMainCart.closest('div.basket-row').remove();
+				if(parseInt(data.totalPrice)){
+					$('.basket-total-cost').html(data.totalPrice + ' р.');
+					if(data.totalPrice>=400){
+						$('#free').html('(бесплатно)');
+					}else{
+						$('#free').html('(120 р.)');
+					}
+				}else{
+					$('.basket-container').remove();
+					$('.basket-result').remove();
+					$('.page-header-block h1').text('Корзина пуста');
+				}
+				}
 			}
 		});
 	});

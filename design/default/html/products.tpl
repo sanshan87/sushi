@@ -19,7 +19,7 @@
 				<li><a href="/">Главная</a></li>
 					{if $category}
 					{foreach $category->path as $cat}
-					<li><a href="catalog/{$cat->url}">{$cat->name|escape}</a></li>
+					<li{if $cat@last} class="active"{/if}>{if !$cat@last}<a href="catalog/{$cat->url}">{/if}{$cat->name|escape}{if !$cat@last}</a>{/if}</li>
 					{/foreach}  
 					{if $brand}
 					<li><a href="catalog/{$cat->url}/{$brand->url}">{$brand->name|escape}</a></li>
@@ -120,46 +120,14 @@
 									<div class="bf-corner bf-corner--bottomLeft"></div>
 									<div class="bf-corner bf-corner--bottomRight"></div>
 								</div>
-								<ul class="main-menu">
-									<li class="menu-header">Меню</li>										
-									{* функция вывода дерева категорий *}
-									{function name=categories_tree}
-									{if $categories}
-									{foreach $categories as $c}
-										{* Показываем только видимые категории *}
-										{if $c->visible}
-											<li>
-											{if $c->subcategories|@count>0}
-												<div class="dropdown">
-														<a href="#" class="dropdown-toggle" data-toggle="dropdown">{$c->name|escape} <span>(4)</span></a>
-														<ul class="dropdown-menu"> 
-															{foreach $c->subcategories as $subCat}
-															<li><a {if $category->id == $subCat->id}class="selected"{/if} href="catalog/{$subCat->url}">{$subCat->name|escape}</a></li>
-															{/foreach}
-														</ul>
-												</div>
-											{else}
-												<a {if $category->id == $c->id}class="selected"{/if} href="catalog/{$c->url}" data-category="{$c->id}">{$c->name|escape} <span>(4)</span></a>
-											{/if}
-											</li>
-										{/if}
-									{/foreach}
-									{/if}
-									{/function}
-									{categories_tree categories=$categories}
-								</ul>	
+								{include file="main_menu.tpl"}	
 							</div>
 						</div>
 						<div class="col-xs-12">
 							<div class="working-info">
 								<div class="border"></div>
 								<div class="wi-text">
-									<p><b>Доставка суши и роллов</b></p>
-									<p>Бесплатная<br>доставка от 400р.</p>
-									<img src="design/{$settings->theme|escape}/images/time-icon.png" alt="Time" class="time-icon">
-									<p><b>Время работы:</b></p>
-									<p>вс - чт с 10-00 до 22-00<br>пт - сб с 10-00 до 23-00</p>
-									<p>Без перерывов<br>и выходных</p>
+									{include file='working_info.tpl'}
 								</div>
 							</div>
 						</div>
@@ -183,6 +151,23 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="text-content">
+		<div class="container">
+			<h1 class="text-center">Суши и роллы в Орле</h1>
+			<div class="row">
+				<div class="col-md-6 col-xs-12">
+					<img src="design/{$settings->theme|escape}/images/ierogliph-text.png" alt="Иероглиф" class="ierogliph pull-left">
+					Самым популярным японским блюдом является суши, его можно 
+					считать визитной карточкой японской кухни. Япония располагается 
+					на островах, окруженных морем, которое богато разнообразными рыбами, моллюсками и ракообразными. Поскольку в Японии гористая местность, существует проблема с недостатком культивируемой пахотной земли, поэтому население Японии, преимущественно выращивает рис. Для иностранцев суши (комбинация сырого филе и сваренного особым образом риса) всегда казалось экзотическим блюдом, но для японцев эта пища считается натуральной, так как они привыкли питаться дарами моря и рисовыми полями.
+				</div>
+				<div class="col-md-6 col-xs-12">
+					Суши или суси, как их иногда называют, приобрели широкую популярность во всем мире с начала 1980-х годов. В нашей стране сегодня это блюдо любят и едят очень многие. Суши невозможно сравнить ни с одним рыбным блюдом русской или европейской кухни. Они имеют неповторимый вкус и очень нежную текстуру.<br> Первые суши появились в Южной Азии. Там варёный рис начали использовать для приготовления и консервации рыбы.Рыба очищалась и нарезалась на маленькие кусочки. Затем ее солили и смешивали с рисом. После этого на рыбу клали камни 
+					в качестве пресса. Это помогало избежать попадания воздуха. 
 				</div>
 			</div>
 		</div>

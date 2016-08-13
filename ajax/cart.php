@@ -28,8 +28,9 @@
 		$currency = reset($currencies);
 	$simpla->design->assign('currency',	$currency);
 	$result['cart'] = $simpla->design->fetch('cart_informer.tpl');
-	$result['count'] = $simpla->cart->getCountInCart();
+	$result['count'] = $cart->total_products;
 	$result['text'] = "В корзине {$result['count']} ".$simpla->design->plural_modifier($result['count'],'товар','товаров','товара');
+	$result['totalPrice'] = number_format($cart->total_price,2,'.','');
 	header("Content-type: application/json; charset=UTF-8");
 	header("Cache-Control: must-revalidate");
 	header("Pragma: no-cache");

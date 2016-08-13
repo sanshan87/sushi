@@ -172,6 +172,8 @@ class ProductsView extends View
 					$product->variant = $product->variants[0];
 				if(isset($product->images[0]))
 					$product->image = $product->images[0];
+					$features = $this->features->get_product_options(array('product_id'=>$product->id));
+					$product->features = $features;
 			}
 				
 	

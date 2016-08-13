@@ -13,7 +13,6 @@ require_once('Simpla.php');
 
 class Cart extends Simpla
 {
-
 	/*
 	*
 	* Функция возвращает корзину
@@ -48,12 +47,16 @@ class Cart extends Simpla
 				}
 	
 				$products = array();
-				foreach($this->products->get_products(array('id'=>$products_ids, 'limit' => count($products_ids))) as $p)
+				foreach($this->products->get_products(array('id'=>$products_ids, 'limit' => count($products_ids))) as &$p){
+					$features = $this->features->get_product_options(array('product_id'=>$p->id));
+					$p->features = $features;
 					$products[$p->id]=$p;
+				}
 				
 				$images = $this->products->get_images(array('product_id'=>$products_ids));
 				foreach($images as $image)
 					$products[$image->product_id]->images[$image->id] = $image;
+
 			
 				
 				foreach($items as $variant_id=>$item)
@@ -71,6 +74,7 @@ class Cart extends Simpla
 						$cart->total_products += $item->amount;
 					}
 				}
+
 				
 				// Пользовательская скидка
 				$cart->discount = 0;

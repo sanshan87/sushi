@@ -130,6 +130,8 @@ class ProductView extends View
 				{
 					$r->image = &$r->images[0];
 					$r->variant = &$r->variants[0];
+					$features = $this->features->get_product_options(array('product_id'=>$r->id));
+					$r->features = $features;
 				}
 				else
 				{

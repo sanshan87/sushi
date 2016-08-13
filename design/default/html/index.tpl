@@ -81,84 +81,16 @@
 	<div class="side-basket" id="cart_informer">
 		{include file='cart_informer.tpl'}
 	</div>
-
-	<nav class="navbar navbar-default">
-		<div class="container">
-			<div class="row">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-
-				<div class="collapse navbar-collapse" id="main-navbar">
-					<ul class="nav navbar-nav" id="menu">
-					{foreach $pages as $p}
-						{* Выводим только страницы из первого меню *}
-						{if $p->menu_id == 1}
-						<li {if $page && $page->id == $p->id}class="selected"{/if}>
-							<a data-page="{$p->id}" href="{$p->url}">{$p->name|escape}</a>
-						</li>
-						{/if}
-					{/foreach}
-					</ul>
-						
-					<ul class="nav navbar-nav navbar-right nav-social hidden-sm">
-						<li><a href="http://vk.com/">Мы вконтакте <img src="design/{$settings->theme|escape}/images/top-social-vk.png" alt=""></a></li>
-					</ul>
-
-					<form class="navbar-form navbar-right" role="search" id="navbar-form" action="/products">
-						<div class="form-group">
-							<input type="text" class="form-control input_search" placeholder="Поиск" name="keyword" value="{$keyword|escape}">
-						</div>
-						<button type="submit" class="btn btn-search"><span class="glyphicon glyphicon-search"></span></button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</nav>
-
-	<header class="main-header">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-3">
-					<a href="#"><img src="design/{$settings->theme|escape}/images/header-logo.png" alt="Сушитория" class="img-responsive h-logo"></a>
-				</div>
-				<div class="col-md-6 col-sm-7 col-xs-12 text-center">
-					<div class="h-contacts">
-						<div><a href="tel:+74862303010">30-30-10</a> (Северный / Железнодорожный / Советский р-н)</div>
-						<div><a href="tel:+74862303020">30-30-20</a> (Заводской / Советский р-н)</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-2 col-xs-12">
-					<a href="/cart" class="h-basket">
-						<div class="b-icon">
-							<div class="b-icon-count" id="cnt_in_cart">{$cart->total_products}</div>
-						</div>
-						<div class="b-text hidden-sm">
-							<b>Корзина</b><span id="txt_cnt">В корзине {$cart->total_products} {$cart->total_products|plural:'товар':'товаров':'товара'}</span>
-						</div>
-					</a>
-				</div>
-			</div>
-		</div>
-	</header>
-
+		<!--header-->
+		{include file='header.tpl'}
+		<!--endheader-->
 	<div class="second-header slider-header">
 		<div class="container">
 			<div class="row flex-row align-stretch">
 				<div class="col-sm-9">
 					<div class="slider-info">
 						<div class="working-info">
-							<p><b>Доставка суши и роллов</b></p>
-							<p>Бесплатная<br>доставка от 400р.</p>
-							<img src="design/{$settings->theme|escape}/images/time-icon.png" alt="Time" class="time-icon">
-							<p><b>Время работы:</b></p>
-							<p>вс - чт с 10-00 до 22-00<br>пт - сб с 10-00 до 23-00</p>
-							<p>Без перерывов<br>и выходных</p>
+							{include file='working_info.tpl'}
 						</div>
 						<div class="owl-carousel">
 							<div><a href="#"><img src="design/{$settings->theme|escape}/images/slide-1.jpg" alt="Суши"></a></div>
@@ -168,34 +100,7 @@
 					</div>
 				</div>
 				<div class="col-sm-3">
-					<ul class="main-menu">
-						<li class="menu-header">Меню</li>										
-						{* функция вывода дерева категорий *}
-						{function name=categories_tree}
-						{if $categories}
-						{foreach $categories as $c}
-							{* Показываем только видимые категории *}
-							{if $c->visible}
-								<li>
-								{if $c->subcategories|@count>0}
-									<div class="dropdown">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown">{$c->name|escape} <span>(4)</span></a>
-											<ul class="dropdown-menu"> 
-												{foreach $c->subcategories as $subCat}
-												<li><a {if $category->id == $subCat->id}class="selected"{/if} href="catalog/{$subCat->url}">{$subCat->name|escape}</a></li>
-												{/foreach}
-											</ul>
-									</div>
-								{else}
-									<a {if $category->id == $c->id}class="selected"{/if} href="catalog/{$c->url}" data-category="{$c->id}">{$c->name|escape} <span>(4)</span></a>
-								{/if}
-								</li>
-							{/if}
-						{/foreach}
-						{/if}
-						{/function}
-						{categories_tree categories=$categories}
-					</ul>
+					{include file="main_menu.tpl"}
 				</div>
 			</div>
 		</div>
@@ -203,72 +108,7 @@
 
 {$content}
 
-	<div class="footer-block">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-xs-12 hidden-xs">
-					<ul class="footer-nav list-unstyled">
-						<li class="menu-header">Роллы</li>
-						<li><a href="#">Ассорти</a></li>
-						<li><a href="#">Жареные</a></li>
-						<li><a href="#">Запеченые</a></li>
-						<li><a href="#">Классика</a></li>
-						<li><a href="#">Сеты</a></li>
-						<li><a href="#">Сложные</a></li>
-					</ul>
-					<ul class="footer-nav list-unstyled border-right">
-						<li class="menu-header">Меню</li>
-						{if $categories}
-						{foreach $categories as $c}
-							{* Показываем только видимые категории *}
-							{if $c->visible}
-								<li>
-									<a {if $category->id == $c->id}class="selected"{/if} href="catalog/{$c->url}" data-category="{$c->id}">{$c->name|escape}</a>
-								</li>
-							{/if}
-						{/foreach}
-						{/if}
-					</ul>
-					<ul class="footer-nav list-unstyled">
-					{foreach $pages as $p}
-					{* Выводим только страницы из первого меню *}
-						{if $p->menu_id == 1}
-						<li {if $page && $page->id == $p->id}class="selected"{/if}>
-							<a href="{$p->url}">{$p->name|escape}</a>
-						</li>
-						{/if}
-					{/foreach}
-					</ul>
-				</div>
-				<div class="col-md-6 col-xs-12">
-					<div class="f-contacts">
-						<div><a href="tel:+74862303010">30-30-10</a> (Северный / Железнодорожный / Советский р-н)</div>
-						<div><a href="tel:+74862303020">30-30-20</a> (Заводской / Советский р-н)</div>
-					</div>
-					<div class="f-worktime">
-						<p>Время работы:</p> 
-						вс - чт с 10-00 до 22-00<br>
-						пт - сб с 10-00 до 23-00<br>
-						Без перерывов и выходных
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-7 col-xs-12">
-					<span class="f-copyright">© Сушитория. 2016 г. Все права защищены.</span>
-					<a href="http://vk.com/" class="f-social">Мы вконтакте <img src="design/{$settings->theme|escape}/images/top-social-vk.png" alt=""></a></li>
-				</div>
-				<div class="col-sm-4 col-xs-12 col-sm-offset-1">
-					<div class="f-author">Создание сайта: <a href="#">студия «Соль»</a></div>
-				</div>
-			</div>
-		</div>
-	</footer>
+{include file="footer.tpl"}
 	<script src="design/{$settings->theme|escape}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<!-- endbower -->
 	<script src="design/{$settings->theme|escape}/js/main.js"></script>

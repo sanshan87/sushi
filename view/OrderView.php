@@ -1,5 +1,6 @@
 <?PHP
-
+error_reporting(0);
+ini_set('display_errors','off');
 /**
  * Simpla CMS
  *
@@ -19,7 +20,6 @@ class OrderView extends View
 	public function __construct()
 	{
 		parent::__construct();
-		$this->design->smarty->registerPlugin("function", "checkout_form", array($this, 'checkout_form'));
 	}
 
 	//////////////////////////////////////////
@@ -41,6 +41,64 @@ class OrderView extends View
 	
 	function fetch_order()
 	{
+		$cart = $this->cart->get_cart();
+		
+		if($_SERVER['REQUEST_METHOD'] == 'POST' and $_POST['checkout'] and count($cart->purchases)){
+
+			$order = new stdClass;
+			$order->delivery_id = $this->request->post('delivery_id', 'integer');
+			$order->payment_method_id = $this->request->post('payment_method_id', 'integer');
+			$order->name        = $this->request->post('name');
+			$order->address     = $this->request->post('address');
+			$order->phone       = $this->request->post('phone');
+			//$order->comment     = $this->request->post('comment');
+			$order->ip      	= $_SERVER['REMOTE_ADDR'];
+			$this->design->assign('delivery_id', $order->delivery_id);
+			$this->design->assign('name', $order->name);
+			$this->design->assign('phone', $order->phone);
+			$this->design->assign('address', $order->address);
+			$captcha_code =  $this->request->post('captcha_code', 'string');
+			if(empty($order->name)){
+    		$this->design->assign('error', 'empty_name');
+			header('Location: '.$this->config->root_url.'/cart');
+			exit();
+			}
+			elseif($_SESSION['captcha_code'] != $captcha_code || empty($captcha_code))
+			{
+			$this->design->assign('error', 'captcha');
+			header('Location: '.$this->config->root_url.'/cart');
+			exit();
+			}
+			else
+			{
+	    	// Добавляем заказ в базу
+	    	$order_id = $this->orders->add_order($order);
+			$_SESSION['order_id'] = $order_id;
+	    	
+	    	// Добавляем товары к заказу
+	    	foreach($cart->purchases as $elementCart)
+	    	{
+	    		$this->orders->add_purchase(array('order_id'=>$order_id, 'variant_id'=>intval($elementCart->variant->id), 'amount'=>intval($elementCart->amount)));
+	    	}
+	    	$order = $this->orders->get_order($order_id);
+	    	// Стоимость доставки
+			$delivery = $this->delivery->get_delivery($order->delivery_id);
+	    	if(!empty($delivery) && $delivery->free_from > $order->total_price)
+	    	{
+	    		$this->orders->update_order($order->id, array('delivery_price'=>$delivery->price, 'separate_delivery'=>$delivery->separate_payment));
+	    	}
+			
+			// Отправляем письмо пользователю
+			//$this->notify->email_order_user($order->id);
+	    	
+			// Отправляем письмо администратору
+			//$this->notify->email_order_admin($order->id);
+	    	
+	    	// Очищаем корзину (сессию)
+			$this->cart->empty_cart();		
+			// Перенаправляем на страницу заказа
+		}
+		}
 		if($url = $this->request->get('url', 'string'))
 			$order = $this->orders->get_order((string)$url);
 		elseif(!empty($_SESSION['order_id']))
@@ -53,22 +111,7 @@ class OrderView extends View
 						
 		$purchases = $this->orders->get_purchases(array('order_id'=>intval($order->id)));
 		if(!$purchases)
-			return false;
-			
-		if($this->request->method('post'))
-		{
-			if($payment_method_id = $this->request->post('payment_method_id', 'integer'))
-			{
-				$this->orders->update_order($order->id, array('payment_method_id'=>$payment_method_id));
-				$order = $this->orders->get_order((integer)$order->id);
-			}
-			elseif($this->request->post('reset_payment_method'))
-			{
-				$this->orders->update_order($order->id, array('payment_method_id'=>null));
-				$order = $this->orders->get_order((integer)$order->id);
-			}
-		}
-		
+			return false;		
 		$products_ids = array();
 		$variants_ids = array();
 		foreach($purchases as $purchase)
@@ -125,7 +168,7 @@ class OrderView extends View
 		
 		
 		// Выводим заказ
-		return $this->body = $this->design->fetch('order.tpl');
+	return $this->body = $this->design->fetch('order.tpl');
 	}
 	
 	private function download()
@@ -155,18 +198,4 @@ class OrderView extends View
 		exit();
 	}
 	
-	public function checkout_form($params, &$smarty)
-	{
-		$module_name = preg_replace("/[^A-Za-z0-9]+/", "", $params['module']);
-
-		$form = '';
-		if(!empty($module_name) && is_file("payment/$module_name/$module_name.php"))
-		{
-			include_once("payment/$module_name/$module_name.php");
-			$module = new $module_name();
-			$form = $module->checkout_form($params['order_id'], $params['button_text']);
-		}
-		return $form;
-	}
-
 }
