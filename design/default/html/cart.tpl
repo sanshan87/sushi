@@ -137,7 +137,7 @@
 						<div class="form-group">
 							<label class="control-label col-md-2">Адрес доставки</label>
 							<div class="col-md-4">
-								<input name="address" type="text" value="{$address|escape}" class="form-control" />
+								<textarea name="address" rows="5" class="form-control">{$address|escape}</textarea>
 							</div>
 						</div>
 						<div class="form-group">
