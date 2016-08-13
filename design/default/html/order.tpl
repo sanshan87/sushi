@@ -1,7 +1,7 @@
 {* Страница заказа *}
 
-{$meta_title = "Ваш заказ №`$order->id`" scope=parent}
-
+{$meta_title = "Ваш заказ №`$order->id`"}
+{$wrapper = 'wrapper_for_products.tpl' scope=parent}
 <h1>Ваш заказ №{$order->id} 
 {if $order->status == 0}принят{/if}
 {if $order->status == 1}в обработке{elseif $order->status == 2}выполнен{/if}
@@ -58,18 +58,7 @@
 	</th>
 </tr>
 {/if}
-{* Купон, если есть *}
-{if $order->coupon_discount > 0}
-<tr>
-	<th class="image"></th>
-	<th class="name">купон</th>
-	<th class="price"></th>
-	<th class="amount"></th>
-	<th class="price">
-		&minus;{$order->coupon_discount|convert}&nbsp;{$currency->sign}
-	</th>
-</tr>
-{/if}
+
 {* Если стоимость доставки входит в сумму заказа *}
 {if !$order->separate_delivery && $order->delivery_price>0}
 <tr>
@@ -172,44 +161,7 @@
 </table>
 
 
-{if !$order->paid}
-{* Выбор способа оплаты *}
-{if $payment_methods && !$payment_method && $order->total_price>0}
-<form method="post">
-<h2>Выберите способ оплаты</h2>
-<ul id="deliveries">
-    {foreach $payment_methods as $payment_method}
-    	<li>
-    		<div class="checkbox">
-    			<input type=radio name=payment_method_id value='{$payment_method->id}' {if $payment_method@first}checked{/if} id=payment_{$payment_method->id}>
-    		</div>			
-			<h3><label for=payment_{$payment_method->id}>	{$payment_method->name}, к оплате {$order->total_price|convert:$payment_method->currency_id}&nbsp;{$all_currencies[$payment_method->currency_id]->sign}</label></h3>
-			<div class="description">
-			{$payment_method->description}
-			</div>
-    	</li>
-    {/foreach}
-</ul>
-<input type='submit' class="button" value='Закончить заказ'>
-</form>
 
-{* Выбраный способ оплаты *}
-{elseif $payment_method}
-<h2>Способ оплаты &mdash; {$payment_method->name}
-<form method=post><input type=submit name='reset_payment_method' value='Выбрать другой способ оплаты'></form>	
-</h2>
-<p>
-{$payment_method->description}
-</p>
-<h2>
-К оплате {$order->total_price|convert:$payment_method->currency_id}&nbsp;{$all_currencies[$payment_method->currency_id]->sign}
-</h2>
-
-{* Форма оплаты, генерируется модулем оплаты *}
-{checkout_form order_id=$order->id module=$payment_method->module}
-{/if}
-
-{/if}
 
 
  

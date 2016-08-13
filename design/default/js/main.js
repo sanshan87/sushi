@@ -116,7 +116,7 @@ $(document).ready(function() {
 
 	var counter = {
 		max: 99,
-		min: 0,
+		min: 1,
 		inc: function(num) {
 			if(num < this.max) {
 				return ++num;
@@ -138,18 +138,58 @@ $(document).ready(function() {
 				num = this.min;
 			}
 			return num;
+		},
+		
+		updatePrice: function(variant_id,amount){
+			$.ajax({
+				url: "ajax/cart.php",
+				data: {
+					action: "updateAmount",
+					variant_id: variant_id,
+					amount: amount
+				},
+				dataType: 'json',
+				success: function(data){
+					$('#cnt_in_cart').text(data.count);
+					$('#txt_cnt').html(data.text);
+					if(parseInt(data.totalPrice))
+						$('.basket-total-cost').html(data.totalPrice + ' р.');
+					if(data.totalPrice>=400){
+						$('#free').html('(бесплатно)');
+					}else{
+						$('#free').html('(120 р.)');
+					}
+				}
+			});
 		}
 	};
+	
+	
 	$('.count-form .btn-minus').click(function(){
 		var inp = $(this).siblings('.number');
 		inp.val(counter.dec(inp.val()));
+		amount = parseInt(inp.val());
+		form = $(this).closest('.basket-row').find('form');
+		if(form.find('input[name="variant_id"]').size()) 
+			var variant_id = form.find('input[name="variant_id"]').val();
+		counter.updatePrice(variant_id,amount);
 	});
 	$('.count-form .btn-plus').click(function(){
 		var inp = $(this).siblings('.number');
 		inp.val(counter.inc(inp.val()));
+		amount = parseInt(inp.val());
+		form = $(this).closest('.basket-row').find('form');
+		if(form.find('input[name="variant_id"]').size()) 
+			var variant_id = form.find('input[name="variant_id"]').val();
+		counter.updatePrice(variant_id,amount);
 	});
 	$('.count-form .number').change(function(){
 		var inp = $(this);
 		inp.val(counter.checkVal(inp.val()));
+		amount = parseInt(inp.val());
+		form = $(this).closest('.basket-row').find('form');
+		if(form.find('input[name="variant_id"]').size()) 
+			var variant_id = form.find('input[name="variant_id"]').val();
+		counter.updatePrice(variant_id,amount);
 	});
 });

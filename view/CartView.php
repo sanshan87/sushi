@@ -59,7 +59,6 @@ class CartView extends View
 
     	$captcha_code =  $this->request->post('captcha_code', 'string');
 
-		// Скидка
 		$cart = $this->cart->get_cart();
 		$order->discount = $cart->discount;
 		
@@ -169,7 +168,8 @@ class CartView extends View
 		// Способы доставки
 		$deliveries = $this->delivery->get_deliveries(array('enabled'=>1));
 		$this->design->assign('deliveries', $deliveries);
-		
+		$payment_methods = $this->payment->get_payment_methods(array('enabled'=>1));
+		$this->design->assign('payment_methods', $payment_methods);
 		// Данные пользователя
 		if($this->user)
 		{
