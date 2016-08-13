@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-09 18:13:28
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-13 19:34:25
          compiled from "simpla\design\html\product.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2096257a0d4fe4acee2-93099070%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '3f18dfe5f48ef059e152ab919b3f13338168bbfc' => 
     array (
       0 => 'simpla\\design\\html\\product.tpl',
-      1 => 1470752018,
+      1 => 1471109661,
       2 => 'file',
     ),
   ),
@@ -56,8 +56,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => 0,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_57a0d4fe768308_95896520')) {function content_57a0d4fe768308_95896520($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_replace')) include 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\Smarty\\libs\\plugins\\modifier.replace.php';
-if (!is_callable('smarty_modifier_truncate')) include 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\Smarty\\libs\\plugins\\modifier.truncate.php';
+<?php if ($_valid && !is_callable('content_57a0d4fe768308_95896520')) {function content_57a0d4fe768308_95896520($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_replace')) include 'E:\\xampp\\htdocs\\sushi.local\\Smarty\\libs\\plugins\\modifier.replace.php';
+if (!is_callable('smarty_modifier_truncate')) include 'E:\\xampp\\htdocs\\sushi.local\\Smarty\\libs\\plugins\\modifier.truncate.php';
 ?><script src="/js/cropit/dist/jquery.cropit.js"></script>
 <link href="/js/modalPopLite/modalPopLite.css" rel="stylesheet" type="text/css" /> 
 <script  src="/js/modalPopLite/modalPopLite.min.js"></script>
@@ -65,7 +65,7 @@ if (!is_callable('smarty_modifier_truncate')) include 'C:\\openserver\\OpenServe
 	<li class="active"><a href="<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['url'][0][0]->url_modifier(array('module'=>'ProductsAdmin','category_id'=>$_smarty_tpl->tpl_vars['product']->value->category_id,'return'=>null,'brand_id'=>null,'id'=>null),$_smarty_tpl);?>
 ">Товары</a></li>
 	<?php if (in_array('categories',$_smarty_tpl->tpl_vars['manager']->value->permissions)) {?><li><a href="index.php?module=CategoriesAdmin">Категории</a></li><?php }?>
-	<?php if (in_array('brands',$_smarty_tpl->tpl_vars['manager']->value->permissions)) {?><li><a href="index.php?module=BrandsAdmin">Бренды</a></li><?php }?>
+	
 	<?php if (in_array('features',$_smarty_tpl->tpl_vars['manager']->value->permissions)) {?><li><a href="index.php?module=FeaturesAdmin">Свойства</a></li><?php }?>
 <?php list($_capture_buffer, $_capture_assign, $_capture_append) = array_pop($_smarty_tpl->_capture_stack[0]);
 if (!empty($_capture_buffer)) {
@@ -636,7 +636,7 @@ overflow-y: auto;
 ">
 
  	<div id="name">
-		<input class="name" name=name type="text" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['product']->value->name, ENT_QUOTES, 'UTF-8', true);?>
+		<label>Название</label><input class="name" name=name type="text" style="width: 89%;margin-left: 14px;" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['product']->value->name, ENT_QUOTES, 'UTF-8', true);?>
 "/> 
 		<input name=id type="hidden" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['product']->value->id, ENT_QUOTES, 'UTF-8', true);?>
 "/> 
@@ -868,8 +868,9 @@ $_smarty_tpl->tpl_vars['feature']->_loop = true;
 	<div id="column_right">
 	
 		<div class="block layer images" style="height:200px; overflow: hidden;">
-		         <div id="clicker" style="text-align:center;text-decoration:underline;">Добавление превью</div>
-				 <div id="preview_result" style="height:120px;width:225px;">
+		         <div id="clicker" style="text-align:center;text-decoration:underline;cursor:pointer;"><h2><?php if ($_GET['id']>0) {?>Редактирование<?php } else { ?>Добавление<?php }?> превью</h2></div>
+				 <div id="preview_result" style="height:140px;width:430px;text-align:center;
+				 padding-top:20px;">
 				<?php  $_smarty_tpl->tpl_vars['image'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['image']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['product_images']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['image']->key => $_smarty_tpl->tpl_vars['image']->value) {
@@ -902,7 +903,7 @@ $_smarty_tpl->tpl_vars['image']->_loop = true;
 <input type="hidden" id="imgOrig" value="" name="imgDataOrig">
 		</div>
 		<div class="block layer">
-			<h2>Связанные товары</h2>
+			<h2>С этим продуктом часто заказывают</h2>
 			<div id=list class="sortable related_products">
 				<?php  $_smarty_tpl->tpl_vars['related_product'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['related_product']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['related_products']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}

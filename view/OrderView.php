@@ -97,6 +97,7 @@ class OrderView extends View
 	    	// Очищаем корзину (сессию)
 			$this->cart->empty_cart();		
 			// Перенаправляем на страницу заказа
+			$cart = $this->cart->get_cart();
 		}
 		}
 		if($url = $this->request->get('url', 'string'))

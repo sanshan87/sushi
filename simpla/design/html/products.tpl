@@ -2,7 +2,7 @@
 {capture name=tabs}
 	<li class="active"><a href="{url module=ProductsAdmin keyword=null category_id=null brand_id=null filter=null page=null}">Товары</a></li>
 	{if in_array('categories', $manager->permissions)}<li><a href="index.php?module=CategoriesAdmin">Категории</a></li>{/if}
-	{if in_array('brands', $manager->permissions)}<li><a href="index.php?module=BrandsAdmin">Бренды</a></li>{/if}
+	{*{if in_array('brands', $manager->permissions)}<li><a href="index.php?module=BrandsAdmin">Бренды</a></li>{/if}*}
 	{if in_array('features', $manager->permissions)}<li><a href="index.php?module=FeaturesAdmin">Свойства</a></li>{/if}
 {/capture}
 
@@ -99,7 +99,7 @@
 			<div class="icons cell">
 				<a class="preview"   title="Предпросмотр в новом окне" href="../products/{$product->url}" target="_blank"></a>			
 				<a class="enable"    title="Активен"                 href="#"></a>
-				<a class="featured"  title="Рекомендуемый"           href="#"></a>
+				<a class="featured"  title="Популярный"           href="#"></a>
 				<a class="duplicate" title="Дублировать"             href="#"></a>
 				<a class="delete"    title="Удалить"                 href="#"></a>
 			</div>
@@ -116,8 +116,8 @@
 			<select name="action">
 				<option value="enable">Сделать видимыми</option>
 				<option value="disable">Сделать невидимыми</option>
-				<option value="set_featured">Сделать рекомендуемым</option>
-				<option value="unset_featured">Отменить рекомендуемый</option>
+				<option value="set_featured">Сделать популярными</option>
+				<option value="unset_featured">Отменить популярные</option>
 				<option value="duplicate">Создать дубликат</option>
 				{if $pages_count>1}
 				<option value="move_to_page">Переместить на страницу</option>
@@ -178,11 +178,9 @@
 	<!-- Фильтры -->
 	<ul>
 		<li {if !$filter}class="selected"{/if}><a href="{url brand_id=null category_id=null keyword=null page=null filter=null}">Все товары</a></li>
-		<li {if $filter=='featured'}class="selected"{/if}><a href="{url keyword=null brand_id=null category_id=null page=null filter='featured'}">Рекомендуемые</a></li>
-		<li {if $filter=='discounted'}class="selected"{/if}><a href="{url keyword=null brand_id=null category_id=null page=null filter='discounted'}">Со скидкой</a></li>
+		<li {if $filter=='featured'}class="selected"{/if}><a href="{url keyword=null brand_id=null category_id=null page=null filter='featured'}">Популярные</a></li>
 		<li {if $filter=='visible'}class="selected"{/if}><a href="{url keyword=null brand_id=null category_id=null page=null filter='visible'}">Активные</a></li>
 		<li {if $filter=='hidden'}class="selected"{/if}><a href="{url keyword=null brand_id=null category_id=null page=null filter='hidden'}">Неактивные</a></li>
-		<li {if $filter=='outofstock'}class="selected"{/if}><a href="{url keyword=null brand_id=null category_id=null page=null filter='outofstock'}">Отсутствующие</a></li>
 	</ul>
 	<!-- Фильтры -->
 

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-09 18:25:18
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-13 18:59:30
          compiled from "simpla\design\html\settings.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2190157a0d542694e66-31437928%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '418c522abdcc45242a9a35d7207d38fc61cfc733' => 
     array (
       0 => 'simpla\\design\\html\\settings.tpl',
-      1 => 1470752018,
+      1 => 1471107557,
       2 => 'file',
     ),
   ),
@@ -29,12 +29,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_57a0d54280fd38_88034763')) {function content_57a0d54280fd38_88034763($_smarty_tpl) {?><?php if (!is_callable('smarty_function_math')) include 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\Smarty\\libs\\plugins\\function.math.php';
+<?php if ($_valid && !is_callable('content_57a0d54280fd38_88034763')) {function content_57a0d54280fd38_88034763($_smarty_tpl) {?><?php if (!is_callable('smarty_function_math')) include 'E:\\xampp\\htdocs\\sushi.local\\Smarty\\libs\\plugins\\function.math.php';
 ?><?php $_smarty_tpl->_capture_stack[0][] = array('tabs', null, null); ob_start(); ?>
 	<li class="active"><a href="index.php?module=SettingsAdmin">Настройки</a></li>
 	<?php if (in_array('currency',$_smarty_tpl->tpl_vars['manager']->value->permissions)) {?><li><a href="index.php?module=CurrencyAdmin">Валюты</a></li><?php }?>
 	<?php if (in_array('delivery',$_smarty_tpl->tpl_vars['manager']->value->permissions)) {?><li><a href="index.php?module=DeliveriesAdmin">Доставка</a></li><?php }?>
-	<?php if (in_array('payment',$_smarty_tpl->tpl_vars['manager']->value->permissions)) {?><li><a href="index.php?module=PaymentMethodsAdmin">Оплата</a></li><?php }?>
+	
 	<?php if (in_array('managers',$_smarty_tpl->tpl_vars['manager']->value->permissions)) {?><li><a href="index.php?module=ManagersAdmin">Менеджеры</a></li><?php }?>
 <?php list($_capture_buffer, $_capture_assign, $_capture_append) = array_pop($_smarty_tpl->_capture_stack[0]);
 if (!empty($_capture_buffer)) {
@@ -168,7 +168,7 @@ if ($_smarty_tpl->parent != null) $_smarty_tpl->parent->tpl_vars['meta_title'] =
 " /> %</li>
 				<li><label class=property>Ширина превью товара</label><input name="preview_x" class="simpla_inp" type="text" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->preview_x, ENT_QUOTES, 'UTF-8', true);?>
 " /> px</li>
-				<li><label class=property>Ширина превью товара</label><input name="preview_y" class="simpla_inp" type="text" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->preview_y, ENT_QUOTES, 'UTF-8', true);?>
+				<li><label class=property>Высота превью товара</label><input name="preview_y" class="simpla_inp" type="text" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->preview_y, ENT_QUOTES, 'UTF-8', true);?>
 " /> px</li>
 			</ul>
 		</div>
@@ -176,7 +176,7 @@ if ($_smarty_tpl->parent != null) $_smarty_tpl->parent->tpl_vars['meta_title'] =
 
 		
 		<!-- Параметры -->
-		<div class="block layer">
+		<!--<div class="block layer">
 			<h2>Интеграция с <a href="http://prostiezvonki.ru">простыми звонками</a></h2>
 			<ul>
 				<li><label class=property>Сервер</label><input name="pz_server" class="simpla_inp" type="text" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->pz_server, ENT_QUOTES, 'UTF-8', true);?>
@@ -195,7 +195,7 @@ $_smarty_tpl->tpl_vars['manager']->_loop = true;
 " /></li>
 				<?php } ?>
 			</ul>
-		</div>
+		</div>-->
 		<!-- Параметры (The End)-->
 		
 		<input class="button_green button_save" type="submit" name="save" value="Сохранить" />

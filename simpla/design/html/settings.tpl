@@ -2,7 +2,7 @@
 	<li class="active"><a href="index.php?module=SettingsAdmin">Настройки</a></li>
 	{if in_array('currency', $manager->permissions)}<li><a href="index.php?module=CurrencyAdmin">Валюты</a></li>{/if}
 	{if in_array('delivery', $manager->permissions)}<li><a href="index.php?module=DeliveriesAdmin">Доставка</a></li>{/if}
-	{if in_array('payment', $manager->permissions)}<li><a href="index.php?module=PaymentMethodsAdmin">Оплата</a></li>{/if}
+	{*{if in_array('payment', $manager->permissions)}<li><a href="index.php?module=PaymentMethodsAdmin">Оплата</a></li>{/if}*}
 	{if in_array('managers', $manager->permissions)}<li><a href="index.php?module=ManagersAdmin">Менеджеры</a></li>{/if}
 {/capture}
  
@@ -103,14 +103,14 @@
 				<li><label class=property>Прозрачность знака (больше &mdash; прозрачней)</label><input name="watermark_transparency" class="simpla_inp" type="text" value="{$settings->watermark_transparency|escape}" /> %</li>
 				<li><label class=property>Резкость изображений (рекомендуется 20%)</label><input name="images_sharpen" class="simpla_inp" type="text" value="{$settings->images_sharpen|escape}" /> %</li>
 				<li><label class=property>Ширина превью товара</label><input name="preview_x" class="simpla_inp" type="text" value="{$settings->preview_x|escape}" /> px</li>
-				<li><label class=property>Ширина превью товара</label><input name="preview_y" class="simpla_inp" type="text" value="{$settings->preview_y|escape}" /> px</li>
+				<li><label class=property>Высота превью товара</label><input name="preview_y" class="simpla_inp" type="text" value="{$settings->preview_y|escape}" /> px</li>
 			</ul>
 		</div>
 		<!-- Параметры (The End)-->
 
 		
 		<!-- Параметры -->
-		<div class="block layer">
+		<!--<div class="block layer">
 			<h2>Интеграция с <a href="http://prostiezvonki.ru">простыми звонками</a></h2>
 			<ul>
 				<li><label class=property>Сервер</label><input name="pz_server" class="simpla_inp" type="text" value="{$settings->pz_server|escape}" /></li>
@@ -120,7 +120,7 @@
 				<li><label class=property>{$manager->login}</label><input name="pz_phones[{$manager->login}]" class="simpla_inp" type="text" value="{$settings->pz_phones[$manager->login]|escape}" /></li>
 				{/foreach}
 			</ul>
-		</div>
+		</div>-->
 		<!-- Параметры (The End)-->
 		
 		<input class="button_green button_save" type="submit" name="save" value="Сохранить" />
