@@ -75,7 +75,7 @@
 				</div>
 				<a href="products/{$product->url}" class="price-link">
 				{if $product->image}
-					<div class="price-img"><img src="{$product->image->filename|resize:225:120}" alt="{$product->name|escape}" class="img-responsive"></div>
+					<div class="price-img"><img src="{$product->image->filename|resize:$settings->preview_x:$settings->preview_y}" alt="{$product->name|escape}" class="img-responsive"></div>
 				{/if}	
 					<div class="price-info">
 						<p class="price-name">{$product->name|escape}</p>
@@ -139,7 +139,7 @@
 				</div>
 				<a href="products/{$product->url}" class="price-link">
 				{if $product->image}
-					<div class="price-img"><img src="{$product->image->filename|resize:225:120}" alt="{$product->name|escape}" class="img-responsive"></div>
+					<div class="price-img"><img src="{$product->image->filename|resize:$settings->preview_x:$settings->preview_y}" alt="{$product->name|escape}" class="img-responsive"></div>
 				{/if}	
 					<div class="price-info">
 						<p class="price-name">{$product->name|escape}</p>

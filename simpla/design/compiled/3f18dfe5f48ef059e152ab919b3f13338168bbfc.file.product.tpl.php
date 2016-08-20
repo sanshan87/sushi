@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-13 19:34:25
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-20 14:57:24
          compiled from "simpla\design\html\product.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2096257a0d4fe4acee2-93099070%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '3f18dfe5f48ef059e152ab919b3f13338168bbfc' => 
     array (
       0 => 'simpla\\design\\html\\product.tpl',
-      1 => 1471109661,
+      1 => 1471697829,
       2 => 'file',
     ),
   ),
@@ -589,7 +589,7 @@ overflow-y: auto;
 ">Вернуться</a>
 	<?php }?>
 	
-	<span class="share">		
+	<!--<span class="share">		
 		<a href="#" onClick='window.open("http://vkontakte.ru/share.php?url=<?php echo urlencode($_smarty_tpl->tpl_vars['config']->value->root_url);?>
 /products/<?php echo urlencode($_smarty_tpl->tpl_vars['product']->value->url);?>
 &title=<?php echo urlencode($_smarty_tpl->tpl_vars['product']->value->name);?>
@@ -610,7 +610,7 @@ overflow-y: auto;
 ","displayWindow","width=700,height=400,left=250,top=170,status=no,toolbar=no,menubar=no");return false;'>
   		<img src="<?php echo $_smarty_tpl->tpl_vars['config']->value->root_url;?>
 /simpla/design/images/twitter_icon.png" /></a>
-	</span>
+	</span>-->
 	
 </div>
 <!-- Системное сообщение (The End)-->
@@ -876,7 +876,7 @@ $_smarty_tpl->tpl_vars['feature']->_loop = true;
 foreach ($_from as $_smarty_tpl->tpl_vars['image']->key => $_smarty_tpl->tpl_vars['image']->value) {
 $_smarty_tpl->tpl_vars['image']->_loop = true;
 ?>
-					<img src="<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['resize'][0][0]->resize_modifier($_smarty_tpl->tpl_vars['image']->value->filename,225,120);?>
+					<img src="<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['resize'][0][0]->resize_modifier($_smarty_tpl->tpl_vars['image']->value->filename,$_smarty_tpl->tpl_vars['settings']->value->preview_x,$_smarty_tpl->tpl_vars['settings']->value->preview_y);?>
 " alt="" />
 					<!--<input type=hidden name='images[]' value='<?php echo $_smarty_tpl->tpl_vars['image']->value->id;?>
 '>-->

@@ -707,7 +707,7 @@ overflow-y: auto;
 				 <div id="preview_result" style="height:140px;width:430px;text-align:center;
 				 padding-top:20px;">
 				{foreach $product_images as $image}
-					<img src="{$image->filename|resize:225:120}" alt="" />
+					<img src="{$image->filename|resize:$settings->preview_x:$settings->preview_y}" alt="" />
 					<!--<input type=hidden name='images[]' value='{$image->id}'>-->
 				{/foreach}
 				 </div>

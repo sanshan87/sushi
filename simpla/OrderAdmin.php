@@ -7,6 +7,9 @@ require_once('api/Simpla.php');
 ############################################
 class OrderAdmin extends Simpla
 {
+	const PERCENT = 0.1;
+	private $smallDiscount = ['limit'=>1000,'percent'=>5];
+	private $bigDiscount = ['limit'=>2000,'percent'=>10];
 	public function fetch()
 	{
 		$order = new stdClass;
@@ -16,13 +19,21 @@ class OrderAdmin extends Simpla
 			$order->name = $this->request->post('name');
 			$order->email = $this->request->post('email');
 			$order->phone = $this->request->post('phone');
-			$order->address = $this->request->post('address');
+			$order->delivery_id = $this->request->post('delivery_id', 'integer');
+			if($order->delivery_id == 1){
+				$order->address = strip_tags($this->request->post('address'));
+				$order->from_adress = '';
+			}else{
+				$order->address='';
+				$order->from_adress = $this->request->post('variant_delself');
+			}
 			$order->comment = $this->request->post('comment');
 			$order->note = $this->request->post('note');
-			$order->discount = $this->request->post('discount', 'floatr');
+			//$order->discount = $this->request->post('discount', 'floatr');
+			$order->discount = 0;
 			$order->coupon_discount = $this->request->post('coupon_discount', 'floatr');
-			$order->delivery_id = $this->request->post('delivery_id', 'integer');
 			$order->delivery_price = $this->request->post('delivery_price', 'float');
+			$order->delivery_price = 0;
 			$order->payment_method_id = $this->request->post('payment_method_id', 'integer');
 			$order->paid = $this->request->post('paid', 'integer');
 			$order->user_id = $this->request->post('user_id', 'integer');
@@ -77,6 +88,32 @@ class OrderAdmin extends Simpla
 				foreach($this->orders->get_purchases(array('order_id'=>$order->id)) as $p)
 					if(!in_array($p->id, $posted_purchases_ids))
 						$this->orders->delete_purchase($p->id);
+			$order_i = $this->orders->get_order($order->id);
+			$delivery = $this->delivery->get_delivery($order_i->delivery_id);
+	    	if(!empty($delivery) && $delivery->free_from > $order_i->total_price && $order_i->delivery_id == 1)
+	    	{
+	    		$this->orders->update_order($order_i->id, array('delivery_price'=>$delivery->price, 'separate_delivery'=>$delivery->separate_payment));
+	    	}elseif($delivery->free_from < $order_i->total_price && $order_i->delivery_id == 1){
+				$this->orders->update_order($order_i->id, array('delivery_price'=>0, 'separate_delivery'=>$delivery->separate_payment));
+			}
+			
+			
+			//Скидки	
+			if($order_i->delivery_id == 1){
+				if($order_i->total_price>=$this->bigDiscount['limit']){
+					$order_i->discount = number_format($this->bigDiscount['percent'],2,'.','');
+					$this->orders->update_order($order_i->id, array('discount'=>$order_i->discount));
+				}elseif($order_i->total_price>=$this->smallDiscount['limit']){
+					$order_i->discount = number_format($this->smallDiscount['percent'],2,'.','');
+					$this->orders->update_order($order_i->id, array('discount'=>$order_i->discount));
+				}
+			}
+			if($order_i->delivery_id == 2){
+				$delivery = new stdClass;
+				$delivery->price = -1*number_format(($order_i->total_price*self::PERCENT),2,'.','');
+				$this->orders->update_order($order_i->id, array('delivery_price'=>$delivery->price, 'separate_delivery'=>0));
+			}
+			//Скидки
 					
 				// Принять?
 				if($this->request->post('status_new'))

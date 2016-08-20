@@ -85,7 +85,7 @@
 					
 					{* Доставка *}
 					{if $deliveries}
-					<div class="page-header-block">
+					<div class="page-header-block" style="border-top: none;">
 						<h2>Выберите способ доставки:</h2>
 					</div>
 					<form method="post" action="/order" class="form-horizontal">
@@ -95,7 +95,7 @@
 						<div class="form-group">
 							<div class="btn-group col-xs-12" data-toggle="buttons">
 								{foreach $deliveries as $delivery}
-								<label class="btn btn-default col-sm-6 col-xs-12 {if $delivery_id==$delivery->id}active{elseif $delivery@first}active{/if}">
+								<label data-role="switches" class="btn btn-default col-sm-6 col-xs-12 {if $delivery_id==$delivery->id}active{elseif $delivery@first}active{/if}">
 									<input type="radio" name="delivery_id" id="deliveries_{$delivery->id}" value="{$delivery->id}" {if $delivery_id==$delivery->id}checked{elseif $delivery@first}checked{/if} id="deliveries_{$delivery->id}"> {$delivery->name} 
 									<span {if $delivery->id == 1}id="free"{/if}>
 										{if $cart->total_price < $delivery->free_from && $delivery->price>0}
@@ -113,6 +113,18 @@
 								<div class="col-md-12 col-sm-12 col-xs-12 description" id="desc_{$delivery->id}" {if $delivery->id != 1}style="display: none;"{/if}>{$delivery->description|strip_tags:true}</div>
 							</div>
 						{/foreach}
+						<div class="page-header-block" style="border-top: none;">
+						<h2>Выберите способ оплаты:</h2>
+						</div>
+						<div class="form-group">
+							<div class="btn-group col-xs-12" data-toggle="buttons">
+								{foreach $payment_methods as $payment_method}
+								<label class="btn btn-default col-sm-6 col-xs-12 {if $payment_method_id==$payment_method->id}active{elseif $payment_method@first}active{/if}">
+									<input type="radio" name="payment_method_id" value="{$payment_method->id}" {if $payment_method_id==$payment_method->id}checked{elseif $payment_method@first}checked{/if} id="payment_method_{$payment_method->id}"> {$payment_method->name} 
+								</label>
+								{/foreach}
+							</div>
+						</div>
 						{if $error}
 							<div class="from-group">
 								<div class="message_error" class="col-md-12 col-sm-12 col-xs-12">
@@ -131,28 +143,41 @@
 						<div class="form-group">
 							<label class="control-label col-md-2">Телефон</label>
 							<div class="col-md-4">
-								<input name="phone" type="text" value="{$phone|escape}" class="form-control" />
+								<input name="phone" type="text" value="{$phone|escape}" data-format=".+" data-notice="Введите телефон" class="form-control" />
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group" id="adressForCurier">
 							<label class="control-label col-md-2">Адрес доставки</label>
 							<div class="col-md-4">
-								<textarea name="address" rows="5" class="form-control">{$address|escape}</textarea>
+								<textarea name="address" rows="5" data-format=".+" data-notice="Введите адрес" class="form-control">{$address|escape}</textarea>
+							</div>
+						</div>
+						<div class="form-group" id="adressForDelSelf">
+							<label class="control-label col-md-2">Откуда будете забирать?</label>
+							<div class="col-md-4">
+								<div class="btn-group" data-toggle="buttons">
+								<label class="btn btn-default col-sm-12 col-xs-12 active" style="margin-bottom:5px">
+									<input type="radio" name="variant_delself" value="R" checked> c ул. Рощинская, 41
+								</label>
+								<label class="btn btn-default col-sm-12 col-xs-12">
+									<input type="radio" name="variant_delself" value="E" > c ул. Емлютина, 2
+								</label>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-md-2">
 								<div class="captcha" >
-									<img style="width:120px" src="captcha/image.php?{math equation='rand(10,10000)'}" alt='captcha'/>
+									<img style="width:100px" src="captcha/image.php?{math equation='rand(10,10000)'}" alt='captcha'/>
 								</div> 
 							</div>
 							<div class="col-md-4">
 								<div class="row">
 									<div class="col-xs-8">
-										<input class="input_captcha form-control" id="comment_captcha" type="text" name="captcha_code" value="" data-format="\d\d\d\d" data-notice="Введите капчу"/>
+										<input class="input_captcha form-control" id="comment_captcha" type="text" placeholder="Число с картинки" name="captcha_code" value="" data-format="\d\d\d\d" data-notice="Введите капчу"/>
 									</div>
 									<div class="col-xs-4 text-right">
-										<button type="button" class="btn btn-default glyphicon glyphicon-refresh"></button>
+										<button type="button" class="btn btn-default glyphicon glyphicon-refresh" id="refresh"></button>
 									</div>
 								</div>
 								
@@ -165,15 +190,50 @@
 							</div>
 						</div>
 					</form>
+					{literal}
 					<script>
 						$(document).ready(function(){
+							
+							var deliveryActive = $('input[name=delivery_id]:checked').val();
+							if(deliveryActive == 1){
+								$('#adressForDelSelf').hide();
+								$('#adressForCurier').show();
+							}else{
+								$('#adressForDelSelf').show();
+								$('#adressForCurier').hide();
+							}
+					
 							$('input[name=delivery_id]').change(function(){
+							$('#baloon').hide();
 								var id = $(this).val();
 								$('.description').hide();
 								$('#desc_' + id).show();
+								if(id==1){
+									$('#adressForDelSelf').hide();
+									$('#adressForCurier').show();	
+									$('#adressForCurier textarea').attr({'data-format':'.+','data-notice':'Введите адрес'});
+								}else{
+									$('#adressForDelSelf').show();
+									$('#adressForCurier').hide();
+									$('#adressForCurier textarea').removeAttr('data-format');
+									$('#adressForCurier textarea').removeAttr('data-notice');
+									$('#adressForCurier textarea').val('');
+								}
 							});
+							
+							function randomInteger(min, max) {
+								var rand = min - 0.5 + Math.random() * (max - min + 1)
+								rand = Math.round(rand);
+								return rand;
+							}
+							
+							$('#refresh').click(function(){
+								$('.captcha img').attr("src","captcha/image.php?" + randomInteger(10, 1000));
+							});
+							
 						});
 					</script>
+					{/literal}
 					{/if}
 				</div>
 				{/if}
