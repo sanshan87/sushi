@@ -53,14 +53,8 @@ use_imagick = true;
 ;Директория оригиналов изображений
 original_images_dir = files/originals/;
 
-;Директория оригиналов изображений
-s_original_images_dir = files/stocks/originals/;
-
 ;Директория миниатюр
 resized_images_dir = files/products/;
-
-;Директория миниатюр акций
-s_resized_images_dir = files/stocks/resized/;
 
 ;Изображения категорий
 categories_images_dir = files/categories/;

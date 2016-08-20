@@ -1,30 +1,20 @@
-<<<<<<< HEAD
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-17 23:33:53
-=======
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-17 17:48:40
->>>>>>> origin/skidki
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-21 00:22:51
          compiled from "simpla\design\html\settings.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2190157a0d542694e66-31437928%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:393057b8ca2b310955-22845112%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '418c522abdcc45242a9a35d7207d38fc61cfc733' => 
     array (
       0 => 'simpla\\design\\html\\settings.tpl',
-<<<<<<< HEAD
-      1 => 1471122418,
-=======
-      1 => 1471448913,
->>>>>>> origin/skidki
+      1 => 1471725744,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2190157a0d542694e66-31437928',
+  'nocache_hash' => '393057b8ca2b310955-22845112',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_57a0d54280fd38_88034763',
   'variables' => 
   array (
     'manager' => 0,
@@ -36,8 +26,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'managers' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_57b8ca2b48f6b1_81058443',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_57a0d54280fd38_88034763')) {function content_57a0d54280fd38_88034763($_smarty_tpl) {?><?php if (!is_callable('smarty_function_math')) include 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\Smarty\\libs\\plugins\\function.math.php';
+<?php if ($_valid && !is_callable('content_57b8ca2b48f6b1_81058443')) {function content_57b8ca2b48f6b1_81058443($_smarty_tpl) {?><?php if (!is_callable('smarty_function_math')) include 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\Smarty\\libs\\plugins\\function.math.php';
 ?><?php $_smarty_tpl->_capture_stack[0][] = array('tabs', null, null); ob_start(); ?>
 	<li class="active"><a href="index.php?module=SettingsAdmin">Настройки</a></li>
 	<?php if (in_array('currency',$_smarty_tpl->tpl_vars['manager']->value->permissions)) {?><li><a href="index.php?module=CurrencyAdmin">Валюты</a></li><?php }?>
