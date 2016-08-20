@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-20 04:25:51
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-20 23:44:50
          compiled from "C:\openserver\OpenServer\domains\sushitore\sushi\design\default\html\main.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2121457a8c07605f281-49720559%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '01f7f25dc058b169178bcd491a2bcc9380cf539e' => 
     array (
       0 => 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\design\\default\\html\\main.tpl',
-      1 => 1471656347,
+      1 => 1471725744,
       2 => 'file',
     ),
   ),
@@ -23,11 +23,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'stock' => 0,
     'featured_products' => 0,
     'product' => 0,
+    'settings' => 0,
     'opt' => 0,
     'v' => 0,
     'currency' => 0,
     'new_products' => 0,
-    'settings' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -120,7 +120,7 @@ $_smarty_tpl->tpl_vars['product']->_loop = true;
 				<a href="products/<?php echo $_smarty_tpl->tpl_vars['product']->value->url;?>
 " class="price-link">
 				<?php if ($_smarty_tpl->tpl_vars['product']->value->image) {?>
-					<div class="price-img"><img src="<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['resize'][0][0]->resize_modifier($_smarty_tpl->tpl_vars['product']->value->image->filename,225,120);?>
+					<div class="price-img"><img src="<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['resize'][0][0]->resize_modifier($_smarty_tpl->tpl_vars['product']->value->image->filename,$_smarty_tpl->tpl_vars['settings']->value->preview_x,$_smarty_tpl->tpl_vars['settings']->value->preview_y);?>
 " alt="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['product']->value->name, ENT_QUOTES, 'UTF-8', true);?>
 " class="img-responsive"></div>
 				<?php }?>	
@@ -215,7 +215,7 @@ $_smarty_tpl->tpl_vars['product']->_loop = true;
 				<a href="products/<?php echo $_smarty_tpl->tpl_vars['product']->value->url;?>
 " class="price-link">
 				<?php if ($_smarty_tpl->tpl_vars['product']->value->image) {?>
-					<div class="price-img"><img src="<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['resize'][0][0]->resize_modifier($_smarty_tpl->tpl_vars['product']->value->image->filename,225,120);?>
+					<div class="price-img"><img src="<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['resize'][0][0]->resize_modifier($_smarty_tpl->tpl_vars['product']->value->image->filename,$_smarty_tpl->tpl_vars['settings']->value->preview_x,$_smarty_tpl->tpl_vars['settings']->value->preview_y);?>
 " alt="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['product']->value->name, ENT_QUOTES, 'UTF-8', true);?>
 " class="img-responsive"></div>
 				<?php }?>	

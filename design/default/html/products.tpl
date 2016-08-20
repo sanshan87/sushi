@@ -65,7 +65,7 @@
 				</div>
 				<a href="products/{$product->url}" class="price-link">
 				{if $product->image}
-					<div class="price-img"><img src="{$product->image->filename|resize:225:120}" alt="{$product->name|escape}" class="img-responsive"></div>
+					<div class="price-img"><img src="{$product->image->filename|resize:$settings->preview_x:$settings->preview_y}" alt="{$product->name|escape}" class="img-responsive"></div>
 				{/if}	
 					<div class="price-info">
 						<p class="price-name">{$product->name|escape}</p>
@@ -110,48 +110,7 @@
 {/if}
 <!--Каталог товаров (The End)-->
 </div>
-				<div class="col-md-3 col-sm-4 col-xs-12">
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="main-menu-block">
-								<div class="block-frame">
-									<div class="bf-corner bf-corner--topLeft"></div>
-									<div class="bf-corner bf-corner--topRight"></div>
-									<div class="bf-corner bf-corner--bottomLeft"></div>
-									<div class="bf-corner bf-corner--bottomRight"></div>
-								</div>
-								{include file="main_menu.tpl"}	
-							</div>
-						</div>
-						<div class="col-xs-12">
-							<div class="working-info">
-								<div class="border"></div>
-								<div class="wi-text">
-									{include file='working_info.tpl'}
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-12 sidebar-sale">
-							<h3>Акции</h3>
-							<div class="sale-item">
-								<div class="img-block">
-									<img src="design/{$settings->theme|escape}/images/side-sale.jpg" alt="" class="img-responsive">
-									<div class="sale-header">Спринг грибы в подарок!</div>
-								</div>
-								<div class="info-block">
-									<div class="item-text">
-										При заказе на сумму от 800 руб. 
-										Вы получите ролл Спринг грибы 
-										в подарок! В стоимость заказа 
-										не входят сеты и напитки.
-									</div>
-									<div class="item-time">Акция проводится 10:00 до 22:00</div>
-									<a href="#" class="link-more">Подробнее</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				{include file="sidebar.tpl"}
 			</div>
 		</div>
 	</div>

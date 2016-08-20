@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?php /* Smarty version Smarty-3.1.18, created on 2016-08-17 23:33:53
+=======
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-17 17:48:40
+>>>>>>> origin/skidki
          compiled from "simpla\design\html\settings.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2190157a0d542694e66-31437928%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +11,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '418c522abdcc45242a9a35d7207d38fc61cfc733' => 
     array (
       0 => 'simpla\\design\\html\\settings.tpl',
+<<<<<<< HEAD
       1 => 1471122418,
+=======
+      1 => 1471448913,
+>>>>>>> origin/skidki
       2 => 'file',
     ),
   ),
@@ -34,7 +42,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 	<li class="active"><a href="index.php?module=SettingsAdmin">Настройки</a></li>
 	<?php if (in_array('currency',$_smarty_tpl->tpl_vars['manager']->value->permissions)) {?><li><a href="index.php?module=CurrencyAdmin">Валюты</a></li><?php }?>
 	<?php if (in_array('delivery',$_smarty_tpl->tpl_vars['manager']->value->permissions)) {?><li><a href="index.php?module=DeliveriesAdmin">Доставка</a></li><?php }?>
-	
+	<?php if (in_array('payment',$_smarty_tpl->tpl_vars['manager']->value->permissions)) {?><li><a href="index.php?module=PaymentMethodsAdmin">Оплата</a></li><?php }?>
 	<?php if (in_array('managers',$_smarty_tpl->tpl_vars['manager']->value->permissions)) {?><li><a href="index.php?module=ManagersAdmin">Менеджеры</a></li><?php }?>
 <?php list($_capture_buffer, $_capture_assign, $_capture_append) = array_pop($_smarty_tpl->_capture_stack[0]);
 if (!empty($_capture_buffer)) {

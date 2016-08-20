@@ -28,15 +28,22 @@ class Stocks extends Simpla
 	*/
 	public function get_stocks($filter = array())
 	{	
+		$limit = 10;
 		$stocks = array();
 		
 		if(isset($filter['visible']))
 			$visible_filter = $this->db->placehold('AND visible=?', intval($filter['visible']));
 
+		if(isset($filter['limit']))
+			$limit = max(1, intval($filter['limit']));
+
+		$sql_limit = $this->db->placehold(' LIMIT ?', $limit);
+
 		$query = "SELECT id, name, short_annotation, annotation, filename, visible, wd_start, wd_end, we_start, we_end
 		          FROM __stocks 
 		          WHERE 1 $visible_filter 
-		          ORDER BY id";
+		          ORDER BY id
+		          $sql_limit";
 
 		$this->db->query($query);
 		

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-13 20:37:48
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-20 23:53:02
          compiled from "C:\openserver\OpenServer\domains\sushitore\sushi\design\default\html\products.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1812157a8c527cecfc6-11559326%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '3ebcbd35a6993655197b3a504b5e5579d5d9a230' => 
     array (
       0 => 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\design\\default\\html\\products.tpl',
-      1 => 1471109861,
+      1 => 1471726379,
       2 => 'file',
     ),
   ),
@@ -33,10 +33,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'page' => 0,
     'products' => 0,
     'product' => 0,
+    'settings' => 0,
     'opt' => 0,
     'v' => 0,
     'currency' => 0,
-    'settings' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -140,7 +140,7 @@ $_smarty_tpl->tpl_vars['product']->_loop = true;
 				<a href="products/<?php echo $_smarty_tpl->tpl_vars['product']->value->url;?>
 " class="price-link">
 				<?php if ($_smarty_tpl->tpl_vars['product']->value->image) {?>
-					<div class="price-img"><img src="<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['resize'][0][0]->resize_modifier($_smarty_tpl->tpl_vars['product']->value->image->filename,225,120);?>
+					<div class="price-img"><img src="<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['resize'][0][0]->resize_modifier($_smarty_tpl->tpl_vars['product']->value->image->filename,$_smarty_tpl->tpl_vars['settings']->value->preview_x,$_smarty_tpl->tpl_vars['settings']->value->preview_y);?>
 " alt="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['product']->value->name, ENT_QUOTES, 'UTF-8', true);?>
 " class="img-responsive"></div>
 				<?php }?>	
@@ -209,51 +209,8 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
 <?php }?>
 <!--Каталог товаров (The End)-->
 </div>
-				<div class="col-md-3 col-sm-4 col-xs-12">
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="main-menu-block">
-								<div class="block-frame">
-									<div class="bf-corner bf-corner--topLeft"></div>
-									<div class="bf-corner bf-corner--topRight"></div>
-									<div class="bf-corner bf-corner--bottomLeft"></div>
-									<div class="bf-corner bf-corner--bottomRight"></div>
-								</div>
-								<?php echo $_smarty_tpl->getSubTemplate ("main_menu.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
-	
-							</div>
-						</div>
-						<div class="col-xs-12">
-							<div class="working-info">
-								<div class="border"></div>
-								<div class="wi-text">
-									<?php echo $_smarty_tpl->getSubTemplate ('working_info.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+				<?php echo $_smarty_tpl->getSubTemplate ("sidebar.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-12 sidebar-sale">
-							<h3>Акции</h3>
-							<div class="sale-item">
-								<div class="img-block">
-									<img src="design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/images/side-sale.jpg" alt="" class="img-responsive">
-									<div class="sale-header">Спринг грибы в подарок!</div>
-								</div>
-								<div class="info-block">
-									<div class="item-text">
-										При заказе на сумму от 800 руб. 
-										Вы получите ролл Спринг грибы 
-										в подарок! В стоимость заказа 
-										не входят сеты и напитки.
-									</div>
-									<div class="item-time">Акция проводится 10:00 до 22:00</div>
-									<a href="#" class="link-more">Подробнее</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>

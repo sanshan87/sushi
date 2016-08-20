@@ -92,7 +92,7 @@
 				{$order->name|escape}
 			</div>
 		</li>
-		<li>
+		<!--<li>
 			<label class=property>Email</label>
 			<div class="edit_order_detail" style='display:none;'>
 				<input name="email" class="simpla_inp" type="text" value="{$order->email|escape}" />
@@ -100,7 +100,7 @@
 			<div class="view_order_detail">
 				<a href="mailto:{$order->email|escape}?subject=Заказ%20№{$order->id}">{$order->email|escape}</a>
 			</div>
-		</li>
+		</li>-->
 		<li>
 			<label class=property>Телефон</label>
 			<div class="edit_order_detail" style='display:none;'>
@@ -111,6 +111,7 @@
 				<span class="ip_call" data-phone="{$order->phone|escape}" target="_blank">{$order->phone|escape}</span>{else}{$order->phone|escape}{/if}
 			</div>
 		</li>
+		{if $order->delivery_id == 1}
 		<li>
 			<label class=property>Адрес <a href='http://maps.yandex.ru/' id=address_link target=_blank><img align=absmiddle src='design/images/map.png' alt='Карта в новом окне' title='Карта в новом окне'></a></label>
 			<div class="edit_order_detail" style='display:none;'>
@@ -120,7 +121,24 @@
 				{$order->address|escape}
 			</div>
 		</li>
+		{/if}
+		{if $order->delivery_id == 2}
 		<li>
+			<label class=property>Точка выдачи</label>
+			<div class="edit_order_detail" style='display:none;'>
+				<label>
+									<input type="radio" name="variant_delself" value="R"{if $order->from_adress == 'R'} checked{/if}> c ул. Рощинская, 41
+								</label>
+								<label>
+									<input type="radio" name="variant_delself" value="E"{if $order->from_adress == 'E'} checked{/if}> c ул. Емлютина, 2
+								</label>
+			</div>
+			<div class="view_order_detail">
+				{if $order->from_adress == 'R'}ул. Рощинская, д.41{/if}{if $order->from_adress == 'E'}ул. Емлютина, д.2{/if}
+			</div>
+		</li>
+		{/if}
+		<!--<li>
 			<label class=property>Комментарий пользователя</label>
 			<div class="edit_order_detail" style='display:none;'>
 			<textarea name="comment">{$order->comment|escape}</textarea>
@@ -128,7 +146,7 @@
 			<div class="view_order_detail">
 				{$order->comment|escape|nl2br}
 			</div>
-		</li>
+		</li>-->
 	</ul>
 	</div>
 
@@ -303,15 +321,14 @@
 	</div>
 	{/if}
 
-	<!--<div class="block discount layer">
+	<div class="block discount layer">
 		<h2>Скидка</h2>
 		<input type=text name=discount value='{$order->discount}'> <span class=currency>%</span>		
 	</div>
 
 	<div class="subtotal layer">
 	С учетом скидки<b> {($subtotal-$subtotal*$order->discount/100)|round:2} {$currency->sign}</b>
-	</div> -->
-	
+	</div>
 	<!--<div class="block discount layer">
 		<h2>Купон{if $order->coupon_code} ({$order->coupon_code}){/if}</h2>
 		<input type=text name=coupon_discount value='{$order->coupon_discount}'> <span class=currency>{$currency->sign}</span>		
@@ -340,7 +357,7 @@
 	</div>-->
 		
 		
-	<!--<div class="block payment">
+	<div class="block payment">
 		<h2>Оплата</h2>
 				<select name="payment_method_id">
 				<option value="0">Не выбрана</option>
@@ -349,8 +366,8 @@
 				{/foreach}
 				</select>
 		
-		<input type=checkbox name="paid" id="paid" value="1" {if $order->paid}checked{/if}> <label for="paid" {if $order->paid}class="green"{/if}>Заказ оплачен</label>		
-	</div>-->
+		<!--<input type=checkbox name="paid" id="paid" value="1" {if $order->paid}checked{/if}> <label for="paid" {if $order->paid}class="green"{/if}>Заказ оплачен</label>	-->	
+	</div>
 
  
 	{if $payment_method}

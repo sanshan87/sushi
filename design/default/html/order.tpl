@@ -6,7 +6,6 @@
 	<div class="container">
 		<ol class="breadcrumb">
 			<li><a href="/">Главная</a></li>
-			<li><a href="/cart">Корзина</a></li>
 			<li class="active">Заказ</li>
 		</ol>
 	</div>
@@ -66,14 +65,14 @@
 					{/if}
 
 					{* Если стоимость доставки входит в сумму заказа *}
-					{if !$order->separate_delivery && $order->delivery_price>0}
+					{*{if !$order->separate_delivery && $order->delivery_price>0}*}
 					<div class="basket-row">
 						<div class="basket-col"><b>{$delivery->name|escape}</b></div>
 						<div class="basket-col"></div>
 						<div class="basket-col"></div>
 						<div class="basket-col">{$order->delivery_price|convert}&nbsp;{$currency->sign}</div>
 					</div>
-					{/if}
+					{*{/if}*}
 
 					{* Итого *}
 					<div class="basket-row">
@@ -131,10 +130,26 @@
 						<div class="col-md-6 col-xs-6">{$order->address|escape}</div>
 					</div>
 					{/if}
+					{if $order->payment_method_id}
+					<div class="row">
+						<div class="col-md-2 col-xs-6"><b>Способ оплаты</b></div>
+						<div class="col-md-6 col-xs-6">{$payment_method->name}</div>
+						
+					</div>
+					{/if}
+					
+					{if $order->delivery_id == 2}
+					<div class="row">
+						<div class="col-md-2 col-xs-6"><b>Точка выдачи</b></div>
+						<div class="col-md-6 col-xs-6">{if $order->from_adress == 'R'}ул. Рощинская, д.41{/if}{if $order->from_adress == 'E'}ул. Емлютина, д.2{/if}</div>
+						
+					</div>										
+					{/if}
 					{if $order->comment}
 					<div class="row">
 						<div class="col-md-2 col-xs-6"><b>Комментарий</b></div>
 						<div class="col-md-6 col-xs-6">{$order->comment|escape|nl2br}</div>
+					
 					</div>
 					{/if}
 				</div>

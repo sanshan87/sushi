@@ -17,14 +17,10 @@ require_once('View.php');
 
 class OrderView extends View
 {
-	public function __construct()
-	{
-		parent::__construct();
-	}
+	const PERCENT = 0.1;
+	private $smallDiscount = ['limit'=>1000,'percent'=>5];
+	private $bigDiscount = ['limit'=>2000,'percent'=>10];
 
-	//////////////////////////////////////////
-	// Основная функция
-	//////////////////////////////////////////
 	function fetch()
 	{
 		// Скачивание файла
@@ -44,13 +40,18 @@ class OrderView extends View
 		$cart = $this->cart->get_cart();
 		
 		if($_SERVER['REQUEST_METHOD'] == 'POST' and count($cart->purchases)){
-
 			$order = new stdClass;
 			$order->delivery_id = $this->request->post('delivery_id', 'integer');
 			$order->payment_method_id = $this->request->post('payment_method_id', 'integer');
-			$order->name        = $this->request->post('name');
-			$order->address     = $this->request->post('address');
-			$order->phone       = $this->request->post('phone');
+			$order->name        = strip_tags($this->request->post('name'));
+			if($order->delivery_id == 1){
+				$order->address = strip_tags($this->request->post('address'));
+				$order->from_adress = '';
+			}else{
+				$order->address='';
+				$order->from_adress = $this->request->post('variant_delself');
+			}
+			$order->phone       = strip_tags($this->request->post('phone'));
 			//$order->comment     = $this->request->post('comment');
 			$order->ip      	= $_SERVER['REMOTE_ADDR'];
 			$this->design->assign('delivery_id', $order->delivery_id);
@@ -83,11 +84,33 @@ class OrderView extends View
 	    	$order = $this->orders->get_order($order_id);
 	    	// Стоимость доставки
 			$delivery = $this->delivery->get_delivery($order->delivery_id);
-	    	if(!empty($delivery) && $delivery->free_from > $order->total_price)
+	    	if(!empty($delivery) && $delivery->free_from > $order->total_price && $order->delivery_id == 1)
 	    	{
 	    		$this->orders->update_order($order->id, array('delivery_price'=>$delivery->price, 'separate_delivery'=>$delivery->separate_payment));
 	    	}
-			
+			//Скидки
+			if($order->delivery_id == 1){
+				if($order->total_price>=$this->bigDiscount['limit']){
+					$order->discount = number_format($this->bigDiscount['percent'],2,'.','');
+					$this->orders->update_order($order->id, array('discount'=>$order->discount));
+				}elseif($order->total_price>=$this->smallDiscount['limit']){
+					$order->discount = number_format($this->smallDiscount['percent'],2,'.','');
+					$this->orders->update_order($order->id, array('discount'=>$order->discount));
+				}
+			}
+			if($order->delivery_id == 2){
+				$delivery->price = -1*number_format(($order->total_price*self::PERCENT),2,'.','');
+				$this->orders->update_order($order->id, array('delivery_price'=>$delivery->price, 'separate_delivery'=>$delivery->separate_payment));
+			}
+			//Скидки
+			/*$Comet_devid = '1156'; 
+			$Comet_devkey = '1ZyvExMYc3PBmXxKD6nQAwo12vguAwngxSww4IMWPqoZHM7Pg070dz6J1F43c7n7';
+			$link = mysqli_connect("app.comet-server.ru", $Comet_devid, $Comet_devkey, "CometQL_v1");
+			$Comet_arr = array("message" => "У Вас новый заказ №{$order_id}");
+			$Comet_mess = json_encode($Comet_arr);
+			mysqli_query($link,"INSERT INTO pipes_messages (name, event, message) VALUES('pipe1', 'userLogin', '".$Comet_mess."')");
+			mysqli_close($link);
+			$this->db->connect();*/
 			// Отправляем письмо пользователю
 			//$this->notify->email_order_user($order->id);
 	    	

@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
@@ -11,13 +11,18 @@
 <script src="design/js/jquery/jquery.js"></script>
 <script src="design/js/jquery/jquery.form.js"></script>
 <script src="design/js/jquery/jquery-ui.min.js"></script>
+<!--<script src="http://comet-server.ru/CometServerApi.js"></script>-->
 <link rel="stylesheet" type="text/css" href="design/js/jquery/jquery-ui.css" media="screen" />
-
 <meta name="viewport" content="width=1024">
-
 </head>
 <body>
-
+{literal}
+<!--<script>
+$(function(){
+CometServer().start({dev_id:1156}); 
+CometServer().subscription("pipe1.userLogin", function(msg){ new Audio('http://goo.gl/UWLwi1').play();}); }); 
+</script>-->
+{/literal}
 <a href='{$config->root_url}' class='admin_bookmark'></a>
 
 <!-- Вся страница --> 
