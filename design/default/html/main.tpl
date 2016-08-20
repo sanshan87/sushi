@@ -12,45 +12,34 @@
 
 {* Тело страницы *}
 {*$page->body*}
+
+{* Акции *}
+{get_stocks var=stocks}
+{if $stocks}
 	<div class="stock-slider">
 		<div class="container">
 			<div class="block-name"><span>Акции</span></div>
 			<div class="owl-carousel">
+			{foreach $stocks as $stock}
 				<div>
 					<div class="stock-card">
 						<div class="card-img-col">
-							<div class="img-cont"><img src="design/{$settings->theme|escape}/images/stock-p1.jpg" alt="Акция" class="img-responsive"></div>
-							<div class="col-header">Спринг грибы в подарок!</div>
+							<div class="img-cont"><img src="{$stock->filename|resize:225:120}" alt="Акция" class="img-responsive"></div>
+							<div class="col-header">{$stock->name}</div>
 						</div>
 						<div class="card-info-col">
-							При заказе на сумму от 800 руб. 
-							Вы получите ролл Спринг грибы 
-							в подарок! В стоимость заказа 
-							не входят сеты и напитки.
-							Акция проводится 10:00 до 22:00
-							<a href="#" class="moreinfo-link">Подробнее</a>
+							{$stock->annotation|truncate:120}
+							<div>Акция проводится {$stock->start|date_format:"%H:%M"} до {$stock->end|date_format:"%H:%M"}</div>
+							<a href="/shares#{$stock@key}" class="moreinfo-link">Подробнее</a>
 						</div>
 					</div>
 				</div>
-				<div>
-					<div class="stock-card">
-						<div class="card-img-col">
-							<div class="img-cont"><img src="design/{$settings->theme|escape}/images/stock-p1.jpg" alt="Акция" class="img-responsive"></div>
-							<div class="col-header">Спринг грибы в подарок!</div>
-						</div>
-						<div class="card-info-col">
-							При заказе на сумму от 800 руб. 
-							Вы получите ролл Спринг грибы 
-							в подарок! В стоимость заказа 
-							не входят сеты и напитки.
-							Акция проводится 10:00 до 22:00
-							<a href="#" class="moreinfo-link">Подробнее</a>
-						</div>
-					</div>
-				</div>
+			{/foreach}
 			</div>
 		</div>
 	</div>
+{/if}
+
 {* Популярные товары *}
 {get_featured_products var=featured_products}
 {if $featured_products}

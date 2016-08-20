@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-13 19:34:25
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-18 02:52:52
          compiled from "simpla\design\html\product.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2096257a0d4fe4acee2-93099070%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '3f18dfe5f48ef059e152ab919b3f13338168bbfc' => 
     array (
       0 => 'simpla\\design\\html\\product.tpl',
-      1 => 1471109661,
+      1 => 1471477047,
       2 => 'file',
     ),
   ),
@@ -56,8 +56,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => 0,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_57a0d4fe768308_95896520')) {function content_57a0d4fe768308_95896520($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_replace')) include 'E:\\xampp\\htdocs\\sushi.local\\Smarty\\libs\\plugins\\modifier.replace.php';
-if (!is_callable('smarty_modifier_truncate')) include 'E:\\xampp\\htdocs\\sushi.local\\Smarty\\libs\\plugins\\modifier.truncate.php';
+<?php if ($_valid && !is_callable('content_57a0d4fe768308_95896520')) {function content_57a0d4fe768308_95896520($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_replace')) include 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\Smarty\\libs\\plugins\\modifier.replace.php';
+if (!is_callable('smarty_modifier_truncate')) include 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\Smarty\\libs\\plugins\\modifier.truncate.php';
 ?><script src="/js/cropit/dist/jquery.cropit.js"></script>
 <link href="/js/modalPopLite/modalPopLite.css" rel="stylesheet" type="text/css" /> 
 <script  src="/js/modalPopLite/modalPopLite.min.js"></script>
@@ -463,30 +463,30 @@ $(function() {
 	
     $('#popup-wrapper').modalPopLite({ openButton: '#clicker', closeButton: '#close-btn' }); 
 	
-	   $('#image-cropper').cropit({ imageBackground: true , 
-   width:<?php echo $_smarty_tpl->tpl_vars['settings']->value->preview_x;?>
+	$('#image-cropper').cropit({ imageBackground: true, 
+   		width:<?php echo $_smarty_tpl->tpl_vars['settings']->value->preview_x;?>
 ,
-   height:<?php echo $_smarty_tpl->tpl_vars['settings']->value->preview_y;?>
+   		height:<?php echo $_smarty_tpl->tpl_vars['settings']->value->preview_y;?>
 ,
-   initialZoom:'image'<?php if (count($_smarty_tpl->tpl_vars['product_images']->value)>0) {?>,
-   imageState: {
-            src: '<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['resize'][0][0]->resize_modifier(smarty_modifier_replace($_smarty_tpl->tpl_vars['product_images']->value[0]->filename,"_mini","_orig"),600,600);?>
+   		initialZoom:'image'<?php if (count($_smarty_tpl->tpl_vars['product_images']->value)>0) {?>,
+   		imageState: {
+        	src: '<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['resize'][0][0]->resize_modifier(smarty_modifier_replace($_smarty_tpl->tpl_vars['product_images']->value[0]->filename,"_mini","_orig"),600,600);?>
 ',
-          }
-          <?php }?>
-          }); 
+        }
+        <?php }?>
+    }); 
 		  
-	   $('.export').click(function() {
-          var imageData = $('#image-cropper').cropit('export');
-          var imageOrig = $('img.cropit-image-background').attr('src');
-              if(imageData && imageOrig){
-				$('#preview_result').html('');
-				$('#imgMini').val(imageData);
-				$('#imgOrig').val(imageOrig);
-                $("<img src='"+ imageData + "'>").appendTo('#preview_result');
-                $("#close-btn").trigger('click');
-              }
-        });  
+    $('.export').click(function() {
+        var imageData = $('#image-cropper').cropit('export');
+        var imageOrig = $('img.cropit-image-background').attr('src');
+        if(imageData && imageOrig) {
+			$('#preview_result').html('');
+			$('#imgMini').val(imageData);
+			$('#imgOrig').val(imageOrig);
+            $("<img src='"+ imageData + "'>").appendTo('#preview_result');
+            $("#close-btn").trigger('click');
+        }
+    });  
 
 	
 });
@@ -589,7 +589,7 @@ overflow-y: auto;
 ">Вернуться</a>
 	<?php }?>
 	
-	<span class="share">		
+	<!--<span class="share">		
 		<a href="#" onClick='window.open("http://vkontakte.ru/share.php?url=<?php echo urlencode($_smarty_tpl->tpl_vars['config']->value->root_url);?>
 /products/<?php echo urlencode($_smarty_tpl->tpl_vars['product']->value->url);?>
 &title=<?php echo urlencode($_smarty_tpl->tpl_vars['product']->value->name);?>
@@ -610,7 +610,7 @@ overflow-y: auto;
 ","displayWindow","width=700,height=400,left=250,top=170,status=no,toolbar=no,menubar=no");return false;'>
   		<img src="<?php echo $_smarty_tpl->tpl_vars['config']->value->root_url;?>
 /simpla/design/images/twitter_icon.png" /></a>
-	</span>
+	</span>-->
 	
 </div>
 <!-- Системное сообщение (The End)-->
@@ -868,9 +868,10 @@ $_smarty_tpl->tpl_vars['feature']->_loop = true;
 	<div id="column_right">
 	
 		<div class="block layer images" style="height:200px; overflow: hidden;">
-		         <div id="clicker" style="text-align:center;text-decoration:underline;cursor:pointer;"><h2><?php if ($_GET['id']>0) {?>Редактирование<?php } else { ?>Добавление<?php }?> превью</h2></div>
-				 <div id="preview_result" style="height:140px;width:430px;text-align:center;
-				 padding-top:20px;">
+		    <div id="clicker" style="text-align:center;text-decoration:underline;cursor:pointer;">
+		        <h2><?php if ($_GET['id']>0) {?>Редактирование<?php } else { ?>Добавление<?php }?> превью</h2>
+		    </div>
+			<div id="preview_result">
 				<?php  $_smarty_tpl->tpl_vars['image'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['image']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['product_images']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['image']->key => $_smarty_tpl->tpl_vars['image']->value) {
@@ -881,27 +882,24 @@ $_smarty_tpl->tpl_vars['image']->_loop = true;
 					<!--<input type=hidden name='images[]' value='<?php echo $_smarty_tpl->tpl_vars['image']->value->id;?>
 '>-->
 				<?php } ?>
-				 </div>
-                    <div id="popup-wrapper" style="background-color: #fff;width:100%;height:100%;">
-                        <div id="image-cropper" style="margin: 0 auto;width: 225px;position: absolute;top: 50%;transform: translate(-50%, -50%);left: 50%;">
-                            <div class="cropit-image-preview-container">
-                                <div class="cropit-image-preview"></div>
-                            </div>
-                            <input type="range" class="cropit-image-zoom-input" />
-                            <br>
-                            <input type="file" class="cropit-image-input" />
-  <br>
-    <input type="button" class="export" value="Получить превью">
-    </div>
-<input type="button" id="close-btn" value="&times; Close" style="position:absolute; right: 8px; top: 8px; cursor: pointer;
-    font-size: 14px;
-    border-radius: 4px;
-    font-weight: bold;
-    color: red;">
-</div>
-<input type="hidden" id="imgMini" value="" name="imgData">
-<input type="hidden" id="imgOrig" value="" name="imgDataOrig">
+			</div>
+            <div id="popup-wrapper">
+                <div id="image-cropper">
+                    <div class="cropit-image-preview-container">
+                        <div class="cropit-image-preview"></div>
+                    </div>
+                    <input type="range" class="cropit-image-zoom-input" />
+                    <br>
+                    <input type="file" class="cropit-image-input" />
+					<br>
+					<input type="button" class="export" value="Получить превью">
+				</div>
+				<button type="button" id="close-btn"><span>&times;</span></button>
+			</div>
+			<input type="hidden" id="imgMini" value="" name="imgData">
+			<input type="hidden" id="imgOrig" value="" name="imgDataOrig">
 		</div>
+
 		<div class="block layer">
 			<h2>С этим продуктом часто заказывают</h2>
 			<div id=list class="sortable related_products">

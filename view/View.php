@@ -97,6 +97,7 @@ class View extends Simpla
 			$this->design->smarty->registerPlugin("function", "get_featured_products",		array($this, 'get_featured_products_plugin'));
 			$this->design->smarty->registerPlugin("function", "get_new_products",			array($this, 'get_new_products_plugin'));
 			$this->design->smarty->registerPlugin("function", "get_discounted_products",	array($this, 'get_discounted_products_plugin'));
+			$this->design->smarty->registerPlugin("function", "get_stocks",	                array($this, 'get_stocks_plugin'));
 		}
 	}
 		
@@ -298,6 +299,30 @@ class View extends Simpla
 
 			$smarty->assign($params['var'], $products);
 			
+		}
+	}
+
+	public function get_stocks_plugin($params, &$smarty)
+	{
+		if(!isset($params['visible']))
+			$params['visible'] = 1;
+
+		if(!empty($params['var']))
+		{
+			$curWeekDay = date('w');
+			foreach($this->stocks->get_stocks($params) as $s) {
+				if($curWeekDay == 6 || $curWeekDay == 0) {
+					$s->start = $s->we_start;
+					$s->end = $s->we_end;
+				} else {
+					$s->start = $s->wd_start;
+					$s->end = $s->wd_end;
+				}
+				
+				$stocks[$s->id] = $s;
+			}
+
+			$smarty->assign($params['var'], $stocks);
 		}
 	}
 }

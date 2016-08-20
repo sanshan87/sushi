@@ -67,6 +67,10 @@ switch ($object)
     	if($simpla->managers->access('labels'))
         $result = $simpla->orders->update_label($id, $values);
         break;
+    case 'stock':
+        if($simpla->managers->access('stocks'))
+        $result = $simpla->stocks->update_stock($id, $values);
+        break;
 }
 
 header("Content-type: application/json; charset=UTF-8");

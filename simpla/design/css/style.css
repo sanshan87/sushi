@@ -1466,3 +1466,100 @@ div.upload_image input{
 	width: 290px;
 	margin-top: 4px;
 }
+
+#preview-result {
+	height:140px;
+	width:430px;
+	padding-top:20px;
+	text-align:center; 
+}
+
+#popup-wrapper {
+	width:100%;
+	height:100%;
+	background-color: #fff;
+}
+
+#popup-wrapper #image-cropper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 225px;
+	margin: 0 auto;
+	transform: translate(-50%, -50%);
+}
+
+#close-btn {
+	position:absolute; 
+	right: 8px; 
+	top: 8px;
+	padding: 3px 10px;
+	border: 1px solid #dadada;
+	border-radius: 4px;
+	background: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    color: red;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+}
+#close-btn:focus,
+#close-btn:hover,
+#close-btn:active {
+	outline: none;
+}
+#close-btn:hover {
+	background: #eee;
+}
+#close-btn:active {
+	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.3);
+}
+#close-btn span {
+	font-size: 20px;
+}
+.form-group {
+	display: flex;
+}
+.days {
+	width: 25px;
+	font-weight: 700;
+}
+.days li {
+	width: auto!important;
+	margin-bottom: 0!important;
+	padding: 3px 0;
+}
+.days .weekend {
+	color: #e85454;
+}
+.time-inputs label,
+.time-inputs input {
+	margin-right: 10px;
+}
+.time-inputs input {
+	max-width: 50px;
+	text-align: center;
+}
+.weekday-time,
+.weekend-time {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+.weekday-time {
+	height: 105px;
+}
+.weekend-time {
+	height: 42px;
+}
+.weekday-time:before,
+.weekend-time:before {
+	content: "";
+	display: block;
+	height: 90%;
+	width: 5px;
+	margin-right: 15px;
+	border-right: 1px solid #000;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+}

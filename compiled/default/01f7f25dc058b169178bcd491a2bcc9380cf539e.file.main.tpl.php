@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2016-08-13 20:37:19
+<?php /* Smarty version Smarty-3.1.18, created on 2016-08-20 04:25:51
          compiled from "C:\openserver\OpenServer\domains\sushitore\sushi\design\default\html\main.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2121457a8c07605f281-49720559%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '01f7f25dc058b169178bcd491a2bcc9380cf539e' => 
     array (
       0 => 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\design\\default\\html\\main.tpl',
-      1 => 1471109837,
+      1 => 1471656347,
       2 => 'file',
     ),
   ),
@@ -19,17 +19,21 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_57a8c0762ef718_16221099',
   'variables' => 
   array (
-    'settings' => 0,
+    'stocks' => 0,
+    'stock' => 0,
     'featured_products' => 0,
     'product' => 0,
     'opt' => 0,
     'v' => 0,
     'currency' => 0,
     'new_products' => 0,
+    'settings' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_57a8c0762ef718_16221099')) {function content_57a8c0762ef718_16221099($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_57a8c0762ef718_16221099')) {function content_57a8c0762ef718_16221099($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_truncate')) include 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\Smarty\\libs\\plugins\\modifier.truncate.php';
+if (!is_callable('smarty_modifier_date_format')) include 'C:\\openserver\\OpenServer\\domains\\sushitore\\sushi\\Smarty\\libs\\plugins\\modifier.date_format.php';
+?>
 
 
 
@@ -45,47 +49,45 @@ if ($_smarty_tpl->parent != null) $_smarty_tpl->parent->tpl_vars['canonical'] = 
 
 
 
+
+
+<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['get_stocks'][0][0]->get_stocks_plugin(array('var'=>'stocks'),$_smarty_tpl);?>
+
+<?php if ($_smarty_tpl->tpl_vars['stocks']->value) {?>
 	<div class="stock-slider">
 		<div class="container">
 			<div class="block-name"><span>Акции</span></div>
 			<div class="owl-carousel">
+			<?php  $_smarty_tpl->tpl_vars['stock'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['stock']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['stocks']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['stock']->key => $_smarty_tpl->tpl_vars['stock']->value) {
+$_smarty_tpl->tpl_vars['stock']->_loop = true;
+?>
 				<div>
 					<div class="stock-card">
 						<div class="card-img-col">
-							<div class="img-cont"><img src="design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/images/stock-p1.jpg" alt="Акция" class="img-responsive"></div>
-							<div class="col-header">Спринг грибы в подарок!</div>
+							<div class="img-cont"><img src="<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER]['resize'][0][0]->resize_modifier($_smarty_tpl->tpl_vars['stock']->value->filename,225,120);?>
+" alt="Акция" class="img-responsive"></div>
+							<div class="col-header"><?php echo $_smarty_tpl->tpl_vars['stock']->value->name;?>
+</div>
 						</div>
 						<div class="card-info-col">
-							При заказе на сумму от 800 руб. 
-							Вы получите ролл Спринг грибы 
-							в подарок! В стоимость заказа 
-							не входят сеты и напитки.
-							Акция проводится 10:00 до 22:00
-							<a href="#" class="moreinfo-link">Подробнее</a>
+							<?php echo smarty_modifier_truncate($_smarty_tpl->tpl_vars['stock']->value->annotation,120);?>
+
+							<div>Акция проводится <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['stock']->value->start,"%H:%M");?>
+ до <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['stock']->value->end,"%H:%M");?>
+</div>
+							<a href="/shares#<?php echo $_smarty_tpl->tpl_vars['stock']->key;?>
+" class="moreinfo-link">Подробнее</a>
 						</div>
 					</div>
 				</div>
-				<div>
-					<div class="stock-card">
-						<div class="card-img-col">
-							<div class="img-cont"><img src="design/<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['settings']->value->theme, ENT_QUOTES, 'UTF-8', true);?>
-/images/stock-p1.jpg" alt="Акция" class="img-responsive"></div>
-							<div class="col-header">Спринг грибы в подарок!</div>
-						</div>
-						<div class="card-info-col">
-							При заказе на сумму от 800 руб. 
-							Вы получите ролл Спринг грибы 
-							в подарок! В стоимость заказа 
-							не входят сеты и напитки.
-							Акция проводится 10:00 до 22:00
-							<a href="#" class="moreinfo-link">Подробнее</a>
-						</div>
-					</div>
-				</div>
+			<?php } ?>
 			</div>
 		</div>
 	</div>
+<?php }?>
+
 
 <?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['get_featured_products'][0][0]->get_featured_products_plugin(array('var'=>'featured_products'),$_smarty_tpl);?>
 

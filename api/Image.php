@@ -459,7 +459,7 @@ class Image extends Simpla
 	    return $res;  
 	}
 	
-	public function saveBase64($base64string,$name,$size){
+	public function saveBase64($base64string,$name,$size,$moduleType = ''){
 		list($type, $base64string) = explode(';', $base64string);
         list(, $base64string)      = explode(',', $base64string);
         $base64string = str_replace(' ', '+', $base64string);
@@ -471,9 +471,9 @@ class Image extends Simpla
 	}
 	
 	public function getDataURI($imagePath) {
-    $finfo = new finfo(FILEINFO_MIME_TYPE);
-    @$type = $finfo->file($imagePath);
-    return 'data:'.$type.';base64,'.base64_encode(file_get_contents($imagePath));
-}
+	    $finfo = new finfo(FILEINFO_MIME_TYPE);
+	    @$type = $finfo->file($imagePath);
+	    return 'data:'.$type.';base64,'.base64_encode(file_get_contents($imagePath));
+	}
 	
 }

@@ -504,7 +504,7 @@ class Products extends Simpla
 
 			@unlink($this->config->root_dir.$this->config->original_images_dir.$filename);	
 			@unlink($this->config->root_dir.$this->config->original_images_dir.str_replace('_mini','_orig',$filename));
-	}
+		}
 	}
 	/*
 	*

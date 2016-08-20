@@ -17,6 +17,9 @@ RewriteRule ^products/?$	index.php?module=ProductsView [L,QSA]
 RewriteRule ^brands/([^/]+)/?$	index.php?module=ProductsView&brand=$1 [L,QSA]
 RewriteRule ^brands/([^/]+)/page_([^/]+)/?$	index.php?module=ProductsView&brand=$1&page=$2 [L,QSA]
 
+# Акции
+RewriteRule ^shares/?$	index.php?module=StocksView [L,QSA]
+
 # Поиск товаров
 RewriteRule ^search/([^/]+)/?$	index.php?module=ProductsView&keyword=$1 [L,QSA]
 RewriteRule ^search/?$	index.php?module=ProductsView [L,QSA]

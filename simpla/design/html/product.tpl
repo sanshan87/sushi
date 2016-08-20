@@ -394,27 +394,27 @@ $(function() {
 	
     $('#popup-wrapper').modalPopLite({ openButton: '#clicker', closeButton: '#close-btn' }); 
 	
-	   $('#image-cropper').cropit({ imageBackground: true , 
-   width:{/literal}{$settings->preview_x}{literal},
-   height:{/literal}{$settings->preview_y}{literal},
-   initialZoom:'image'{/literal}{if $product_images|@count>0}{literal},
-   imageState: {
-            src: '{/literal}{$product_images[0]->filename|replace:"_mini":"_orig"|resize:600:600}{literal}',
-          }
-          {/literal}{/if}{literal}
-          }); 
+	$('#image-cropper').cropit({ imageBackground: true, 
+   		width:{/literal}{$settings->preview_x}{literal},
+   		height:{/literal}{$settings->preview_y}{literal},
+   		initialZoom:'image'{/literal}{if $product_images|@count>0}{literal},
+   		imageState: {
+        	src: '{/literal}{$product_images[0]->filename|replace:"_mini":"_orig"|resize:600:600}{literal}',
+        }
+        {/literal}{/if}{literal}
+    }); 
 		  
-	   $('.export').click(function() {
-          var imageData = $('#image-cropper').cropit('export');
-          var imageOrig = $('img.cropit-image-background').attr('src');
-              if(imageData && imageOrig){
-				$('#preview_result').html('');
-				$('#imgMini').val(imageData);
-				$('#imgOrig').val(imageOrig);
-                $("<img src='"+ imageData + "'>").appendTo('#preview_result');
-                $("#close-btn").trigger('click');
-              }
-        });  
+    $('.export').click(function() {
+        var imageData = $('#image-cropper').cropit('export');
+        var imageOrig = $('img.cropit-image-background').attr('src');
+        if(imageData && imageOrig) {
+			$('#preview_result').html('');
+			$('#imgMini').val(imageData);
+			$('#imgOrig').val(imageOrig);
+            $("<img src='"+ imageData + "'>").appendTo('#preview_result');
+            $("#close-btn").trigger('click');
+        }
+    });  
 
 	
 });
@@ -703,34 +703,32 @@ overflow-y: auto;
 	<div id="column_right">
 	
 		<div class="block layer images" style="height:200px; overflow: hidden;">
-		         <div id="clicker" style="text-align:center;text-decoration:underline;cursor:pointer;"><h2>{if $smarty.get.id>0}Редактирование{else}Добавление{/if} превью</h2></div>
-				 <div id="preview_result" style="height:140px;width:430px;text-align:center;
-				 padding-top:20px;">
+		    <div id="clicker" style="text-align:center;text-decoration:underline;cursor:pointer;">
+		        <h2>{if $smarty.get.id>0}Редактирование{else}Добавление{/if} превью</h2>
+		    </div>
+			<div id="preview_result">
 				{foreach $product_images as $image}
 					<img src="{$image->filename|resize:225:120}" alt="" />
 					<!--<input type=hidden name='images[]' value='{$image->id}'>-->
 				{/foreach}
-				 </div>
-                    <div id="popup-wrapper" style="background-color: #fff;width:100%;height:100%;">
-                        <div id="image-cropper" style="margin: 0 auto;width: 225px;position: absolute;top: 50%;transform: translate(-50%, -50%);left: 50%;">
-                            <div class="cropit-image-preview-container">
-                                <div class="cropit-image-preview"></div>
-                            </div>
-                            <input type="range" class="cropit-image-zoom-input" />
-                            <br>
-                            <input type="file" class="cropit-image-input" />
-  <br>
-    <input type="button" class="export" value="Получить превью">
-    </div>
-<input type="button" id="close-btn" value="&times; Close" style="position:absolute; right: 8px; top: 8px; cursor: pointer;
-    font-size: 14px;
-    border-radius: 4px;
-    font-weight: bold;
-    color: red;">
-</div>
-<input type="hidden" id="imgMini" value="" name="imgData">
-<input type="hidden" id="imgOrig" value="" name="imgDataOrig">
+			</div>
+            <div id="popup-wrapper">
+                <div id="image-cropper">
+                    <div class="cropit-image-preview-container">
+                        <div class="cropit-image-preview"></div>
+                    </div>
+                    <input type="range" class="cropit-image-zoom-input" />
+                    <br>
+                    <input type="file" class="cropit-image-input" />
+					<br>
+					<input type="button" class="export" value="Получить превью">
+				</div>
+				<button type="button" id="close-btn"><span>&times;</span></button>
+			</div>
+			<input type="hidden" id="imgMini" value="" name="imgData">
+			<input type="hidden" id="imgOrig" value="" name="imgDataOrig">
 		</div>
+
 		<div class="block layer">
 			<h2>С этим продуктом часто заказывают</h2>
 			<div id=list class="sortable related_products">

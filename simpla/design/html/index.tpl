@@ -43,6 +43,10 @@
 	{elseif in_array('labels', $manager->permissions)}
 		<li><a href="index.php?module=OrdersLabelsAdmin"><img src="design/images/menu/orders.png"><b>Заказы</b></a></li>
 	{/if}
+
+	{if in_array('stocks', $manager->permissions)}
+		<li><a href="index.php?module=StocksAdmin"><img src="design/images/menu/orders.png"/><b>Акции</b></a></li>
+	{/if}
 		
 	{*{if in_array('users', $manager->permissions)}
 		<li><a href="index.php?module=UsersAdmin"><img src="design/images/menu/users.png"><b>Покупатели</b></a></li>
