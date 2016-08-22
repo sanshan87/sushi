@@ -6,9 +6,9 @@ class StocksView extends View
 {
 	function fetch()
 	{
-		$stocks = $this->stocks->get_stocks(array('visible' => 1));
+		$stocks = $this->stocks->get_real_stocks(array('visible' => 1));
 		$curWeekDay = date('w');
-		foreach($this->stocks->get_stocks($params) as $s) {
+		foreach($this->stocks->get_real_stocks(array('visible' => 1)) as $s) {
 			if($curWeekDay == 6 || $curWeekDay == 0) {
 				$s->start = $s->we_start;
 				$s->end = $s->we_end;

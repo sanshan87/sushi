@@ -310,7 +310,7 @@ class View extends Simpla
 		if(!empty($params['var']))
 		{
 			$curWeekDay = date('w');
-			foreach($this->stocks->get_stocks($params) as $s) {
+			foreach($this->stocks->get_real_stocks($params) as $s) {
 				if($curWeekDay == 6 || $curWeekDay == 0) {
 					$s->start = $s->we_start;
 					$s->end = $s->we_end;

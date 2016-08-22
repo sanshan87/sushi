@@ -18,10 +18,10 @@ class StockAdmin extends Simpla
 			$stock->wd_end = $this->request->post('wd_end', 'time');
 			$stock->we_start = $this->request->post('we_start', 'time');
 			$stock->we_end = $this->request->post('we_end', 'time');
-
+			$stock->data = date("Y-m-d",time());
 			if(empty($stock->id)) {
   				$stock->id = $this->stocks->add_stock($stock);
-  				$stock = $this->stocks->get_stock($stock->id);
+				$stock = $this->stocks->get_stock($stock->id);
   				$this->design->assign('message_success', 'added');
     		} else {
     			$this->stocks->update_stock($stock->id, $stock);
@@ -49,6 +49,7 @@ class StockAdmin extends Simpla
 						$this->design->assign('error', 'error uploading image');
 					}					
 				}
+				$stock = $this->stocks->get_stock($stock->id);
     		}
 		} else {
 			$id = $this->request->get('id', 'integer');

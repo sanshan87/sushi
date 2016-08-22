@@ -108,7 +108,7 @@ $(function(){
 		    </div>
 			<div id="preview_result" style="text-align:center;">
 				{if $stock->filename}
-				<img src="{$stock->filename|resize:225:120}"/>
+				<img src="{$stock->filename|resize:225:120}&t={math equation='rand(10,10000)'}"/>
 				{/if}
 			</div>
             <div id="popup-wrapper">

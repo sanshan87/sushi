@@ -30,7 +30,7 @@ class Stocks extends Simpla
 	{	
 		$limit = 10;
 		$stocks = array();
-		
+		$visible_filter = '';
 		if(isset($filter['visible']))
 			$visible_filter = $this->db->placehold('AND visible=?', intval($filter['visible']));
 
@@ -42,6 +42,33 @@ class Stocks extends Simpla
 		$query = "SELECT id, name, short_annotation, annotation, filename, visible, wd_start, wd_end, we_start, we_end
 		          FROM __stocks 
 		          WHERE 1 $visible_filter 
+		          ORDER BY id
+		          $sql_limit";
+
+		$this->db->query($query);
+		
+		foreach($this->db->results() as $stock)
+			$stocks[$stock->id] = $stock;
+			
+		return $stocks;
+	}
+	
+		public function get_real_stocks($filter = array())
+	{	
+		$limit = 10;
+		$stocks = array();
+		$visible_filter = '';
+		if(isset($filter['visible']))
+			$visible_filter = $this->db->placehold('AND visible=?', intval($filter['visible']));
+
+		if(isset($filter['limit']))
+			$limit = max(1, intval($filter['limit']));
+
+		$sql_limit = $this->db->placehold(' LIMIT ?', $limit);
+
+		$query = "SELECT id, name, short_annotation, annotation, filename, visible, wd_start, wd_end, we_start, we_end
+		          FROM __stocks 
+		          WHERE 1 AND data=curdate() $visible_filter 
 		          ORDER BY id
 		          $sql_limit";
 
@@ -104,7 +131,7 @@ class Stocks extends Simpla
 			$query = $this->db->placehold("UPDATE __stocks SET filename=? WHERE id=?", $filename, $stock_id);
 			$this->db->query($query);
 		}
-		return($id);
+		return($stock_id);
 	}
 
 	public function delete_image($stock_id)
