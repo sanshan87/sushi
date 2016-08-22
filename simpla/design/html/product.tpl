@@ -708,7 +708,7 @@ overflow-y: auto;
 		    </div>
 			<div id="preview_result">
 				{foreach $product_images as $image}
-					<img src="{$image->filename|resize:$settings->preview_x:$settings->preview_y}" alt="" />
+					<img src="{$image->filename|resize:$settings->preview_x:$settings->preview_y}&t={math equation='rand(10,10000)'}" alt="" />
 					<!--<input type=hidden name='images[]' value='{$image->id}'>-->
 				{/foreach}
 			</div>
