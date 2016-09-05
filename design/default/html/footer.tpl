@@ -41,15 +41,17 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-xs-12 hidden-xs">
+				{get_rolls var=rolls id=6}
+				{if $rolls}
 					<ul class="footer-nav list-unstyled">
-						<li class="menu-header">Роллы</li>
-						<li><a href="#">Ассорти</a></li>
-						<li><a href="#">Жареные</a></li>
-						<li><a href="#">Запеченые</a></li>
-						<li><a href="#">Классика</a></li>
-						<li><a href="#">Сеты</a></li>
-						<li><a href="#">Сложные</a></li>
+						<li class="menu-header">{$rolls->name}</li>
+							{foreach $rolls->subcategories as $subcat}
+							{if $subcat->visible}
+								<li><a href="/catalog/{$subcat->url}">{$subcat->name}</a></li>
+							{/if}
+							{/foreach}
 					</ul>
+				{/if}	
 					<ul class="footer-nav list-unstyled border-right">
 						<li class="menu-header">Меню</li>
 						{if $categories}

@@ -79,6 +79,21 @@ class Categories extends Simpla
 		return false;
 	}
 	
+	public function get_category_menu($params)
+	{
+		$id = (int)$params['id'];
+		if(!isset($this->all_categories))
+			$this->init_categories();
+		if(is_int($id) && array_key_exists(intval($id), $this->all_categories))
+			return $category = $this->all_categories[intval($id)];
+		elseif(is_string($id))
+			foreach ($this->all_categories as $category)
+				if ($category->url == $id)
+					return $this->get_category((int)$category->id);	
+		
+		return false;
+	}
+	
 	// Добавление категории
 	public function add_category($category)
 	{

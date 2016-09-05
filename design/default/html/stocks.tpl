@@ -63,25 +63,6 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xs-12 sidebar-sale">
-							<h3>Акции</h3>
-							<div class="sale-item">
-								<div class="img-block">
-									<img src="design/{$settings->theme|escape}/images/side-sale.jpg" alt="" class="img-responsive">
-									<div class="sale-header">Спринг грибы в подарок!</div>
-								</div>
-								<div class="info-block">
-									<div class="item-text">
-										При заказе на сумму от 800 руб. 
-										Вы получите ролл Спринг грибы 
-										в подарок! В стоимость заказа 
-										не входят сеты и напитки.
-									</div>
-									<div class="item-time">Акция проводится 10:00 до 22:00</div>
-									<a href="#" class="link-more">Подробнее</a>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>

@@ -98,6 +98,7 @@ class View extends Simpla
 			$this->design->smarty->registerPlugin("function", "get_new_products",			array($this, 'get_new_products_plugin'));
 			$this->design->smarty->registerPlugin("function", "get_discounted_products",	array($this, 'get_discounted_products_plugin'));
 			$this->design->smarty->registerPlugin("function", "get_stocks",	                array($this, 'get_stocks_plugin'));
+			$this->design->smarty->registerPlugin("function", "get_rolls",	                array($this, 'get_rolls_children_plugin'));
 		}
 	}
 		
@@ -116,6 +117,14 @@ class View extends Simpla
 	 * Плагины для смарти
 	 *
 	 */	
+	 
+	public function get_rolls_children_plugin($params, &$smarty)
+	{
+		if(!isset($params['visible']))
+			$params['visible'] = 1;
+		if(!empty($params['var']))
+			$smarty->assign($params['var'], $this->categories->get_category_menu($params));
+	} 
 	public function get_posts_plugin($params, &$smarty)
 	{
 		if(!isset($params['visible']))

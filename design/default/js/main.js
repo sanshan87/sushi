@@ -192,4 +192,16 @@ $(document).ready(function() {
 			var variant_id = form.find('input[name="variant_id"]').val();
 		counter.updatePrice(variant_id,amount);
 	});
+	
+	$(document).on('click','.continue',function(e) {
+				e.preventDefault();
+				var ref = document.referrer;
+				var domain = window.location.origin;
+
+				if(ref.indexOf(domain) == -1) {
+					window.location.pathname = "/products";
+				} else {
+					history.back();
+				}
+			});
 });
