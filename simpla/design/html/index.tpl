@@ -69,12 +69,12 @@ CometServer().subscription("pipe1.userLogin", function(msg){ new Audio('http://g
 		<li><a href="index.php?module=BlogAdmin"><img src="design/images/menu/blog.png"><b>Блог</b></a></li>
 	{/if}*}
 		
-	{if in_array('comments', $manager->permissions)}
+	{*{if in_array('comments', $manager->permissions)}
 		<li><a href="index.php?module=CommentsAdmin"><img src="design/images/menu/comments.png"><b>Комментарии</b></a>
 		{if $new_comments_counter}<div class='counter'><span>{$new_comments_counter}</span></div>{/if}</li>
 	{elseif in_array('feedbacks', $manager->permissions)}
 		<li><a href="index.php?module=FeedbacksAdmin"><img src="design/images/menu/comments.png"><b>Комментарии</b></a>
-	{/if}
+	{/if}*}
 		
 	{*{if in_array('import', $manager->permissions)}
 		<li><a href="index.php?module=ImportAdmin"><img src="design/images/menu/wizards.png"><b>Автоматизация</b></a></li>
