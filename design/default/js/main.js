@@ -14,7 +14,8 @@ $(document).ready(function() {
 		items: 1,
 		loop: true,
 		mouseDrag: false,
-		dots: true
+		dots: true,
+		smartSpeed: 500,
 	});
 
 	$(".stock-slider .owl-carousel").owlCarousel({
@@ -24,6 +25,7 @@ $(document).ready(function() {
 		mouseDrag: false,
 		nav: true,
 		navText: [],
+		smartSpeed: 500,
 		responsive: {
 			0: {
 				items: 1
@@ -42,6 +44,7 @@ $(document).ready(function() {
 		nav: true,
 		navText: [],
 		navContainer: "#popular-price-slider-nav",
+		smartSpeed: 500,
 		responsive: {
 			0: {
 				items: 1
@@ -66,6 +69,7 @@ $(document).ready(function() {
 		nav: true,
 		navText: [],
 		navContainer: "#new-price-slider-nav",
+		smartSpeed: 500,
 		responsive: {
 			0: {
 				items: 1

@@ -292,6 +292,7 @@ h1 {
 			border-radius: 20px;
 			color: inherit;
 			line-height: 14px;
+			transition: background 0.2s ease-in;
 			&:hover,
 			&:focus {
 				background: @red;
@@ -637,12 +638,13 @@ h1 {
 	}
 
 	.price-info {
+		position: relative;
 		height: 130px;
 		padding: 12px 15px;
-		background: url('../images/hor-dotted-border.png') left top repeat-x,
-			url('../images/hor-dotted-border.png') left bottom repeat-x;
+		background: #fff, url('../images/hor-dotted-border.png') left top repeat-x, url('../images/hor-dotted-border.png') left bottom repeat-x;
 		text-align: center;
 		line-height: 22px;
+		overflow: hidden;
 		.price-name {
 			margin-bottom: 0;
 			font-family: @roboto-slab;
@@ -663,10 +665,20 @@ h1 {
 			font-style: italic;
 			color: #999999;
 		}
+		&:after {
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: 1px;
+			height: 20px;
+			width: 100%;
+			z-index: 1;
+			background: linear-gradient(rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 45%, rgba(255,255,255,1) 100%);
+		}
 	}
 
 	.price-footer {
-		padding: 15px;
+		padding: 18px 15px;
 		background: #f7f7f7;
 		border-bottom-right-radius: 15px;
 		border-bottom-left-radius: 15px;
@@ -866,7 +878,7 @@ h1 {
 	padding-bottom: 303px;
 	background: @white;
 	z-index: 20;
-	transition: right 0.2s ease-in-out;
+	transition: right 0.4s ease-in-out;
 	&.open {
 		right: 0;
 	}
@@ -1035,6 +1047,10 @@ h1 {
 			font-size: inherit;
 			color: @white;
 			line-height: 1;
+			transition: background 0.2s ease-in;
+			&:hover {
+				background: #ee5a63;
+			}
 		}
 	}
 }
