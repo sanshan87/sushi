@@ -97,7 +97,7 @@
 			<div class="row">
 				<div class="col-sm-7 col-xs-12">
 					<span class="f-copyright">© Сушитория. 2016 г. Все права защищены.</span>
-					<a href="http://vk.com/" class="f-social">Мы вконтакте <img src="design/{$settings->theme|escape}/images/top-social-vk.png" alt=""></a></li>
+					<a href="https://vk.com/sushitoriya" class="f-social">Мы вконтакте <img src="design/{$settings->theme|escape}/images/top-social-vk.png" alt=""></a></li>
 				</div>
 				<div class="col-sm-4 col-xs-12 col-sm-offset-1">
 					<div class="f-author">Создание сайта: <a href="#">студия «Соль»</a></div>
