@@ -40,7 +40,7 @@
 							{/if}
 							</div>
 							<div class="price-descr">
-								<div class="price-name">{$product->product->name}</div>
+								<div class="price-name">{$product->product->name}{if $product->variant->name} {$product->variant->name}{/if}</div>
 								{if $product->product->annotation}<div class="price-ingredients">{$product->product->annotation|strip_tags:true}</div>{/if}
 								{if $product->product->features}
 								{foreach $product->product->features as $opt}

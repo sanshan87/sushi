@@ -31,7 +31,7 @@
 						{/foreach}
 						</div>
 						<div class="b-price-info">
-							<a href="products/{$product->product->url}" class="price-name">{$product->product->name}</a>
+							<a href="products/{$product->product->url}" class="price-name">{$product->product->name}{if $product->variant->name} {$product->variant->name}{/if}</a>
 							<div class="form-inline">
 								<label class="price-count" for="b-item-1">Кол-во:</label>
 								<input type="text" class="form-control" id="b-item-1" name="item_amount" value="{$product->amount}">

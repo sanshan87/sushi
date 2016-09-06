@@ -49,7 +49,7 @@
 						</div>
 						<div class="basket-col">&times; {$purchase->amount}&nbsp;{$settings->units}</div>
 						<div class="basket-col">
-							{($purchase->price*$purchase->amount)|convert}&nbsp;{$currency->sign}
+							{($purchase->price*$purchase->amount)|string_format:"%.2f"}&nbsp;{$currency->sign}
 						</div>
 					</div>
 					{/foreach}
@@ -70,7 +70,7 @@
 						<div class="basket-col"><b>{$delivery->name|escape}</b></div>
 						<div class="basket-col"></div>
 						<div class="basket-col"></div>
-						<div class="basket-col">{$order->delivery_price|convert}&nbsp;{$currency->sign}</div>
+						<div class="basket-col">{$order->delivery_price|string_format:"%.2f"}&nbsp;{$currency->sign}</div>
 					</div>
 					{*{/if}*}
 
@@ -79,7 +79,7 @@
 						<div class="basket-col"><b>Итого</b></div>
 						<div class="basket-col"></div>
 						<div class="basket-col"></div>
-						<div class="basket-col">{$order->total_price|convert}&nbsp;{$currency->sign}</div>
+						<div class="basket-col">{$order->total_price|string_format:"%.2f"}&nbsp;{$currency->sign}</div>
 					</div>
 
 					{* Если стоимость доставки не входит в сумму заказа *}

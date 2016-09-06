@@ -75,3 +75,6 @@ watermark_file = simpla/files/watermark/watermark.png;
 
 ;Директория хранения цифровых товаров
 downloads_dir = files/downloads/;
+
+;Метка
+label_for_variants = 'Выбрать наполнитель'

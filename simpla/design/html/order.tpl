@@ -372,7 +372,7 @@
  
 	{if $payment_method}
 	<div class="subtotal layer">
-	К оплате<b> {$order->total_price|convert:$payment_currency->id} {$payment_currency->sign}</b>
+	К оплате<b> {$order->total_price|string_format:"%.2f"} {$payment_currency->sign}</b>
 	</div>
 	{/if}
 

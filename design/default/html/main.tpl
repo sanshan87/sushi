@@ -99,7 +99,7 @@
 				<form class="variants" action="/cart">
 				<div class="price-footer clearfix">
 					<div class="price-form" style="width:73%">
-						<button style="background:#948788;" class="btn addToBasket" onclick="document.location.href='/products/{$product->url}'">Выбрать наполнитель</button>
+						<button style="background:#948788;" class="btn addToBasket" onclick="document.location.href='/products/{$product->url}'">{$config->label_for_variants}</button>
 					</div>
 				</div>
 				</form>
@@ -171,7 +171,7 @@
 				<form class="variants" action="/cart">
 				<div class="price-footer clearfix">
 					<div class="price-form" style="width:73%">
-						<button style="background:#948788;" class="btn addToBasket" onclick="document.location.href='/products/{$product->url}'">Выбрать наполнитель</button>
+						<button style="background:#948788;" class="btn addToBasket" onclick="document.location.href='/products/{$product->url}'">{$config->label_for_variants}</button>
 					</div>
 				</div>
 				</form>
