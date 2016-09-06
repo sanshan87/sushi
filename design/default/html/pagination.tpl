@@ -17,7 +17,7 @@
 <div class="pagination-block hidden-xs" style="text-align: center;">
 	<ul class="pagination">  
 		{* Количество выводимых ссылок на страницы *}
-		{$visible_pages = 13}
+		{$visible_pages = 9}
 		{* По умолчанию начинаем вывод со страницы 1 *}
 		{$page_from = 1}		
 		{* Если выбранная пользователем страница дальше середины "окна" - начинаем вывод уже не с первой *}
@@ -50,7 +50,8 @@
 		{* Ссылка на последнююю страницу отображается всегда *}
 		<li {if $current_page_num==$total_pages_num}class="active"{/if}>	
 			<a  href="{url page=$total_pages_num}">{$total_pages_num}</a>
-		</li>		
+		</li>	
+		<li><a style="border: 1px solid #ddd;" href="{url page=all}">все</a></li>
 		{if $current_page_num>1}
 		<li><a class="prev_page_link" style="border: 1px solid #ddd;" href="{url page=$current_page_num-1}">←назад</a></li>
 		{/if}
@@ -60,7 +61,8 @@
 	</ul>
 </div>
 <div class="pagination-block visible-xs" style="text-align: center;">
-	<ul class="pagination">		
+	<ul class="pagination">
+		<li><a style="border: 1px solid #ddd;" href="{url page=all}">все</a></li>
 		{if $current_page_num>1}
 		<li><a class="prev_page_link" style="border: 1px solid #ddd;" href="{url page=$current_page_num-1}">← назад</a></li>
 		{/if}

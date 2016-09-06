@@ -62,3 +62,20 @@
 
 	display: block;
 }
+
+.selected {
+	background: rgba(190,174,136,.45);
+	color: #fff;
+	border-radius: 20px;
+	}
+.selected_menu{
+	background: #cf232d;
+    color: #fff;
+    text-decoration: none;
+	border-radius: 20px;
+	}
+.selected_menu_footer{
+	color: #d22630 !important;
+	text-decoration: underline;
+}
+	

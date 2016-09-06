@@ -204,4 +204,9 @@ $(document).ready(function() {
 					history.back();
 				}
 			});
+			
+	if($('.dropdown .dropdown-menu li a.selected_menu').size()){
+		var punkt = $('.dropdown .dropdown-menu li a.selected_menu');
+		punkt.closest('div.dropdown').children('a.dropdown-toggle').addClass('selected_menu');
+	}		
 });

@@ -1,42 +1,3 @@
-{literal}
-<style>
-.pagination {
-	margin-top: 5px;
-	margin-bottom: 5px;
-	font-size: 12px;
-	overflow: hidden;
-}
-.pagination a {
-	display: block;
-	float: left;
-	background-color: #c9262b;
-	margin-right: 5px;
-	margin-bottom: 5px;
-	padding: 7px 4px;
-	min-width: 22px;
-	text-align: center;
-	//border: 1px solid #ffffff;
-	text-decoration: none;
-	color: #000;
-}
-.pagination a.selected:hover,
-.pagination a.selected {
-	background-color: #c9262b;
-	color: #ffffff;
-	border-color: #008fe9;
-}
-.pagination a:hover {
-	background-color: #ec797d;
-}
-
-.pagination a.next_page_link, .pagination a.prev_page_link{
-	border: none;
-	background: none;
-}
-</style>
-{/literal}
-
-
 	<div class="footer-block">
 		<div class="container">
 			<div class="row">
@@ -47,7 +8,7 @@
 						<li class="menu-header">{$rolls->name}</li>
 							{foreach $rolls->subcategories as $subcat}
 							{if $subcat->visible}
-								<li><a href="/catalog/{$subcat->url}">{$subcat->name}</a></li>
+								<li><a href="/catalog/{$subcat->url}" {if $category->id == $subcat->id}class="selected_menu_footer"{/if}>{$subcat->name}</a></li>
 							{/if}
 							{/foreach}
 					</ul>
@@ -59,7 +20,7 @@
 							{* Показываем только видимые категории *}
 							{if $c->visible}
 								<li>
-									<a {if $category->id == $c->id}class="selected"{/if} href="catalog/{$c->url}" data-category="{$c->id}">{$c->name|escape}</a>
+									<a {if $category->id == $c->id}class="selected_menu_footer"{/if} href="catalog/{$c->url}" data-category="{$c->id}">{$c->name|escape}</a>
 								</li>
 							{/if}
 						{/foreach}
@@ -69,8 +30,8 @@
 					{foreach $pages as $p}
 					{* Выводим только страницы из первого меню *}
 						{if $p->menu_id == 1}
-						<li {if $page && $page->id == $p->id}class="selected"{/if}>
-							<a href="{$p->url}">{$p->name|escape}</a>
+						<li>
+							<a href="{$p->url}"{if $page && $page->id == $p->id} class="selected_menu_footer"{/if}>{$p->name|escape}</a>
 						</li>
 						{/if}
 					{/foreach}
