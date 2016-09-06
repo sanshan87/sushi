@@ -607,7 +607,6 @@ overflow-y: auto;
 			<li class="variant_name">      <input name="variants[id][]"            type="hidden" value="{$variant->id|escape}" /><input name="variants[name][]" type="" value="{$variant->name|escape}" /> <a class="del_variant" href=""><img src="design/images/cross-circle-frame.png" alt="" /></a></li>
 			<li class="variant_sku">       <input name="variants[sku][]"           type="text"   value="{$variant->sku|escape}" /></li>
 			<li class="variant_price">     <input name="variants[price][]"         type="text"   value="{$variant->price|escape}" /></li>
-			<!--<li class="variant_discount">  <input name="variants[compare_price][]" type="text"   value="{$variant->compare_price|escape}" /></li>-->
 			<li class="variant_amount">    <input name="variants[skidka][]"         type="text"   value="{$variant->skidka|escape}" /></li>
 			<li class="variant_amount">    <input name="variants[stock][]"         type="text"   value="{if $variant->infinity || $variant->stock == ''}∞{else}{$variant->stock|escape}{/if}" />{$settings->units}</li>
 			<!--<li class="variant_download">
@@ -633,19 +632,19 @@ overflow-y: auto;
 			<li class="variant_name"><input name="variants[id][]" type="hidden" value="" /><input name="variants[name][]" type="" value="" /><a class="del_variant" href=""><img src="design/images/cross-circle-frame.png" alt="" /></a></li>
 			<li class="variant_sku"><input name="variants[sku][]" type="" value="" /></li>
 			<li class="variant_price"><input  name="variants[price][]" type="" value="" /></li>
-			<li class="variant_discount"><input name="variants[compare_price][]" type="" value="" /></li>
+			<li class="variant_amount"><input name="variants[skidka][]" type="text"   value="" /></li>
 			<li class="variant_amount"><input name="variants[stock][]" type="" value="∞" />{$settings->units}</li>
-			<li class="variant_download">
+			<!--<li class="variant_download">
 				<a href='#' class=add_attachment><img src="design/images/cd_add.png" alt="" /></a>
 				<div class=browse_attachment style='display:none;'>
 					<input type=file name=attachment[]>
 					<input type=hidden name=delete_attachment[]>
 				</div>
-			</li>
+			</li>-->
 		</ul>
 
 		<input class="button_green button_save" type="submit" name="" value="Сохранить" />
-		<!--<span class="add" id="add_variant"><i class="dash_link">Добавить вариант</i></span>-->
+		<span class="add" id="add_variant"><i class="dash_link">Добавить вариант</i></span>
  	</div>
 	<!-- Варианты товара (The End)--> 
 	

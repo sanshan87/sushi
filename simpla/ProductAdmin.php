@@ -257,7 +257,7 @@ class ProductAdmin extends Simpla
 		  		    	foreach($related_products  as $i=>$related_product)
 	   	    				$this->products->add_related_product($product->id, $related_product->related_id, $pos++);
 	  	    		}
-					$product = $this->products->get_product($product->id);
+					$product = $this->products->get_product((int)$product->id);
   	    		}
 			}
 			

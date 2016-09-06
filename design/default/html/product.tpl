@@ -59,14 +59,31 @@
 									<span>{$product->body|strip_tags:true}</span>
 									</p>
 									{/if}
-									{if $product->variants|count > 0}
+									{if $product->variants|count < 2}
 									{foreach $product->variants as $v}
 										<div class="price-buttons">
 											<input id="featured_{$v->id}" name="variant" value="{$v->id}" type="radio" class="variant_radiobutton" {if $v@first}checked{/if} {if $product->variants|count<2}style="display:none;"{/if}/>
-											<div class="price-cost">{($v->price)|string_format:"%.2f"} {$currency->sign|escape}</div>
+											<div class="price-cost">{($v->price)|string_format:"%.0f"} {$currency->sign|escape}</div>
 											<button type="submit" class="btn addToBasket">В корзину</button>
 										</div>
-									{/foreach}	
+									{/foreach}
+									{else}
+									<div style="margin-bottom:10px;">
+									<p><b>Наполнитель:</b><br>
+									<select name="variant" class="form-control">
+																		{foreach $product->variants as $v}
+									
+											<option id="featured_{$v->id}" value="{$v->id}"{if $v@first} selected{/if} data-price="{$v->price|string_format:'%.0f'} {$currency->sign|escape}">{$v->name}</option>
+											
+											
+									
+									{/foreach}
+									</select>
+									</div>
+									<div class="price-buttons">
+									<div class="price-cost">{($product->variant->price)|string_format:"%.0f"} {$currency->sign|escape}</div>
+									<button type="submit" class="btn addToBasket">В корзину</button>
+									</div>
 									{/if}
 								</div>
 							</div>
@@ -103,7 +120,7 @@
 											{/if}
 										</div>
 									</a>
-									{if $related_product->variants|count > 0}
+									{if $related_product->variants|count < 2}
 									<form class="variants" action="/cart">
 									{foreach $related_product->variants as $v}
 									<input id="featured_{$v->id}" name="variant" value="{$v->id}" type="radio" class="variant_radiobutton" {if $v@first}checked{/if} {if $product->variants|count<2}style="display:none;"{/if}/>
@@ -121,6 +138,14 @@
 										</div>
 									</div>
 									{/foreach}
+									</form>
+									{else}
+									<form class="variants" action="/cart">
+									<div class="price-footer clearfix">
+										<div class="price-form" style="width:73%">
+											<button style="background:#948788;" class="btn addToBasket" onclick="document.location.href='/products/{$related_product->url}'">Выбрать наполнитель</button>
+										</div>
+									</div>
 									</form>
 									{/if}
 								</div>

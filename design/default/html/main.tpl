@@ -76,7 +76,7 @@
 						{/if}
 					</div>
 				</a>
-				{if $product->variants|count > 0}
+				{if $product->variants|count < 2}
 				<form class="variants" action="/cart">
 				{foreach $product->variants as $v}
 				<input id="featured_{$v->id}" name="variant" value="{$v->id}" type="radio" class="variant_radiobutton" {if $v@first}checked{/if} {if $product->variants|count<2}style="display:none;"{/if}/>
@@ -94,6 +94,14 @@
 					</div>
 				</div>
 				{/foreach}
+				</form>
+				{else}
+				<form class="variants" action="/cart">
+				<div class="price-footer clearfix">
+					<div class="price-form" style="width:73%">
+						<button style="background:#948788;" class="btn addToBasket" onclick="document.location.href='/products/{$product->url}'">Выбрать наполнитель</button>
+					</div>
+				</div>
 				</form>
 				{/if}
 			</div>
@@ -140,7 +148,7 @@
 						{/if}
 					</div>
 				</a>
-				{if $product->variants|count > 0}
+				{if $product->variants|count < 2}
 				<form class="variants" action="/cart">
 				{foreach $product->variants as $v}
 				<input id="featured_{$v->id}" name="variant" value="{$v->id}" type="radio" class="variant_radiobutton" {if $v@first}checked{/if} {if $product->variants|count<2}style="display:none;"{/if}/>
@@ -158,6 +166,14 @@
 					</div>
 				</div>
 				{/foreach}
+				</form>
+				{else}
+				<form class="variants" action="/cart">
+				<div class="price-footer clearfix">
+					<div class="price-form" style="width:73%">
+						<button style="background:#948788;" class="btn addToBasket" onclick="document.location.href='/products/{$product->url}'">Выбрать наполнитель</button>
+					</div>
+				</div>
 				</form>
 				{/if}
 			</div>

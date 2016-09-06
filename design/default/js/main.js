@@ -208,5 +208,10 @@ $(document).ready(function() {
 	if($('.dropdown .dropdown-menu li a.selected_menu').size()){
 		var punkt = $('.dropdown .dropdown-menu li a.selected_menu');
 		punkt.closest('div.dropdown').children('a.dropdown-toggle').addClass('selected_menu');
-	}		
+	}
+
+	$('select[name="variant"]').change(function(){
+		var price_var = $(this).children('option:selected').data('price');
+		$(this).closest('.price-text').find('.price-cost').text(price_var);
+	});
 });

@@ -195,6 +195,7 @@ class View extends Simpla
 				{
 					// добавляем вариант в соответствующий товар
 					$products[$variant->product_id]->variants[] = $variant;
+					//$products[$variant->product_id]->cntVars = count($variant->product_id);
 				}
 				
 				// Выбираем изображения товаров
@@ -210,6 +211,7 @@ class View extends Simpla
 						$product->image = $product->images[0];
 					$features = $this->features->get_product_options(array('product_id'=>$product->id));
 					$product->features = $features;
+					//$product->variants = $product->variants[0];
 				}				
 			}
 
