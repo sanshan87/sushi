@@ -61,7 +61,7 @@
 					<a href="https://vk.com/sushitoriya" class="f-social">Мы вконтакте <img src="design/{$settings->theme|escape}/images/top-social-vk.png" alt=""></a></li>
 				</div>
 				<div class="col-sm-4 col-xs-12 col-sm-offset-1">
-					<div class="f-author">Создание сайта: <a href="#">студия «Соль»</a></div>
+					<div class="f-author">Создание сайта: <a href="http://web-salt.ru">студия «Соль»</a></div>
 				</div>
 			</div>
 		</div>
