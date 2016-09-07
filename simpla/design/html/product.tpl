@@ -576,7 +576,7 @@ overflow-y: auto;
 	
 	<div id="product_categories" {if !$categories}style='display:none;'{/if}>
 		<label>Категория</label>
-		<div>
+		<div style="width:315px;">
 			<ul>
 				{foreach $product_categories as $product_category name=categories}
 				<li>
@@ -589,12 +589,13 @@ overflow-y: auto;
 						{/function}
 						{category_select categories=$categories selected_id=$product_category->id}
 					</select>
-					<span {if not $smarty.foreach.categories.first}style='display:none;'{/if} class="add"><i class="dash_link">Дополнительная категория</i></span>
-					<span {if $smarty.foreach.categories.first}style='display:none;'{/if} class="delete"><i class="dash_link">Удалить</i></span>
+					<!--<span {if not $smarty.foreach.categories.first}style='display:none;'{/if} class="add"><i class="dash_link">Дополнительная категория</i></span>
+					<span {if $smarty.foreach.categories.first}style='display:none;'{/if} class="delete"><i class="dash_link">Удалить</i></span>-->
 				</li>
 				{/foreach}		
 			</ul>
 		</div>
+		<label>Надпись замещающая "В корзину" для вариативного товара</label><input style="margin-left:10px;width: 170px;font-size: 13px;height: 18px;" type="text" name="option_label" value="{$product->option_label}">
 	</div>
 	
 	<div class="novelty-block">

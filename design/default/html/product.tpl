@@ -74,7 +74,7 @@
 									{/foreach}
 									{else}
 									<div style="margin-bottom:10px;">
-										<p><b>Выберите наполнитель:</b><br>
+										<p><b>{$product->option_label|replace:'Выбрать':'Выберите'}:</b><br>
 										<select name="variant" class="form-control">
 											{foreach $product->variants as $v}
 												<option id="featured_{$v->id}" value="{$v->id}"{if $v@first} selected{/if} data-price="{$v->price|string_format:'%.0f'} {$currency->sign|escape}">{$v->name}</option>
@@ -99,8 +99,61 @@
 						<h1>С этим продуктом часто заказывают</h1>
 						<div class="row">
 							{foreach $related_products as $related_product}
+<<<<<<< HEAD
 								<div class="col-md-4 col-sm-6">
 									{include file='price_item.tpl' product=$related_product}
+=======
+							<div class="col-md-4 col-sm-6">
+								<div class="price-item catalog-item">
+									<div class="price-header clearfix">
+									{if $related_product->variant->skidka > 0}
+										<div class="info-flag flag-discount">-{$related_product->variant->skidka}%</div>
+									{/if}
+										<div class="menu-number">{$related_product->variant->sku}</div>
+									</div>
+									<a href="products/{$related_product->url}" class="price-link">
+									{if $related_product->image}
+										<div class="price-img"><img src="{$related_product->image->filename|resize:$settings->preview_x:$settings->preview_y}" alt="{$related_product->name|escape}" class="img-responsive"></div>
+									{/if}	
+										<div class="price-info">
+											<p class="price-name">{$related_product->name|escape}</p>
+											<p class="price-components">{$related_product->annotation|strip_tags:true}</p>
+											{if $related_product->features}
+											{foreach $related_product->features as $opt}
+											<p class="price-weight">{$opt->value}</p>
+											{/foreach}
+											{/if}
+										</div>
+									</a>
+									{if $related_product->variants|count < 2}
+									<form class="variants" action="/cart">
+									{foreach $related_product->variants as $v}
+									<input id="featured_{$v->id}" name="variant" value="{$v->id}" type="radio" class="variant_radiobutton" {if $v@first}checked{/if} {if $product->variants|count<2}style="display:none;"{/if}/>
+									<div class="price-footer clearfix">
+										<div class="price-cost">
+										{if $v->skidka > 0}
+											<span class="old-cost">{$v->price|convert} {$currency->sign|escape}</span>
+											<span class="current-cost">{($v->price|convert - $v->price|convert*$v->skidka/100)|string_format:"%.2f"}</span>
+										{else}
+											<span class="current-cost">{$v->price|convert} {$currency->sign|escape}</span>
+										{/if}
+										</div>
+										<div class="price-form">
+											<button class="btn addToBasket" type="submit">В корзину</button>
+										</div>
+									</div>
+									{/foreach}
+									</form>
+									{else}
+									<form class="variants" action="">
+									<div class="price-footer clearfix">
+										<div class="price-form" style="width:80%">
+											<button style="background:#948788;" class="btn selectOption" onclick="document.location.href='/products/{$related_product->url}'">{if $related_product->option_label}{$related_product->option_label}{else}{$config->label_for_variants}{/if}</button>
+										</div>
+									</div>
+									</form>
+									{/if}
+>>>>>>> 35398e7cbc1f64123b517f3d44be69257c0ce3cb
 								</div>
 							{/foreach}
 						</div>	
