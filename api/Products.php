@@ -30,6 +30,7 @@ class Products extends Simpla
 		// По умолчанию
 		$limit = 100;
 		$page = 1;
+		$is_novelty_filter = '';
 		$category_id_filter = '';
 		$brand_id_filter = '';
 		$product_id_filter = '';
