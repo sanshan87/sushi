@@ -69,7 +69,7 @@
 									{/foreach}
 									{else}
 									<div style="margin-bottom:10px;">
-										<p><b>Выберите наполнитель:</b><br>
+										<p><b>{$product->option_label|replace:'Выбрать':'Выберите'}:</b><br>
 										<select name="variant" class="form-control">
 											{foreach $product->variants as $v}
 												<option id="featured_{$v->id}" value="{$v->id}"{if $v@first} selected{/if} data-price="{$v->price|string_format:'%.0f'} {$currency->sign|escape}">{$v->name}</option>
@@ -136,10 +136,10 @@
 									{/foreach}
 									</form>
 									{else}
-									<form class="variants" action="/cart">
+									<form class="variants" action="">
 									<div class="price-footer clearfix">
-										<div class="price-form" style="width:73%">
-											<button style="background:#948788;" class="btn addToBasket" onclick="document.location.href='/products/{$related_product->url}'">{$config->label_for_variants}</button>
+										<div class="price-form" style="width:80%">
+											<button style="background:#948788;" class="btn selectOption" onclick="document.location.href='/products/{$related_product->url}'">{if $related_product->option_label}{$related_product->option_label}{else}{$config->label_for_variants}{/if}</button>
 										</div>
 									</div>
 									</form>

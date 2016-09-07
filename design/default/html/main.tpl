@@ -96,10 +96,10 @@
 				{/foreach}
 				</form>
 				{else}
-				<form class="variants" action="/cart">
+				<form class="variants" action="">
 				<div class="price-footer clearfix">
-					<div class="price-form" style="width:73%">
-						<button style="background:#948788;" class="btn addToBasket" onclick="document.location.href='/products/{$product->url}'">{$config->label_for_variants}</button>
+					<div class="price-form" style="width:80%">
+						<button style="background:#948788;" class="btn selectOption" onclick="document.location.href='/products/{$product->url}'">{if $product->option_label}{$product->option_label}{else}{$config->label_for_variants}{/if}</button>
 					</div>
 				</div>
 				</form>
@@ -168,10 +168,10 @@
 				{/foreach}
 				</form>
 				{else}
-				<form class="variants" action="/cart">
+				<form class="variants" action="">
 				<div class="price-footer clearfix">
-					<div class="price-form" style="width:73%">
-						<button style="background:#948788;" class="btn addToBasket" onclick="document.location.href='/products/{$product->url}'">{$config->label_for_variants}</button>
+					<div class="price-form" style="width:80%">
+						<button style="background:#948788;" class="btn selectOption" onclick="document.location.href='/products/{$product->url}'">{if $product->option_label}{$product->option_label}{else}{$config->label_for_variants}{/if}</button>
 					</div>
 				</div>
 				</form>

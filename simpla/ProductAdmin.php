@@ -33,7 +33,7 @@ class ProductAdmin extends Simpla
 			
 			$product->annotation = $this->request->post('annotation');
 			$product->body = $this->request->post('body');
-
+			$product->option_label = $this->request->post('option_label');
 			// Варианты товара
 			if($this->request->post('variants'))
 			foreach($this->request->post('variants') as $n=>$va)

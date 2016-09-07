@@ -120,7 +120,8 @@ class Products extends Simpla
 					p.featured, 
 					p.meta_title, 
 					p.meta_keywords, 
-					p.meta_description, 
+					p.meta_description,
+					p.option_label, 
 					b.name as brand,
 					b.url as brand_url
 				FROM __products p		
@@ -245,7 +246,8 @@ class Products extends Simpla
 					p.featured, 
 					p.meta_title, 
 					p.meta_keywords, 
-					p.meta_description
+					p.meta_description,
+					p.option_label 
 				FROM __products AS p
                 WHERE $filter
                 GROUP BY p.id

@@ -78,4 +78,11 @@
 	color: #d22630 !important;
 	text-decoration: underline;
 }
+
+.selectOption {color: #fff;
+    line-height: 1;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-transition: background .2s ease-in;
+    transition: background .2s ease-in;}
 	
