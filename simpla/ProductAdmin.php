@@ -25,6 +25,7 @@ class ProductAdmin extends Simpla
 			$product->visible = $this->request->post('visible', 'boolean');
 			$product->featured = $this->request->post('featured');
 			$product->brand_id = $this->request->post('brand_id', 'integer');
+			$product->novelty = $this->request->post('novelty', 'integer');
 
 			$product->url = trim($this->request->post('url', 'string'));
 			$product->meta_title = $this->request->post('meta_title');

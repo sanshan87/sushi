@@ -588,9 +588,14 @@ h1 {
 	background: url('../images/price-bg.png') center center no-repeat;
 	background-size: 100% 100%;
 	.price-header {
+		position: relative;
 		font-family: @roboto;
+		.info-flags {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
 		.info-flag {
-			float: left;
 			width: 70px;
 			height: 32px;
 			margin-left: -1px;
@@ -608,6 +613,9 @@ h1 {
 			}
 			&.flag-hit {
 				background: url('../images/hit-flag.png') left center no-repeat;
+			}
+			& + .info-flag {
+				margin-top: 2px!important;
 			}
 		}
 		.menu-number {

@@ -52,7 +52,13 @@ $(function() {
 		opacity:0.7,
 		handle: '.move_zone'
 	});
-		
+
+	// Uncheck checkbox
+	$('input[name="novelty"]').click(function(){
+		var otherInputs = $('input[name="novelty"]').not($(this));
+		if(otherInputs.is(':checked'))
+			otherInputs.prop('checked', false);
+	});
 
 	// Сортировка изображений
 	$(".images ul").sortable({ tolerance: 'pointer'});
@@ -552,7 +558,10 @@ overflow-y: auto;
 		<div class="checkbox">
 			<input name=featured value="1" type="checkbox" id="featured_checkbox" {if $product->featured}checked{/if}/> <label for="featured_checkbox">Популярный</label>
 		</div>
+
 	</div> 
+
+	
 	
 	<div id="product_brand" {if !$brands}style='display:none;'{/if}>
 		<label>Бренд</label>
@@ -585,6 +594,15 @@ overflow-y: auto;
 				</li>
 				{/foreach}		
 			</ul>
+		</div>
+	</div>
+	
+	<div class="novelty-block">
+		<div class="checkbox">
+			<input name="novelty" value="1" type="checkbox" id="novelty" {if $product->novelty == 1}checked{/if}><label for="novelty">Новинка</label>
+		</div>
+		<div class="checkbox">
+			<input name="novelty" value="2" type="checkbox" id="hit" {if $product->novelty == 2}checked{/if}><label for="hit">Хит</label>
 		</div>
 	</div>
 

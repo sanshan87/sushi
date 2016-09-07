@@ -137,19 +137,19 @@
 						<div class="form-group">
 							<label class="control-label col-md-2">Имя, фамилия</label>
 							<div class="col-md-4">
-								<input name="name" type="text" value="{$name|escape}" data-format=".+" data-notice="Введите имя" class="form-control"/>
+								<input name="name" type="text" value="{$name|escape}" data-format=".+" data-notice="Введите имя" class="form-control" placeholder="Иван Иванов" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-2">Телефон</label>
 							<div class="col-md-4">
-								<input name="phone" type="text" value="{$phone|escape}" data-format=".+" data-notice="Введите телефон" class="form-control" />
+								<input name="phone" type="text" value="{$phone|escape}" data-format=".+" data-notice="Введите телефон" class="form-control" placeholder="+7 000 000 00 00" />
 							</div>
 						</div>
 						<div class="form-group" id="adressForCurier">
 							<label class="control-label col-md-2">Адрес доставки</label>
 							<div class="col-md-4">
-								<textarea name="address" rows="5" data-format=".+" data-notice="Введите адрес" class="form-control">{$address|escape}</textarea>
+								<textarea name="address" rows="5" data-format=".+" data-notice="Введите адрес" class="form-control" placeholder="Улица, Дом, Квартира, Подъезд">{$address|escape}</textarea>
 							</div>
 						</div>
 						<div class="form-group" id="adressForDelSelf">
