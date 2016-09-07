@@ -552,16 +552,28 @@ overflow-y: auto;
  	<div id="name">
 		<label>Название</label><input class="name" name=name type="text" style="width: 89%;margin-left: 14px;" value="{$product->name|escape}"/> 
 		<input name=id type="hidden" value="{$product->id|escape}"/> 
-		<div class="checkbox">
-			<input name=visible value='1' type="checkbox" id="active_checkbox" {if $product->visible}checked{/if}/> <label for="active_checkbox">Активен</label>
-		</div>
-		<div class="checkbox">
-			<input name=featured value="1" type="checkbox" id="featured_checkbox" {if $product->featured}checked{/if}/> <label for="featured_checkbox">Популярный</label>
-		</div>
+		
 
 	</div> 
 
-	
+	<div id="checkbox-block">
+		<div class="checkbox-group">
+			<div class="checkbox">
+				<input name=visible value='1' type="checkbox" id="active_checkbox" {if $product->visible}checked{/if}/> <label for="active_checkbox">Активен</label>
+			</div>
+			<div class="checkbox">
+				<input name=featured value="1" type="checkbox" id="featured_checkbox" {if $product->featured}checked{/if}/> <label for="featured_checkbox">Популярный</label>
+			</div>
+		</div>	
+		<div class="checkbox-group">
+			<div class="checkbox">
+				<input name="novelty" value="1" type="checkbox" id="novelty" {if $product->novelty == 1}checked{/if}><label for="novelty">Новинка</label>
+			</div>
+			<div class="checkbox">
+				<input name="novelty" value="2" type="checkbox" id="hit" {if $product->novelty == 2}checked{/if}><label for="hit">Хит</label>
+			</div>
+		</div>	
+	</div>
 	
 	<div id="product_brand" {if !$brands}style='display:none;'{/if}>
 		<label>Бренд</label>
@@ -598,14 +610,7 @@ overflow-y: auto;
 		<label>Надпись замещающая "В корзину" для вариативного товара</label><input style="margin-left:10px;width: 170px;font-size: 13px;height: 18px;" type="text" name="option_label" value="{$product->option_label}">
 	</div>
 	
-	<div class="novelty-block">
-		<div class="checkbox">
-			<input name="novelty" value="1" type="checkbox" id="novelty" {if $product->novelty == 1}checked{/if}><label for="novelty">Новинка</label>
-		</div>
-		<div class="checkbox">
-			<input name="novelty" value="2" type="checkbox" id="hit" {if $product->novelty == 2}checked{/if}><label for="hit">Хит</label>
-		</div>
-	</div>
+	
 
 
  	<!-- Варианты товара -->

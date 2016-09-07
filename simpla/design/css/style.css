@@ -1563,6 +1563,24 @@ div.upload_image input{
 	border-top: 1px solid #000;
 	border-bottom: 1px solid #000;
 }
-#product .novelty-block {
-	float: right;
+#checkbox-block {
+	float: left;
+	margin-bottom: 20px;
+}
+#checkbox-block .checkbox-group {
+	float: left;
+}
+#checkbox-block .checkbox-group + .checkbox-group {
+	margin-left: 10px;
+}
+#product .checkbox-group .checkbox {
+	padding-left: 0;
+}
+#product .checkbox-group .checkbox + .checkbox {
+	padding-left: 10px;
+}
+.checkbox-group {
+	padding: 5px;
+	border: 1px dotted #d0d0d0;
+	background-color: #f0f0f0;
 }
