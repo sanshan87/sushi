@@ -78,7 +78,7 @@
 {if $category->description}
 	<div class="text-content">
 		<div class="container">
-			<h1 class="text-center">{$category->meta_title}</h1>
+			{* <h1 class="text-center">СУШИ И РОЛЛЫ В ОРЛЕ</h1> *}
 			<div class="row">
 				<div class="col-xs-12">
 					<img src="design/{$settings->theme|escape}/images/ierogliph-text.png" alt="Иероглиф" class="ierogliph pull-left">

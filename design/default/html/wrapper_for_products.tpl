@@ -11,6 +11,10 @@
 	{* Канонический адрес страницы *}
 	{if isset($canonical)}<link rel="canonical" href="{$config->root_url}{$canonical}"/>{/if}
 	
+	{* Favicon *}
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
 	{* Стили *}
 	<link rel="stylesheet" href="design/{$settings->theme|escape}/bower_components/bootstrap/dist/css/bootstrap.min.css" />
 	<!-- endbower -->
